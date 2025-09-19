@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Presentation.Areas.Security.Models.GroupModel>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Group";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main id="main">
+    <div class="container-fluid">
+        <div class="row p-4">
+
+            <section class="col m-2 p-0 rounded-2 bg-white">
+
+                <div class="d-flex align-items-center justify-content-between py-3 px-4 border-bottom">
+                    <h1 class="mb-0 st-heading">@ViewBag.Title</h1>
+                    <input type="button" value="Add New" class="btn btn-primary" onclick="location.href='@Url.Action("frmGroup","Group")'" />    
+                </div>
+
+                <div class="py-3 px-4">
+                    @Html.Grid(Model).Columns(columns =>
+               {
+                   columns.Add(c => c.Name).Titled("Group Name").SetWidth(150);
+                   columns.Add(c => c.Status).Titled("Status").SetWidth(70);
+                   columns.Add()
+                   .Encoded(false)
+                   .Sanitized(false)
+                   .SetWidth(30)
+                   .RenderValueAs(o => Html.ActionLink("Edit", "frmGroup", "Group", new { theParameter = Application.Common.clsEncryptDecrypt.Encrypt(o.Id.ToString()) }, new { @class = "btn btn-outline-success st-btn-sm st-btn-edit" }));
+
+
+               }).EmptyText("No Data Found.").Filterable(true).Sortable(true).WithPaging(50).WithGridItemsCount("Total Records")
+
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+</main>

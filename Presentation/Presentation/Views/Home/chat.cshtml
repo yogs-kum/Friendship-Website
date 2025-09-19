@@ -1,0 +1,363 @@
+﻿@{
+    ViewBag.Title = "ND Frients";
+    ViewBag.MetaDescription = "ND Frients";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section headerSeparate{
+}
+
+<main id="chatPage" class="container-fluid">
+    <div class="row h-100">
+
+        @* ======= Live User list Section ======= *@
+        <div class="p-0" id="liveUserSec">
+            <div id="searchBox" class="mx-3 mx-md-4 my-3">
+                <input type="text" id="frndSearch" class="rounded-pill" placeholder="Search">
+                <button type="submit" id="frndSearchBtn"></button>
+            </div>
+            <div id="navBox" class="mdrn-scrollbar">
+                <ul class="px-sm-3 px-md-4">
+                    <li class="my-sm-2">
+                        <a href="#" class="p-3 pb-2 live active">
+                            <span class="user-img-wrap"><img src="~/Content/assets/images/users/user-6.jpg" alt="friend Name"></span>
+                            <div class="frnd-name-wrap">
+                                <span class="frnd-name">Charles</span>
+                                <span class="live-status">Active Now</span>
+                            </div>
+                            <span class="pdg-msg d-none">0</span>
+                        </a>
+                    </li>
+                    <li class="my-sm-2">
+                        <a href="#" class="p-3 pb-2 live">
+                            <span class="user-img-wrap"><img src="~/Content/assets/images/users/user-1.jpg" alt="friend Name"></span>
+                            <div class="frnd-name-wrap">
+                                <span class="frnd-name">Jennifer</span>
+                                <span class="live-status">Active Now</span>
+                            </div>
+                            <span class="pdg-msg">4</span>
+                        </a>
+                    </li>
+                    <li class="my-sm-2">
+                        <a href="#" class="p-3 pb-2 live">
+                            <span class="user-img-wrap"><img src="~/Content/assets/images/users/user-5.jpg" alt="friend Name"></span>
+                            <div class="frnd-name-wrap">
+                                <span class="frnd-name">Jason</span>
+                                <span class="live-status">Active Now</span>
+                            </div>
+                            <span class="pdg-msg d-none">0</span>
+                        </a>
+                    </li>
+                    <li class="my-sm-2">
+                        <a href="#" class="p-3 pb-2 live">
+                            <span class="user-img-wrap"><img src="~/Content/assets/images/users/user-7.jpg" alt="friend Name"></span>
+                            <div class="frnd-name-wrap">
+                                <span class="frnd-name">Alice</span>
+                                <span class="live-status">Active Now</span>
+                            </div>
+                            <span class="pdg-msg">4</span>
+                        </a>
+                    </li>
+                    <li class="my-sm-2">
+                        <a href="#" class="p-3 pb-2 live">
+                            <span class="user-img-wrap"><img src="~/Content/assets/images/users/user-9.jpg" alt="friend Name"></span>
+                            <div class="frnd-name-wrap">
+                                <span class="frnd-name">Kathryn</span>
+                                <span class="live-status">Active Now</span>
+                            </div>
+                            <span class="pdg-msg d-none">0</span>
+                        </a>
+                    </li>
+                    <li class="my-sm-2">
+                        <a href="#" class="p-3 pb-2 live">
+                            <span class="user-img-wrap"><img src="~/Content/assets/images/users/user-11.jpg" alt="friend Name"></span>
+                            <div class="frnd-name-wrap">
+                                <span class="frnd-name">Kevin</span>
+                                <span class="live-status">Active Now</span>
+                            </div>
+                            <span class="pdg-msg">1</span>
+                        </a>
+                    </li>
+                    <li class="my-sm-2">
+                        <a href="#" class="p-3 pb-2 live">
+                            <span class="user-img-wrap"><img src="~/Content/assets/images/users/user-3.jpg" alt="friend Name"></span>
+                            <div class="frnd-name-wrap">
+                                <span class="frnd-name">William</span>
+                                <span class="live-status">Active Now</span>
+                            </div>
+                            <span class="pdg-msg">4</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        @* ======= Chat Section ======= *@
+        <div class="p-0" id="chatSec">
+            <div id="chatDispWrap" class="px-3 px-md-4 mdrn-scrollbar">
+
+                    <div class="chat-text-wrap pt-3 pb-4 me">
+                        <div class="img"><img src="~/Content/assets/images/temp/demo-user-1.jpg"></div>
+                        <div class="chat-text">
+                            <p>Hello !</p>
+                            <span class="chat-time">05:30 pm</span>
+                        </div>
+                    </div>
+                    <div class="chat-text-wrap pt-3 pb-4 me">
+                        <div class="img"><img src="~/Content/assets/images/temp/demo-user-1.jpg"></div>
+                        <div class="chat-text">
+                            <p>How are you?</p>
+                            <span class="chat-time">05:34 pm</span>
+                        </div>
+                    </div>
+                    <div class="chat-text-wrap pt-3 pb-4">
+                        <div class="img"><img src="~/Content/assets/images/users/user-6.jpg"></div>
+                        <div class="chat-text">
+                            <p>I am fine.</p>
+                            <span class="chat-time">05:45 pm</span>
+                        </div>
+                    </div>
+                    <div class="chat-text-wrap pt-3 pb-4">
+                        <div class="img"><img src="~/Content/assets/images/users/user-6.jpg"></div>
+                        <div class="chat-text">
+                            <p>Please can you send me a latest pic.</p>
+                            <span class="chat-time">05:53 pm</span>
+                        </div>
+                    </div>
+                    <div class="chat-text-wrap pt-3 pb-4 me">
+                        <div class="img"><img src="~/Content/assets/images/temp/demo-user-1.jpg"></div>
+                        <div class="chat-text">
+                            <img src="~/Content/assets/images/temp/gallery-eliana-4.jpg">
+                            <span class="chat-time">06:10 pm</span>
+                        </div>
+                    </div>
+                    <div class="chat-date">Today</div>
+                    <div class="chat-text-wrap pt-3 pb-4">
+                        <div class="img"><img src="~/Content/assets/images/users/user-6.jpg"></div>
+                        <div class="chat-text">
+                            <p>Thank you</p>
+                            <span class="chat-time">04:30 am</span>
+                        </div>
+                    </div>
+                    <div class="chat-text-wrap pt-3 pb-4 me">
+                        <div class="img"><img src="~/Content/assets/images/temp/demo-user-1.jpg"></div>
+                        <div class="chat-text">
+                            <p>Welcome</p>
+                            <span class="chat-time">02:30 am</span>
+                        </div>
+                    </div>
+
+            </div>
+            <div id="chatWriteWrap" class="px-4 py-3">
+                @*<textarea id="chatTextarea" name="chatTextarea" style="max-height:500px;">Lorem Isem</textarea>*@
+                <p class="textarea" role="textbox" contenteditable></p>
+                <button id="pin"></button>
+                <button id="emoji"></button>
+                <button id="send"></button>
+            </div>
+        </div>
+
+        @* ======= User Profile Section ======= *@
+    <div class="p-0 mdrn-scrollbar" id="userProfileSec">
+
+        <div class="img-box-outer mt-4">
+            <div class="img-box">
+                <img src="/Content/assets/images/users/user-6.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+            </div>
+        </div>
+
+        <div id="editProfileView" class="mt-lg-2" @*style="flex:1 100px;overflow-y:auto;"*@>
+            <section class="row pb-2 mx-3">
+                <div class="col-12 px-3 pb-4">
+                    <div class="text-center fs-4 text-uppercase">Charles</div>
+                </div>
+                <div class="col-6 px-3 pb-3">
+                    <label>Gender:</label>
+                    <div>Women</div>
+                </div>
+                <div class="col-6 px-3 pb-3">
+                    <label>DOB:</label>
+                    <div>1994-03-12</div>
+                </div>
+                <div class="col-6 px-3 pb-3">
+                    <label>Marital status:</label>
+                    <div>Divorced</div>
+                </div>
+                <div class="col-6 px-3 pb-3">
+                    <label>Height:</label>
+                    <div>5 feet 9 inches</div>
+                </div>
+                <div class="col-12 px-3 pb-3">
+                    <label>Race:</label>
+                    <div>Hispanic or Latino</div>
+                </div>
+            </section>
+            <section class="row pt-4 pb-2 mx-3" id="favouriteSec">
+                <div class="col-12 mb-3 heading">
+                    <h5 class="fw-semibold"><span class="material-symbols-outlined">favorite</span>My Life in Pictures</h5>
+                </div>
+                <div class="col-6 px-3 pb-3 text-center">
+                    @*<div class="img-box"><img src="~/Content/assets/images/blank-user.png" alt="image name"></div>*@
+                    <div class="img-box"><img src="~/Content/assets/images/temp/dog.jpg" alt="image name"></div>
+                    <label>A picture with your pet</label>
+                    <div>I love dogs</div>
+                </div>
+                <div class="col-6 px-3 pb-3 text-center">
+                    <div class="img-box"><img src="~/Content/assets/images/temp/golf.jpg" alt="image name"></div>
+                    <label>A picture playing your favorite sport</label>
+                    <div>I love to play golf</div>
+                </div>
+                <div class="col-6 px-3 pb-3 text-center">
+                    <div class="img-box"><img src="~/Content/assets/images/temp/old-north-church.jpg" alt="image name"></div>
+                    <label>A picture in your favorite place</label>
+                    <div>I like to visit old churches</div>
+                </div>
+            </section>
+            <section class="row pt-4 pb-2 mx-3" id="goodFrndSec">
+                <div class="col-12 mb-3 heading">
+                    <h5 class="fw-semibold"><span class="material-symbols-outlined">interests</span>Personal Habits</h5>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Are you a night owl or a morning person?</label>
+                    <div class="answer">Morning person</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Are you someone who enjoys physical activity or more of a couch potato?</label>
+                    <div class="answer">Physical activity </div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Do you like to travel or are you a homebody?</label>
+                    <div class="answer">Travel</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Do you drink alcohol?</label>
+                    <div class="answer">Socially</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Do you smoke tobacco products?</label>
+                    <div class="answer">Never</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Do you use recreational drugs?</label>
+                    <div class="answer">Never</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Is there anything you watch regularly on television?</label>
+                    <div class="answer">No</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Do you have pets?</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">What kind of music do you like?</label>
+                    <div class="answer">Popular music, Disco, Rock, Hip hop</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Do you have strong political affiliations?</label>
+                    <div class="answer">No</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Would you consider relocating?</label>
+                    <div class="answer">Yes</div>
+                </div>
+            </section>
+            <section class="row pt-4 pb-2 mx-3" id="goodFrndSec">
+                <div class="col-12 mb-3 heading">
+                    <h5 class="fw-semibold"><span class="material-symbols-outlined">diversity_3</span>Activity Preferences</h5>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Watching a movie?</label>
+                    <div class="answer">Horror, Thriller, Science fiction, Comedy, Romance, Documentary, Thriller, Historical, Biographical</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Having tea/coffee</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going to a bar/sports bar</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going to a concert</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Watching a live play</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Watching a musical live/on TV</label>
+                    <div class="answer">No</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Fishing/hunting</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Participating in water sports in an natural body of water</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going for a motorcycle ride</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Go on a hike</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going for a bike ride</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going for a run</label>
+                    <div class="answer">No</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going for a leisurely walk</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going on a road trip/vacation</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going on a picnic</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Bowling</label>
+                    <div class="answer">No</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going to a museum</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going shopping</label>
+                    <div class="answer">Yes</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going out to dinner</label>
+                    <div class="answer">Chinese, Indian, Italian</div>
+                </div>
+                <div class="col-12 px-3 pb-4">
+                    <label class="question">Going dancing</label>
+                    <div class="answer">Yes</div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    </div>
+</main>
+
+
+@section footerSeparate{
+    <script>
+        var chatDispWrap = document.querySelector('#chatDispWrap');
+        chatDispWrap.scrollTop = chatDispWrap.scrollHeight - chatDispWrap.clientHeight;
+    </script>
+}

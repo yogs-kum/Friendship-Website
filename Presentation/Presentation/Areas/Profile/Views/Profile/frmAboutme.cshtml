@@ -1,0 +1,105 @@
+﻿@model Presentation.Areas.Profile.Models.ProfilePhotos
+@{
+	ViewBag.Title = "About Me";
+	Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+}
+
+<style>
+	.photouploader {
+		border-radius: 12px;
+		box-shadow: 0 16px 54px rgb(23 11 37 / 79%);
+	}
+
+	.dropzone {
+		border-radius: 12px;
+		box-shadow: 0 16px 54px rgb(23 11 37 / 79%);
+	}
+</style>
+
+<script>
+    $(function () {
+		// Multiple images preview in browser
+		var imagesPreview = function (input, placeToInsertImagePreview) {
+    	if (input.files) {
+				var filesAmount = input.files.length;
+
+				for (i = 0; i < filesAmount; i++) {
+					var reader = new FileReader();
+
+					reader.onload = function (event) {
+						$($.parseHTML('<img style="height:90px; width:90px;">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+					}
+
+					reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+		};
+
+		$('#btnUPload').on('change', function () {
+			imagesPreview(this, 'div.gallery');
+		});
+	});
+</script>
+
+<div class="container photouploader">
+	@using (Html.BeginForm("SaveAboutMe", "Profile", FormMethod.Post, new { id = "frmContactUs", name = "frmContactUs", enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+
+
+
+        <div class="row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-md-4">
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.PicDescription, htmlAttributes: new { @class = "control-label col-sm-6" })
+                    <div class="col-sm-8">
+                        @Html.TextAreaFor(model => model.PicDescription, new { style = "width: 500px; height: 80px;", placeholder = "Pic Description" })
+                        @Html.ValidationMessageFor(model => model.PicDescription, "", new { @class = "text-danger" })
+
+                        <input type="hidden" id="ProfileSectionId" name="ProfileSectionId" value="@Application.Common.clsEncryptDecrypt.Encrypt(Model.ProfileId.ToString())" />
+                        <input type="hidden" id="ProfileId" name="ProfileId" value="@Application.Common.clsEncryptDecrypt.Encrypt(Model.ProfileSectionId.ToString())" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-md-4">
+                <div class="form-group row">
+                    @*<label>Photos</label>*@
+                    <div class="col-sm-8">
+                        <input type="file" accept="image/*" class="form-control"  style="border:none;" id="btnUPload" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-12 ">
+                <div class="col-md-12 gallery">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6">
+            <div class="col-md-6">
+            </div>
+            <input type="hidden" id="UserId" name="UserId" value="@Model.UserId" />
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+        </div>
+        <div class="form-group col-sm-6">
+            <input type="submit" value="Next" class="btn btn-primary" />
+        </div>
+
+    </div>
+
+	}
+</div>

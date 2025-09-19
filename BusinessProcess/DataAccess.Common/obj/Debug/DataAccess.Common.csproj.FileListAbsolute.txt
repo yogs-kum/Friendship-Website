@@ -1,0 +1,5 @@
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Common\bin\Debug\DataAccess.Common.dll
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Common\bin\Debug\DataAccess.Common.pdb
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Common\obj\Debug\DataAccess.Common.csproj.CoreCompileInputs.cache
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Common\obj\Debug\DataAccess.Common.dll
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Common\obj\Debug\DataAccess.Common.pdb

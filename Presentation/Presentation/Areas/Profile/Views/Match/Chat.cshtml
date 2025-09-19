@@ -1,0 +1,422 @@
+﻿@model List<Presentation.Areas.Profile.Models.UserFriendList>
+
+@{
+	ViewBag.Title = "Chat";
+	Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+	int NewChatRoomId = Convert.ToInt32(TempData["NewChatRoomId"]);
+
+}
+<style>
+
+	#divMessage {
+		width: 100%;
+		max-height: 400px;
+		overflow-y: scroll;
+		min-height: 400px;
+		padding: 0 10px 0 5px;
+	}
+
+	.msgSent {
+		text-align: right;
+		width: 100%;
+	}
+
+	.msgRecieve {
+		text-align: left;
+	}
+
+	#userdata {
+		border-right: 1px solid #dbe1e3;
+		background-color: #f5f5fa;
+	}
+
+	#navChatOptions > ul > li > ul {
+		display: none;
+		list-style-type: none;
+		width: 10%;
+		min-width: 185px;
+		background-color: #dee2e6;
+		padding: 10px;
+		border-radius: 0 0 6px 6px;
+		position: absolute;
+		top: 64px;
+		right: 0;
+	}
+
+	#navChatOptions > ul > li:hover > ul {
+		display: block;
+	}
+
+	#navChatOptions > ul > li > ul > li {
+		height: 44px;
+	}
+
+		#navChatOptions > ul > li > ul > li > a {
+			display: flex;
+			align-items: center;
+			line-height: 44px;
+			padding: 0 10px;
+			color: #fff;
+			font-size: 13px;
+			border-radius: 4px;
+		}
+
+			#navChatOptions > ul > li > ul > li > a::before {
+				font-family: 'Material Icons';
+				font-size: 14px;
+				margin-right: 8px;
+			}
+
+			/*#navChatOptions > ul > li > ul > li > a.profile-icon::before {
+					content: "\e8a6";
+				}
+
+				#navChatOptions > ul > li > ul > li > a.change-pass-icon::before {
+					content: "\e898";
+				}*/
+
+			#navChatOptions > ul > li > ul > li > a::before {
+				content: "\e9ba";
+			}
+
+		#navChatOptions > ul > li > ul > li > a {
+			background-color: #e9ecef;
+			justify-content: center;
+		}
+
+			#navChatOptions > ul > li > ul > li > a:hover {
+				background-color: #fff;
+				color: #d6516d;
+			}
+
+			#navChatOptions > ul > li > ul > li > a:hover {
+				background-color: #e9ecef;
+			}
+
+			#navChatOptions > ul > li > ul > li > a.active {
+				background-color: #e9ecef;
+				color: #00c2cb;
+			}
+</style>
+
+<div id="divLogin" class="mylogin">
+
+	@*User Name:<input id="txtUserName" type="text" /><br />
+		<input id="btnLogin" type="button" value="Login" />*@
+	<div id="divalarm"></div>
+</div>
+
+<div id="divChat" class="mylogin">
+	<main id="profileDisp">
+
+		<div class="st-responsive st-pdg st-pdg-section">
+			<div class="profile-disp-cntnr st-row">
+
+				@if (Model.Count() > 0)
+				{
+					<section class="left-col st-pdg" style="border-right: 1px solid #dbe1e3; background-color: #f5f5fa; max-height: 500px; min-height: 500px; overflow-y: scroll; ">
+
+						@for (int i = 0; i < Model.Count(); i++)
+						{
+							string userName = @Model[i].IsGroup == 0 ? @Model[i].UserName : @Model[i].ChatRoomName;
+							<div style="padding-bottom:20px">
+								<div class="user-img-box"><img src="@Model[i].PicName" alt="User Img" width="40" height="40"></div>
+								<div class="user-detail-box">
+									<input type="button" data-userId="@Model[i].UserId" data-userPic="@Model[i].PicName"
+										   data-userName="@Model[i].UserName" data-chatRoomName="@Model[i].ChatRoomName" data-isGroup="@Model[i].IsGroup" data-ChatRoomId="@Model[i].ChatRoomId" data-requestUserId="@Model[i].RequestedUserId"
+										   value="@userName" onclick="loadProfileChat(this)" />
+								</div>
+							</div>
+						}
+					</section>
+
+					<div class="right-col st-pdg" id="Chats" style="display:none">
+						<section class="st-pdg" style="text-align: center; display: flex; background-color: #f5f5fa; margin-left: -20px; height: 50px;padding: 12px 0px 4px 0; border-bottom: none ">
+							<div class="user-img" style=" margin-left: 10px;"><img src="" alt="User Img" width="40" height="40"></div>
+							<div class="user-name" style="padding-left:15px;" id="lbluserName">
+							</div>
+							<div style="padding-left:500px">
+								<nav id="navChatOptions">
+									<ul>
+										<li>
+											<button><div class="user-wel"><div class="user-name"></div></div></button>
+											<ul>
+												<li><span class="logout-icon" id="lblchatMember" onclick="AddChatMember()">Add Member</span></li>
+												<li><span class="profile-icon active">Clear Chat</span></li>
+												<li><span class="change-pass-icon" onclick="DeleteChat()">Delete Member</span></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+							</div>
+							@*<a class="user-addMember search-icon" style="text-align:right; width: 80%;" id="lblchatMember" onclick="AddChatMember()"><i class="search-icon"></i>Add Member</a>*@
+
+						</section>
+
+						<section class="st-pdg" style="text-align: center; display: flex; padding: 0px 0 4px 0; border-bottom: none">
+							<div id="divMessage">
+
+							</div>
+
+						</section>
+
+						<section class="st-pdg" style="text-align: center; display: flex; padding: 0px 0 4px 0; border-bottom:none">
+							<div class="" style="width:90%">
+								<input class="pf-input" onkeypress="checkEnterPress(event)" placeholder="Message..." id="txtMessage" type="text" />
+							</div>
+							<div class="" style="width:10%">
+								<input type="hidden" id="userId" value="" />
+								<input type="hidden" id="chatUserId" value="" />
+								<input type="hidden" id="chatUserName" value="" />
+								<input type="hidden" id="chatUserpic" value="" />
+								<input type="hidden" id="IsGroupChat" value="0" />
+								<input type="hidden" id="ChatRoomId" value="" />
+								<input type="hidden" id="GroupMemberIds" value="" />
+								<input id="NewChatRoomId" type="hidden" value="@NewChatRoomId" />
+								<input class="btn-primary btn-s" id="btnSendMessage" onclick="sendMessage()" type="button" value="Send" />
+							</div>
+						</section>
+					</div>
+					<div id="MemberList">
+
+					</div>
+
+				}
+			</div>
+		</div>
+	</main>
+</div>
+
+<input id="hId" type="hidden" />
+<input id="hUserName" type="hidden" />
+<input id="hdn_connectionId" type="hidden" />
+<input id="hGroup" type="hidden" />
+
+@section scripts {
+
+	@*<script src="~/Scripts/jquery-1.8.2.min.js"></script>*@
+	@*<script src="~/Scripts/jquery.signalR-2.4.2.js"></script>*@
+	@*<script src="~/Scripts/jquery.signalR-2.4.2.min.js" type="text/javascript"></script>
+		<script src="~/signalr/hubs" type="text/javascript"></script>*@
+
+	<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+	<script src="~/Scripts/jquery.signalR-2.0.1.min.js"></script>
+	<script src="~/signalr/hubs" type="text/javascript"></script>
+
+
+	<script>
+		//var NewChatRoomId =
+		$(document).load(function () {
+
+			var NewChatRoomId = $('#NewChatRoomId').val();
+			if (NewChatRoomId!= undefined &&  NewChatRoomId!="0") {
+				var element = $("button[data-chatroomid='" + NewChatRoomId + "']");
+				loadProfileChat(element);
+			//loadProfileChat(element);
+		  }
+		});
+
+
+		function loadProfileChat($this) {
+			$('#divMessage').html('');
+			$('#Chats').css('display', 'block')
+			$('#userId').val($this.dataset.userid);
+			$('#chatUserId').val($this.dataset.requestuserid);
+			$('#chatUserName').val($this.dataset.username);
+			$('#lbluserName').text($this.dataset.isgroup > 0 ? $this.dataset.chatroomname : $this.dataset.username);
+			$('#ChatRoomId').val($this.dataset.chatroomid);
+			$('#IsGroupChat').val($this.dataset.isgroup);
+			$('#Chats .user-img img').attr('src', $this.dataset.userpic);
+
+			$("#activeChatUserId").val($this.dataset.requestuserid)
+
+			var objHub = $.connection.myHub;
+
+			loadClientMethods(objHub);
+			$.connection.hub.start().done(function () {
+				//loadEvents(objHub);
+				var isGroup = parseInt($('#IsGroupChat').val());
+				var loginUserName =$('#loginUserName').val();
+				objHub.server.connect(loginUserName, $this.dataset.userid,
+					$this.dataset.requestuserid,
+					$this.dataset.username,
+					$this.dataset.isgroup,
+					$this.dataset.chatroomid
+				);
+			});
+		}
+
+		$(function () { //This section will run whenever we call Chat.cshtml page
+
+		});
+
+		//function loadEvents(objHub) {
+
+		//	$("#txtPassword").keypress(function (e) {
+		//		if (e.which == 13) {
+		//			$("#btnLogin").click();
+		//		}
+		//	});
+
+		//	$("#txtMessage").keypress(function (e) {
+		//		if (e.which == 13) {
+		//			$('#btnSendMessage').click();
+		//		}
+		//	});
+		//}
+
+		function checkEnterPress(e) {
+			if (e.charCode == 13 || e.keyCode == 13 || e.key == 'enter') {
+				e.preventDefault();
+				sendMessage();
+			}
+		}
+
+		function sendMessage() {
+			var objHub = $.connection.myHub;
+			var loginUserName = $('#loginUserName').val();
+			var connectionId = $('#hdn_connectionId').val();
+			objHub.server.sendMessageToGroup(connectionId, $("#txtMessage").val(), $("#userId").val(), loginUserName, $("#chatUserId").val(), $("#chatUserName").val(), $("#IsGroupChat").val(), $("#ChatRoomId").val());
+			InsertUserMessage($("#userId").val(), $("#chatUserId").val(), $("#txtMessage").val(), $("#chatUserName").val(), $("#IsGroupChat").val(), $("#ChatRoomId").val());
+		}
+
+		function loadClientMethods(objHub) {
+			objHub.client.NoExistAdmin = function () {
+				var divNoExist = $('<div><p>There is no Admin to response you try again later</P></div>');
+				$("#divChat").hide();
+				$("#divLogin").show();
+
+				$(divNoExist).hide();
+				$('#divalarm').prepend(divNoExist);
+				$(divNoExist).fadeIn(900).delay(9000).fadeOut(900);
+			}
+
+			objHub.client.getMessages = function (customConnectionId, message, userId, userName, chatUserId, chatUserName) {
+				let activeChatUserId = parseInt($("#activeChatUserId").val());
+				let currentConnectionId = $('#hdn_connectionId').val();
+				$("#txtMessage").val('');
+				if ($("#hGroup").val() == "1") {
+					if (customConnectionId === currentConnectionId) {
+						if (userId != $("#userId").val()) {
+							let chatUserName = $("#chatUserName").val().split(" ")[0]
+							$('#divMessage').append('<div classs="msgRecieve"style="text-align:left;"><p><b>' +
+								chatUserName + ':</b> ' + message +  '</p></div>');
+					}
+						else {
+							$('#divMessage').append('<div classs="msgSent" style="text-align:right;"><p>' +
+							 '<b>You:</b> ' + message + '</p></div>');
+						}
+					}
+				}
+				else {
+					if (userName == $("#chatUserId").val()) {
+						let chatUserName = $("#chatUserName").val().split(" ")[0]
+						$('#divMessage').append('<div classs="msgRecieve"style="text-align:left;"><p><b>' +
+							chatUserName + ':</b> ' + message + '</p></div>');
+					}
+					else {
+						$('#divMessage').append('<div classs="msgSent" style="text-align:right;"><p>' +
+							'<b>You:</b> ' + message + '</p></div>');
+					}
+				}
+
+				var height = $('#divMessage')[0].scrollHeight;
+				$('#divMessage').scrollTop(height);
+
+			}
+
+			objHub.client.onConnected = function (id, customConnectionId, userName, UserID, userGroup, messagesDetail, currentUserId, currentUserName) {
+				//$('#divMessage').append(messagesDetail);
+				//$('#ChatRoomId').val(chatRoomId);
+				$('#divMessage').append(messagesDetail.m_StringValue);
+				$('#hUserName').val(userName);
+				$('#hId').val(UserID);
+				$('#hGroup').val(userGroup);
+
+				//save the connection Id
+				$('#hdn_connectionId').val(customConnectionId);
+
+				$("#divChat").show();
+				$("#divLogin").hide();
+				let objDiv = document.getElementById("divMessage");
+				objDiv.scrollTop = objDiv.scrollHeight;
+			}
+		}
+
+		function AddChatMember() {
+			var url = '@Url.Action("_addFriend", "Match")';
+		    $.ajax({
+				url: url,
+				type: "POST",
+				data: { 'ChatMemberId': $('#chatUserId').val(), 'IsGroup': $('#IsGroupChat').val(), 'ChatRoomId': $('#ChatRoomId').val()},
+				success: function (data) {
+					$('#MemberList').html(data);
+					$('#MyMemberList').show();
+					$('#MyMemberList').modal('show');
+			    }, error: function () { alert("Error in Call"); }
+		   })
+		}
+		function InsertUserMessage(userId, chatUserId, message, chatUserName, isGroup, chatRoomId) {
+
+			var url = '@Url.Action("InsertUserMessage", "Match")';
+			$.ajax({
+				url: url,
+				type: "GET",
+				data: {
+					'userId': userId, 'chatUserId': chatUserId, 'message': message,'chatUserName' :chatUserName,'isGroup': isGroup, 'chatRoomId': chatRoomId },
+				success: function (data) {
+					//$('#divMessage').html('');
+
+				}, error: function () { alert("Error in Call"); }
+
+			});
+		}
+		function DeleteChat() {
+			var url = '@Url.Action("DeleteChat", "Match")';
+			$.ajax({
+				url: url,
+				type: "GET",
+				data: { 'ChatMemberId': $('#chatUserId').val(), 'IsGroup': $('#IsGroupChat').val(), 'ChatRoomId': $('#ChatRoomId').val() },
+				success: function (data) {
+					$('#divMessage').html('');
+
+				}, error: function () { alert("Error in Call"); }
+
+			});
+		}
+		function addMember($this) {
+			FilterFriend()
+
+			var url = '@Url.Action("AddMemberInChat", "Match")';
+			$.ajax({
+				url: url,
+				type: "GET",
+				data: { 'ChatUserId': $('#chatUserId').val(), 'NewMemberId': $this.dataset.userid, 'ChatRoomId': $('#ChatRoomId').val()},
+				success: function (data) {
+					$('#MyMemberList').modal('hide');
+				}, error: function () { alert("Error in Call"); }
+
+			})
+
+		}
+		function FilterFriend() {
+			var input = $('#txtSearchFriends').val();
+			filter = input.toUpperCase();
+			var ul = document.getElementById('addFriendsList');
+			var li = ul.getElementsByTagName('li');
+
+			for (i = 0; i < li.length; i++) {
+				a = li[i].getElementsByTagName("a")[0];
+				txtValue = a.textContent || a.innerText;
+				let filters = filter.split(" ");
+				filters = filters.filter(f => f.length);
+				let shouldDisplay = true;
+				filters.forEach(filt => {
+					shouldDisplay = shouldDisplay && txtValue.toUpperCase().includes(filt)
+				});
+				li[i].style.display = (shouldDisplay || filters.length === 0) ? "" : "none";
+			}
+		}
+	</script>
+}
+

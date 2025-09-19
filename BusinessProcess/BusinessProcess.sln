@@ -1,0 +1,124 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Base", "DataAccess.Base\DataAccess.Base.csproj", "{D52E8759-9C16-4B4E-A45C-45EA8ED87199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Common", "Application.Common\Application.Common.csproj", "{20F557F3-7719-4A08-A663-FC2211B8186D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Common", "DataAccess.Common\DataAccess.Common.csproj", "{8793306A-AE14-4C97-B28B-DE1698DEFA86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Entity", "DataAccess.Entity\DataAccess.Entity.csproj", "{565AC7D2-2F4C-47E6-9A79-76292D011F5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{B404CB6F-30A4-49D4-BDE5-F185F2537641}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.Security", "BusinessProcess.Security\BusinessProcess.Security.csproj", "{8E4060A9-0F14-4CB8-A365-559618B741B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Security", "Interface.Security\Interface.Security.csproj", "{B5101D0E-2A9D-4C66-8A36-0D8D7875C05B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.Administration", "BusinessProcess.Administration\BusinessProcess.Administration.csproj", "{633C691F-BFD1-4599-8672-24B25A334D5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Administration", "Interface.Administration\Interface.Administration.csproj", "{374B113B-3057-4F0D-A71F-C0BA73208258}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.Profile", "BusinessProcess.Profile\BusinessProcess.Profile.csproj", "{48FBB743-A5E8-438B-9F27-651A908D51A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Profile", "Interface.Profile\Interface.Profile.csproj", "{5A82C787-051E-4F9A-966D-269B5E58F20B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D52E8759-9C16-4B4E-A45C-45EA8ED87199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D52E8759-9C16-4B4E-A45C-45EA8ED87199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D52E8759-9C16-4B4E-A45C-45EA8ED87199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D52E8759-9C16-4B4E-A45C-45EA8ED87199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20F557F3-7719-4A08-A663-FC2211B8186D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20F557F3-7719-4A08-A663-FC2211B8186D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20F557F3-7719-4A08-A663-FC2211B8186D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20F557F3-7719-4A08-A663-FC2211B8186D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8793306A-AE14-4C97-B28B-DE1698DEFA86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8793306A-AE14-4C97-B28B-DE1698DEFA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8793306A-AE14-4C97-B28B-DE1698DEFA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8793306A-AE14-4C97-B28B-DE1698DEFA86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{565AC7D2-2F4C-47E6-9A79-76292D011F5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{565AC7D2-2F4C-47E6-9A79-76292D011F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{565AC7D2-2F4C-47E6-9A79-76292D011F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{565AC7D2-2F4C-47E6-9A79-76292D011F5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B404CB6F-30A4-49D4-BDE5-F185F2537641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B404CB6F-30A4-49D4-BDE5-F185F2537641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B404CB6F-30A4-49D4-BDE5-F185F2537641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B404CB6F-30A4-49D4-BDE5-F185F2537641}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E4060A9-0F14-4CB8-A365-559618B741B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E4060A9-0F14-4CB8-A365-559618B741B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E4060A9-0F14-4CB8-A365-559618B741B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E4060A9-0F14-4CB8-A365-559618B741B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5101D0E-2A9D-4C66-8A36-0D8D7875C05B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5101D0E-2A9D-4C66-8A36-0D8D7875C05B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5101D0E-2A9D-4C66-8A36-0D8D7875C05B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5101D0E-2A9D-4C66-8A36-0D8D7875C05B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{633C691F-BFD1-4599-8672-24B25A334D5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{633C691F-BFD1-4599-8672-24B25A334D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{633C691F-BFD1-4599-8672-24B25A334D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{633C691F-BFD1-4599-8672-24B25A334D5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{374B113B-3057-4F0D-A71F-C0BA73208258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{374B113B-3057-4F0D-A71F-C0BA73208258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{374B113B-3057-4F0D-A71F-C0BA73208258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{374B113B-3057-4F0D-A71F-C0BA73208258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48FBB743-A5E8-438B-9F27-651A908D51A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48FBB743-A5E8-438B-9F27-651A908D51A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48FBB743-A5E8-438B-9F27-651A908D51A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48FBB743-A5E8-438B-9F27-651A908D51A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A82C787-051E-4F9A-966D-269B5E58F20B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A82C787-051E-4F9A-966D-269B5E58F20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A82C787-051E-4F9A-966D-269B5E58F20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A82C787-051E-4F9A-966D-269B5E58F20B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43DC764C-FF88-4DA8-8BEA-77556580CF66}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 12
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.strengthsfirst.org/tfs-devops
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Application.Common\\Application.Common.csproj
+		SccProjectName1 = Application.Common
+		SccLocalPath1 = Application.Common
+		SccProjectUniqueName2 = BusinessProcess.Administration\\BusinessProcess.Administration.csproj
+		SccProjectName2 = BusinessProcess.Administration
+		SccLocalPath2 = BusinessProcess.Administration
+		SccProjectUniqueName3 = BusinessProcess.Security\\BusinessProcess.Security.csproj
+		SccProjectName3 = BusinessProcess.Security
+		SccLocalPath3 = BusinessProcess.Security
+		SccProjectUniqueName4 = DataAccess.Base\\DataAccess.Base.csproj
+		SccProjectName4 = DataAccess.Base
+		SccLocalPath4 = DataAccess.Base
+		SccProjectUniqueName5 = DataAccess.Common\\DataAccess.Common.csproj
+		SccProjectName5 = DataAccess.Common
+		SccLocalPath5 = DataAccess.Common
+		SccProjectUniqueName6 = DataAccess.Entity\\DataAccess.Entity.csproj
+		SccProjectName6 = DataAccess.Entity
+		SccLocalPath6 = DataAccess.Entity
+		SccProjectUniqueName7 = Interface.Administration\\Interface.Administration.csproj
+		SccProjectName7 = Interface.Administration
+		SccLocalPath7 = Interface.Administration
+		SccProjectUniqueName8 = Interface.Security\\Interface.Security.csproj
+		SccProjectName8 = Interface.Security
+		SccLocalPath8 = Interface.Security
+		SccProjectUniqueName9 = WebAPI\\WebAPI.csproj
+		SccProjectName9 = WebAPI
+		SccLocalPath9 = WebAPI
+		SccProjectUniqueName10 = BusinessProcess.Profile\\BusinessProcess.Profile.csproj
+		SccProjectName10 = BusinessProcess.Profile
+		SccLocalPath10 = BusinessProcess.Profile
+		SccProjectUniqueName11 = Interface.Profile\\Interface.Profile.csproj
+		SccProjectName11 = Interface.Profile
+		SccLocalPath11 = Interface.Profile
+	EndGlobalSection
+EndGlobal

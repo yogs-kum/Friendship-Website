@@ -1,0 +1,17 @@
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\BusinessProcess.Security.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\BusinessProcess.Security.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\Application.Common.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\DataAccess.Base.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\DataAccess.Common.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\DataAccess.Entity.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\Interface.Security.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\Application.Common.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\DataAccess.Base.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\DataAccess.Common.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\DataAccess.Entity.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\bin\Debug\Interface.Security.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\obj\Debug\BusinessProcess.Security.csproj.AssemblyReference.cache
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\obj\Debug\BusinessProcess.Security.csproj.CoreCompileInputs.cache
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\obj\Debug\BusinessProcess.Security.csproj.CopyComplete
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\obj\Debug\BusinessProcess.Security.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Security\obj\Debug\BusinessProcess.Security.pdb

@@ -1,0 +1,615 @@
+﻿@model Presentation.Areas.Profile.Models.Profile
+@{
+    ViewBag.Title = "User Home";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+    ViewBag.UserID = @Model.UserId;
+}
+
+<style>
+	.photouploader{border-radius:12px;}
+	.dropzone{border-radius:12px;box-shadow: 0 16px 54px rgb(23 11 37 / 79%);}
+    .photouploader {
+        border-radius: 12px;
+        /*box-shadow: 0 16px 54px rgb(23 11 37 / 79%);*/
+    }
+
+    .dropzone {
+        border-radius: 12px;
+        box-shadow: 0 16px 54px rgb(23 11 37 / 79%);
+    }
+</style>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#txtPhone').keyup(function (e) {
+			ValidateUser();
+			//NumericOnly(e);
+		});
+		$('#txtPhone').keydown(function (e) {
+			ValidateUser();
+			//NumericOnly(e);
+		});
+		$("#txtPhone").bind("paste", function (e) {
+			e.preventDefault();
+		});
+		$("#txtPhone").bind('keypress', function (e) {
+			if (e.keyCode == '9' || e.keyCode == '16') {
+				return;
+			}
+			var code;
+			if (e.keyCode) code = e.keyCode;
+			else if (e.which) code = e.which;
+			if (e.which == 46)
+				return false;
+			if (code == 8 || code == 46)
+				return true;
+			if (code < 48 || code > 57)
+				return false;
+		}
+		); $('#txtPinCode').keyup(function (e) {
+			ValidateUser();
+			//NumericOnly(e);
+		});
+		$('#txtPinCode').keydown(function (e) {
+			ValidateUser();
+			//NumericOnly(e);
+		});
+		$("#txtPinCode").bind("paste", function (e) {
+			e.preventDefault();
+		});
+		$("#txtPinCode").bind('keypress', function (e) {
+			if (e.keyCode == '9' || e.keyCode == '16') {
+				return;
+			}
+			var code;
+			if (e.keyCode) code = e.keyCode;
+			else if (e.which) code = e.which;
+			if (e.which == 46)
+				return false;
+			if (code == 8 || code == 46)
+				return true;
+			if (code < 48 || code > 57)
+				return false;
+		}
+		);
+		var CntryId = $("#ddlCountry").val();
+		// var Demographic = '';
+		if (CntryId != "") {
+			// GetCountryState();
+		}
+
+		if ($('#hdnNextTab').val() == "ProfilePics") {
+			openLifeMyPictureView(1);
+		}
+
+		else if ($('#hdnNextTab').val() == "ProfileCharStr") {
+			openSpecificInterestsView(1);
+		}
+		else if ($('#hdnNextTab').val() == "ProfileInter") {
+			openCharacterStrengthsView(1);
+		}
+		else if ($('#hdnNextTab').val() == "ProfileTrait") {
+			openNeurodiverseStrengthsView(1);
+		}
+		else {
+			ShowDemographic();
+		}
+
+	});
+
+    function GetCountryState() {
+        var theUrl = '@Url.Action("GetCountryState", "Profile")';
+        var theCountryId = $("#ddlCountry").val();
+        $.ajax({
+            type: "GET", dataType:"json", url: theUrl,
+            data: { theCountryId: theCountryId }, success: function (response) {
+                $("#ddlState").empty();
+                $.each(response, function (index, item) {
+                    $("#ddlState").append($("<option></option>").val(item['Value']).html(item['Text']));
+                })
+                $(document).ready(function () { $("#ddlState").val(@ViewBag.StateId);})
+            }, error: function () { alert("Error in Call"); }
+        })
+    }
+
+	function ValidateUser(return_val) {
+		event = event || window.event || event.srcElement;
+		var return_val = true;
+		if ($('#txtFirstName').val().trim() == '') {
+			$('#txtFirstName').next('span').text('Please Enter first name').show();
+			return_val = false;
+		} else {
+			$('#txtFirstName').next('span').hide();
+		}
+		if ($('#txtLastName').val().trim() == '') {
+			$('#txtLastName').next('span').text('Please enter last name').show();
+			return_val = false;
+		}
+        if ($('#txtNickName').val().trim() == '') {
+            $('#txtNickName').next('span').text('Please enter nick name').show();
+            return_val = false;
+        }else {
+			$('#txtLastName').next('span').hide();
+		}
+		if ($('#ddlCountry').val().trim() == '') {
+			$('#ddlCountry').next('span').text('Please select country').show();
+			return_val = false;
+		} else {
+			$('#ddlCountry').next('span').hide();
+		}
+		if ($('#ddlState').val().trim() == '') {
+			$('#ddlState').next('span').text('Please select state').show();
+			return_val = false;
+		} else {
+			$('#ddlState').next('span').hide();
+		}
+		if ($('#txtCity').val().trim() == '') {
+			$('#txtCity').next('span').text('Please enter city').show();
+			return_val = false;
+		} else {
+			$('#txtCity').next('span').hide();
+		}
+		if ($('#txtPinCode').val().trim() == '') {
+			$('#txtPinCode').next('span').text('Please enter zipcode').show();
+			return_val = false;
+		} else {
+			$('#txtPinCode').next('span').hide();
+		}
+		if ($('#txtPhone').val().trim() == '') {
+			$('#txtPhone').next('span').text('Please enter phone no.').show();
+			return_val = false;
+		} else {
+			$('#txtPhone').next('span').hide();
+		}
+		return return_val;
+	};
+	function SavePostData() {
+		var isValid = ValidateUser(0);
+		if (isValid) {
+			$('#frmContactUs').submit();
+		}
+
+	}
+	function ShowDemographic() {
+		$('#profileData').show();
+		$('#mylifeinPicture').hide();
+        $('#SpecificInterests').hide();
+        $('#characterStrengths').hide();
+        $('#beFriendsWithMe').hide();
+		$('#NeurodiverseStrengths').hide();
+		$('#Masker').hide();
+        $('#step_1').addClass('active');
+        $('#step_2').removeClass('active');
+        $('#step_3').removeClass('active');
+        $('#step_4').removeClass('active');
+        $('#step_5').removeClass('active');
+		$('#step_6').removeClass('active');
+		$('#step_7').removeClass('active');
+            }
+
+    function openLifeMyPictureView(partialViewToInsert) {
+        var userID = $('#UserId').val();
+        var obj = {
+            id: '_myLifeMyPicture',
+           // UserID: $('#UserId').val()//'M7VuQHORs+4='
+             UserID: userID
+        };
+        $.ajax({
+            url: '@Url.Action("_myLifeMyPicture", "Profile")',
+            data: obj,
+            type: "POST",
+            success: function (data) {
+                $('#mylifeinPicture').html(data);
+                $('#mylifeinPicture').show();
+                $('#profileData').hide();
+                $('#beFriendsWithMe').hide();
+                $('#SpecificInterests').hide();
+				$('#characterStrengths').hide();
+				$('#NeurodiverseStrengths').hide();
+                $('#Masker').hide();
+				$('#step_1').removeClass('active');
+                $('#step_2').addClass('active');
+                $('#step_3').removeClass('active');
+                $('#step_4').removeClass('active');
+                $('#step_5').removeClass('active');
+				$('#step_6').removeClass('active');
+				$('#step_7').removeClass('active');
+
+            }
+        });
+    }
+
+     function openLifeFriendsWithMeView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_beFriendsWithMe", "Profile")',
+            data: { id: partialViewToInsert},
+            type: "POST",
+            success: function (data) {
+                $('#beFriendsWithMe').html(data);
+                $('#beFriendsWithMe').show();
+                $('#profileData').hide();
+                $('#SpecificInterests').hide();
+                $('#mylifeinPicture').hide();
+				$('#characterStrengths').hide();
+				$('#NeurodiverseStrengths').hide();
+                $('#Masker').hide();
+				$('#step_1').removeClass('active');
+				$('#step_2').removeClass('active');
+                $('#step_3').addClass('active');
+                $('#step_4').removeClass('active');
+                $('#step_5').removeClass('active');
+				$('#step_6').removeClass('active');
+				$('#step_7').removeClass('active');
+            }
+        });
+    }
+
+     function openSpecificInterestsView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_IntersetcharacterNeuro", "Profile")',
+            data: { id: partialViewToInsert},
+            type: "POST",
+            success: function (data) {
+                $('#SpecificInterests').html(data);
+
+                $('#SpecificInterests').show();
+				$('#profileData').hide();
+				$('#mylifeinPicture').hide();
+                $('#beFriendsWithMe').hide();
+				$('#characterStrengths').hide();
+				$('#NeurodiverseStrengths').hide();
+                $('#Masker').hide();
+
+				$('#step_1').removeClass('active');
+				$('#step_2').removeClass('active');
+				$('#step_3').removeClass('active');
+                $('#step_4').addClass('active');
+                $('#step_5').removeClass('active');
+				$('#step_6').removeClass('active');
+				$('#step_7').removeClass('active');
+                $('#ddlSpecificInterests').select2(
+                    {
+                        multiple: true,
+                        placeholder: 'Select Your Interests'
+                    });
+
+                $('#ddlSpecificInterests').val(null);
+                $('#ddlSpecificInterests').change();
+                var SpecificInterests = $('#hdnSavedInterests').val();
+                $('#ddlSpecificInterests').val(SpecificInterests.split(', '));
+                $('#ddlSpecificInterests').change();
+
+                $('#ddlStrength').select2(
+                    {
+                        multiple: true,
+                        placeholder: 'Select Your Top 5 Strengths',
+                        maximumSelectionLength: 5
+                    });
+
+                $('#ddlStrength').val(null);
+                $('#ddlStrength').change();
+                var Strength = $('#hdnSavedStrength').val();
+                $('#ddlStrength').val(Strength.split(', '));
+                $('#ddlStrength').change();
+
+
+                $('#ddlDesiredStrength').select2(
+                    {
+                        multiple: true,
+                        placeholder: 'Select Top 5 Strengths You desire in a Friend',
+                        maximumSelectionLength: 5
+
+                    });
+
+                $('#ddlDesiredStrength').val(null);
+                $('#ddlDesiredStrength').change();
+                var DesiredStrength = $('#hdnSavedDesiredStrength').val();
+                $('#ddlDesiredStrength').val(DesiredStrength.split(', '));
+                $('#ddlDesiredStrength').change();
+
+
+            }
+        });
+    }
+
+     function openCharacterStrengthsView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_characterStrengths", "Profile")',
+            data: { id: partialViewToInsert},
+            type: "POST",
+            success: function (data) {
+                $('#characterStrengths').html(data);
+                $('#characterStrengths').show();
+                 $('#profileData').hide();
+                $('#SpecificInterests').hide();
+                $('#mylifeinPicture').hide();
+                $('#beFriendsWithMe').hide();
+				$('#NeurodiverseStrengths').hide();
+                $('#Masker').hide();
+				$('#step_1').removeClass('active');
+				$('#step_2').removeClass('active');
+				$('#step_3').removeClass('active');
+				$('#step_4').removeClass('active');
+                $('#step_5').addClass('active');
+				$('#step_6').removeClass('active');
+				$('#step_7').removeClass('active');
+            }
+        });
+    }
+
+    function openNeurodiverseStrengthsView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_neurodiverseStrengths", "Profile")',
+            data: { id: partialViewToInsert},
+            type: "POST",
+            success: function (data) {
+                $('#NeurodiverseStrengths').html(data);
+                $('#profileData').hide();
+                $('#NeurodiverseStrengths').show();
+               $('#SpecificInterests').hide();
+                $('#beFriendsWithMe').hide();
+				$('#characterStrengths').hide();
+                $('#Masker').hide();
+				$('#step_1').removeClass('active');
+				$('#step_2').removeClass('active');
+				$('#step_3').removeClass('active');
+				$('#step_4').removeClass('active');
+				$('#step_5').removeClass('active');
+                $('#step_6').addClass('active');
+                $('#step_7').removeClass('active');
+            }
+        });
+    }
+
+     function openMaskerView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_masker", "Profile")',
+            data: { id: partialViewToInsert},
+            type: "POST",
+            success: function(data) {
+                $('#Masker').html(data);
+                $('#Masker').show();
+                $('#profileData').hide();
+                $('#SpecificInterests').hide();
+                $('#mylifeinPicture').hide();
+                $('#beFriendsWithMe').hide();
+                $('#NeurodiverseStrengths').hide();
+				$('#step_1').removeClass('active');
+				$('#step_2').removeClass('active');
+				$('#step_3').removeClass('active');
+				$('#step_4').removeClass('active');
+				$('#step_5').removeClass('active');
+				$('#step_6').removeClass('active');
+                $('#step_7').addClass('active');
+            }
+        });
+    }
+
+	function UploadPhoto(id) {
+		$('#btnUPload_' + id).click();
+	}
+
+var imagesPreview = function (input, placeToInsertImagePreview) {
+		if (input.files) {
+			var filesAmount = input.files.length;
+			for (i = 0; i < filesAmount; i++) {
+				var reader = new FileReader();
+
+				reader.onload = function (event) {
+					$('#' + placeToInsertImagePreview).attr('src', event.target.result);
+				}
+
+				reader.readAsDataURL(input.files[i]);
+			}
+		}
+	};
+
+</script>
+
+<main id="profile">
+    <div class="st-responsive st-pdg st-pdg-section">
+        <input type="hidden" id="hdnNextTab" name="hdnNextTab" value="@Convert.ToString(Session["NextTab"])" />
+
+        <section id="editProfileCntnr" class="st-row">
+
+            <div class="tab-btn">
+                <div class="area">
+                    <h2 class="sec-heading">@Model.FirstName's Profile</h2>
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                        <li class="" id="step_1">
+                            <div onclick="ShowDemographic();">
+                                My Profile
+                                <span>Lorem Ipsum is simply</span>
+                            </div>
+                        </li>
+                        <li id="step_2">
+                            <div onclick="openLifeMyPictureView(this.id)" id="_myLifeMyPicture">
+                                About Me
+                                <span>Lorem Ipsum is simply</span>
+                            </div>
+                        </li>
+                        <li id="step_3">
+                            <div onclick="openLifeFriendsWithMeView(this.id)" id="_beFriendsWithMe">
+                                How to Be Friends with Me
+                                <span>Lorem Ipsum is simply</span>
+                            </div>
+                        </li>
+                        <li id="step_4">
+                            <div onclick="openSpecificInterestsView(this.id)" id="_IntersetcharacterNeuro">
+                                My Specific Interests
+                                <span>Lorem Ipsum is simply</span>
+                            </div>
+                        </li>
+                        <li id="step_5" style="display:none;">
+                            <div onclick="openCharacterStrengthsView(this.id)" id="_characterStrengths">
+                                My Character Strengths
+                                <span>Lorem Ipsum is simply</span>
+                            </div>
+                        </li>
+                        <li id="step_6">
+                            <div onclick="openNeurodiverseStrengthsView(this.id)" id="_neurodiverseStrengths">
+                                My Neurodiverse Strengths
+                                <span>Lorem Ipsum is simply</span>
+                            </div>
+                        </li>
+                        @*<li id="step_7">
+                <div onclick="openMaskerView(this.id)" id="_masker">
+                    Are you a Masker?
+                </div>
+            </li>*@
+                        @*<li id="step_8"><strong>Previous Exposure</strong></li>
+            <li id="step_9"><strong>Previous COVID-19 Test</strong></li>
+            <li id="step_10"><strong>Risk Assessment And Next Steps</strong></li>*@
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-content">
+                <div id="profileData" style="display:none;">
+                    <div class="progress d-block d-lg-none">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"></div>
+                    </div>
+
+                    @using (Html.BeginForm("PostData", "Profile", FormMethod.Post, new { id = "frmContactUs", name = "frmContactUs", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        <div class="st-row st-center">
+                            <div id="videos">
+                                <div id="subscriber"></div>
+                                <div id="publisher"></div>
+                            </div>
+                            <div class="life-in-pic-box" style="width:auto;">
+                                <div class="st-pdg proficepic">
+                                    <div onclick="$('#btnUpload').click();" id="divimg_10" class="img-input">
+                                        <div class="img-box">
+                                            <img src="@Session["PicName"].ToString()" height="150" width="150" id="img_10">
+                                        </div>
+                                    </div>
+                                    <div class="detail-box">
+                                        <label for="staticEmail" style="padding-top:8px;font-weight:500;">Me</label>
+                                        @*<input type="text" id="PicDescription" name="PicDescription" class="pf-input" placeholder="About Picture">*@
+                                    </div>
+                                    <input type="file" accept="image/*" style="display:none" id="btnUpload" name="btnUpload" onchange="imagesPreview(this, 'img_10')">
+                                </div>
+                            </div>
+                        </div>
+                        @Html.HiddenFor(model => model.ProfilePhotoID)
+                        <div class="st-row">
+                            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.FirstName)
+                                <div>
+                                    @*@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @id = "txtFirstName" } })*@
+                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "pf-input", @id = "txtFirstName" } })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                                @Html.LabelFor(model => model.LastName)
+                                <div>
+                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "pf-input", @id = "txtLastName", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="st-row">
+                            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                                @Html.LabelFor(model => model.NickName)
+                                <div>
+                                    @Html.EditorFor(model => model.NickName, new { htmlAttributes = new { @class = "pf-input", @id = "txtNickName", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                                @Html.LabelFor(model => model.CountryId)
+                                <div>
+                                    @Html.DropDownListFor(model => model.CountryId, new SelectList((IEnumerable<SelectListItem>)ViewData["Country"], "Value", "Text", Model.CountryId), "Select Country", new { @class = "pf-input", @id = "ddlCountry", @onChange = "GetCountryState()", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="st-row">
+                            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                                @Html.LabelFor(model => model.StateId)
+                                <div>
+                                    @Html.DropDownListFor(model => model.StateId, new SelectList((IEnumerable<SelectListItem>)ViewData["State"], "Value", "Text", Model.StateId), "Select State", new { @class = "pf-input", @id = "ddlState", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                                @Html.LabelFor(model => model.City)
+                                <div>
+                                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "pf-input", @id = "txtCity", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="st-row">
+                            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                                @Html.LabelFor(model => model.PinCode)
+                                <div>
+                                    @Html.EditorFor(model => model.PinCode, new { htmlAttributes = new { @class = "pf-input", @id = "txtPinCode", @required = "required", @type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.PinCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                                @Html.LabelFor(model => model.DOB)
+                                <div>
+                                    @*@Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", @id = "txtDOB", @type = "Date" } })*@
+                                    <input type="date" id="DOB" name="DOB" class="pf-input" value="@Convert.ToDateTime(Model.DOB).ToString("yyyy-MM-dd")" />
+                                    @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="st-row">
+                            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                                @Html.LabelFor(model => model.Email)
+                                <div>
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "pf-input", @id = "txtEmail", @disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                                @Html.LabelFor(model => model.Phone)
+                                <div>
+                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "pf-input", @id = "txtPhone", @required = "required", @maxLength = "10" } })
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="UserId" name="UserId" value="@ViewBag.UserID.ToString()" />
+                        <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                        <div class="pf-field-cntnr st-row st-center" style="padding-top:25px;">
+                            <input type="button" onclick="SavePostData()" value="Next &nbsp;&nbsp;&#10095;" class="btn-l btn-primary btn-next" />
+                        </div>
+                    }
+                </div>
+                <div id="mylifeinPicture" style="display:none;">
+                </div>
+                <div id="SpecificInterests" style="display:none;">
+                </div>
+                <div id="characterStrengths" style="display:none;">
+                </div>
+                <div id="NeurodiverseStrengths" style="display:none;">
+                </div>
+                <div id="Masker" style="display:none;">
+                </div>
+                <div id="beFriendsWithMe" style="display:none;">
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+
+</main>
+

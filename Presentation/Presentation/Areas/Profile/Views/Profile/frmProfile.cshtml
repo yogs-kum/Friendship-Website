@@ -1,0 +1,302 @@
+﻿@model Presentation.Areas.Profile.Models.Profile
+@{
+    ViewBag.Title = "User Home";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+    ViewBag.UserID = @Model.UserId;
+}
+<style>
+    .life-in-pic-box .img-input::before {
+        display: none;
+    }
+</style>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var CntryId = $("#ddlCountry").val();
+		// var Demographic = '';
+		if (CntryId != "") {
+			// GetCountryState();
+		}
+
+		$('.loader').show();
+		$('#profileDisp').css('opacity', '0.3');
+		ShowDemographic()
+		openLifeMyPictureView(1);
+		openLifeFriendsWithMeView(1)
+		openSpecificInterestsView(1);
+		openNeurodiverseStrengthsView(1);
+
+	});
+
+    function GetCountryState() {
+        var theUrl = '@Url.Action("GetCountryState", "Profile")';
+        var theCountryId = $("#ddlCountry").val();
+        $.ajax({
+            type: "GET", dataType:"json", url: theUrl,
+            data: { theCountryId: theCountryId }, success: function (response) {
+                $("#ddlState").empty();
+                $.each(response, function (index, item) {
+                    $("#ddlState").append($("<option></option>").val(item['Value']).html(item['Text']));
+                })
+                $(document).ready(function () { $("#ddlState").val(@ViewBag.StateId);})
+            }, error: function () { alert("Error in Call"); }
+        })
+    }
+
+    function ShowDemographic() {
+		$('#profileData').show();
+	}
+
+    function openLifeMyPictureView(partialViewToInsert) {
+        var userID = $('#UserId').val();
+        var obj = {
+            id: '_myLifeMyPicture',
+           // UserID: $('#UserId').val()//'M7VuQHORs+4='
+             UserID: userID
+        };
+        $.ajax({
+            url: '@Url.Action("_profileMyLifeInPicture", "Profile")',
+            data: obj,
+            type: "POST",
+            success: function (data) {
+                $('#mylifeinPicture').html(data);
+            }
+        });
+    }
+
+     function openLifeFriendsWithMeView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_profilebeFriendsWithMe", "Profile")',
+            data: { id: partialViewToInsert},
+            type: "POST",
+            success: function (data) {
+                $('#beFriendsWithMe').html(data);
+
+            }
+        });
+    }
+
+     function openSpecificInterestsView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_profileIntersetcharacterNeuro", "Profile")',
+            data: { id: partialViewToInsert},
+            type: "POST",
+            success: function (data) {
+                $('#SpecificInterests').html(data);
+
+
+                //ddlSpecificInterests
+                //ddlStrength
+
+                $('#ddlSpecificInterests').select2(
+                    {
+                        multiple: true,
+                        placeholder: 'Select Your Interests'
+                    });
+
+                $('#ddlSpecificInterests').val(null);
+                $('#ddlSpecificInterests').change();
+                var SpecificInterests = $('#hdnSavedInterests').val();
+                $('#ddlSpecificInterests').val(SpecificInterests.split(', '));
+                $('#ddlSpecificInterests').change();
+
+                $('#ddlStrength').select2(
+                    {
+                        multiple: true,
+                        placeholder: 'Select Your Top 5 Strengths',
+                        maximumSelectionLength: 5
+                    });
+
+                $('#ddlStrength').val(null);
+                $('#ddlStrength').change();
+                var Strength = $('#hdnSavedStrength').val();
+                $('#ddlStrength').val(Strength.split(', '));
+                $('#ddlStrength').change();
+
+
+                $('#ddlDesiredStrength').select2(
+                    {
+                        multiple: true,
+                        placeholder: 'Select Top 5 Strengths You desire in a Friend',
+                        maximumSelectionLength: 5
+
+                    });
+
+                $('#ddlDesiredStrength').val(null);
+                $('#ddlDesiredStrength').change();
+                var DesiredStrength = $('#hdnSavedDesiredStrength').val();
+                $('#ddlDesiredStrength').val(DesiredStrength.split(', '));
+                $('#ddlDesiredStrength').change();
+
+
+            }
+        });
+    }
+
+
+
+    function openNeurodiverseStrengthsView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_profileNeurodiverseStrengths", "Profile")',
+            data: { id: partialViewToInsert},
+            type: "POST",
+            success: function (data) {
+				$('#NeurodiverseStrengths').html(data);
+				$('#editProfileCntnr :input').attr('disabled', true);
+				$('.loader').hide();
+				$('#profileDisp').css('opacity', '1');
+            }
+        });
+    }
+
+     function openMaskerView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_profileMasker", "Profile")',
+            data: { id: partialViewToInsert},
+            type: "POST",
+            success: function(data) {
+                $('#Masker').html(data);
+
+            }
+        });
+    }
+
+	function UploadPhoto(id) {
+		$('#btnUPload_' + id).click();
+	}
+
+	function OpenChatBox() {
+		var url = "/Profile/Match/chat";
+		window.location.href = url;
+
+	}
+
+var imagesPreview = function (input, placeToInsertImagePreview) {
+		if (input.files) {
+			var filesAmount = input.files.length;
+			debugger;
+			for (i = 0; i < filesAmount; i++) {
+				var reader = new FileReader();
+
+				reader.onload = function (event) {
+					$('#' + placeToInsertImagePreview).attr('src', event.target.result);
+				}
+
+				reader.readAsDataURL(input.files[i]);
+			}
+		}
+	};
+</script>
+<main id="profileDisp">
+
+    <div class="st-responsive st-pdg st-pdg-section">
+        <div class="profile-disp-cntnr st-row">
+            <section class="left-col st-pdg">
+                <div class="user-img-box"><img src="@ViewBag.PicName" alt="User Img" width="150" height="150"></div>
+                <div class="user-detail-box">
+                    <h3>@Model.FirstName</h3>
+                </div>
+            </section>
+            <div class="right-col st-pdg">
+                <section class="st-pdg">
+                    @Html.HiddenFor(model => model.ProfilePhotoID)
+                    <div class="head st-row st-justify-between">
+                        <h3>My Profile</h3>
+                        <a href="/Profile/Profile/frmRegister?ID=@HttpUtility.UrlEncode(ViewBag.UserID.ToString())" target="_blank" class="profile-edit-btn">Edit</a>
+                    </div>
+                    <div class="st-row">
+                        <div class="detail-row st-row st-flex">
+                            <div class="lable">First Name:</div>
+                            <div class="lable-detail">@Model.FirstName</div>
+                        </div>
+                        <div class="detail-row st-row st-flex">
+                            <div class="lable">Last Name:</div>
+                            <div class="lable-detail">@Model.LastName</div>
+                        </div>
+                    </div>
+
+                    <div class="st-row">
+                        <div class="detail-row st-row st-flex">
+                            <div class="lable">Nick Name:</div>
+                            <div class="lable-detail">@Model.NickName</div>
+                        </div>
+                        <div class="detail-row st-row st-flex">
+                            <div class="lable">Country:</div>
+                            <div class="lable-detail">@Model.CountryName</div>
+                        </div>
+                    </div>
+
+                    <div class="st-row">
+                        <div class="detail-row st-row st-flex">
+                            <div class="lable">State:</div>
+                            <div class="lable-detail">@Model.StateName</div>
+                        </div>
+                        <div class="detail-row st-row st-flex">
+                            <div class="lable">City:</div>
+                            <div class="lable-detail">@Model.City</div>
+                        </div>
+
+                    </div>
+                    <div class="st-row">
+                        <div class="detail-row st-row st-flex">
+                            <div class="lable">Zip Code:</div>
+                            <div class="lable-detail">@Model.PinCode</div>
+                        </div>
+                        <div class="detail-row st-row st-flex">
+                            <div class="lable">Date Of Birth:</div>
+                            <div class="lable-detail">@Convert.ToDateTime(Model.DOB).ToString("MMM dd, yyyy")</div>
+                        </div>
+
+                    </div>
+                    <div class="st-row">
+                        <div class="detail-row st-row st-flex">
+                            <div class="lable">Phone No.(i.e. cell):</div>
+                            <div class="lable-detail">@Model.Phone</div>
+                        </div>
+                        <div class="detail-row st-row st-flex">
+                            <div class="lable">Email:</div>
+                            <div class="lable-detail">@Model.Email</div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="UserId" name="UserId" value="@ViewBag.UserID.ToString()" />
+                    <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+
+                </section>
+
+                <section class="st-pdg">
+                    <div id="mylifeinPicture">
+
+                    </div>
+                </section>
+                <section class="st-pdg">
+                    <div id="beFriendsWithMe">
+
+                    </div>
+                </section>
+                <section class="st-pdg">
+                    <div id="SpecificInterests">
+
+                    </div>
+                </section>
+
+                <section class="st-pdg" style="border:none;">
+                    <div id="NeurodiverseStrengths">
+
+                    </div>
+                </section>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</main>
+
+
+
+
+

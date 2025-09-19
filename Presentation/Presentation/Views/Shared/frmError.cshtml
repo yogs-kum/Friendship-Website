@@ -1,0 +1,22 @@
+﻿<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<div>
+    <div class="col-md-1">
+        <img src="~/Images/danger-icon.jpg" />
+    </div>
+    <div class="col-md-offset-2">
+        <h2>
+            <label class="text-danger">Oops.. Error Occured while processing your request.<br /> Kindly contact System Support.</label>
+        </h2>
+        <div>
+            <h5><label id="lblError" class="col-lg-6 alert-info">@ViewBag.Error</label></h5>
+        </div>
+    </div>
+</div>

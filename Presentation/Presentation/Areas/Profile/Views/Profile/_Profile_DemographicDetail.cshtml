@@ -1,0 +1,102 @@
+﻿@model Presentation.Areas.Profile.Models.NDUserProfile
+
+@using (Html.BeginForm("SaveUpdateDemographic", "Profile", FormMethod.Post, new { @class = "row g-3 ps-lg-4" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="col-md-6">
+        <label for="validationCustom01" class="form-label">First name</label>
+        @Html.TextBoxFor(model =>model.theProfile.FirstName, new { @class = "form-control", @id = "txtFirstName" })
+        @Html.ValidationMessageFor(model => model.theProfile.FirstName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom02" class="form-label">Last name</label>
+        @Html.TextBoxFor(model => model.theProfile.LastName, new { @class = "form-control", @id = "txtLastName", @required = "required" })
+        @Html.ValidationMessageFor(model => model.theProfile.LastName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-4">
+        <label for="gender" class="form-label">Gender</label>
+        @Html.DropDownListFor(model => model.theProfile.Gender, new SelectList((IEnumerable<SelectListItem>)ViewData["GenderList"], "Value", "Text", Model.theProfile.Gender), "Choose...", new { @class = "form-select", @id = "ddlGender", @required="required"})
+        @Html.ValidationMessageFor(model => model.theProfile.Gender, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-4">
+        <label for="validationCustom05" class="form-label">DOB</label>
+        @if (Model == null)
+        {
+            @Html.TextBoxFor(model => model.theProfile.DOB, new { @class = "form-control", @type = "date", @id = "txtDOB", @required="required" })
+        }
+        else
+        {
+            @Html.TextBoxFor(model => model.theProfile.DOB, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", @id = "txtDOB", @required="required" })
+        }
+        @Html.ValidationMessageFor(model => model.theProfile.DOB, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-4">
+        <label for="marital" class="form-label">Marital status</label>
+        @Html.DropDownListFor(model => model.theProfile.MaritalStatus, new SelectList((IEnumerable<SelectListItem>)ViewData["Marital_Status"], "Value", "Text", Model.theProfile.MaritalStatus), "Choose...", new { @class = "form-select", @id = "ddlMaritalStatus" })
+    </div>
+    <div class="col-6 col-md-3 pe-0">
+        <label for="feet" class="form-label">Height <span class="fw-normal">(feet)</span></label>
+        @Html.DropDownListFor(model => model.theProfile.Height_Feets, new SelectList((IEnumerable<SelectListItem>)ViewData["HeightFeets"], "Value", "Text", Model.theProfile.Height_Feets), "Choose...", new { @class = "form-select", @id = "ddlHeightFeets" })
+    </div>
+    <div class="col-6 col-md-3 ps-0">
+        <label for="inches" class="form-label">Height <span class="fw-normal">(inches)</span></label>
+        @Html.DropDownListFor(model => model.theProfile.Height_Inc, new SelectList((IEnumerable<SelectListItem>)ViewData["HeightInc"], "Value", "Text", Model.theProfile.Height_Inc), "Choose...", new { @class = "form-select", @id = "ddlHeightInc" })
+    </div>
+    @*<div class="col-md-4">
+            <label for="gender" class="form-label">Gender</label>
+            @Html.DropDownListFor(model => model.Gender, new SelectList((IEnumerable<SelectListItem>)ViewData["Gender"], "Value", "Text", Model.Gender), "Choose...", new { @class = "form-select", @required = "required", @id = "ddlGender" })
+            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+        </div>*@
+    <div class="col-md-6">
+        <label for="race" class="form-label">Race</label>
+        @Html.DropDownListFor(model => model.theProfile.Race, new SelectList((IEnumerable<SelectListItem>)ViewData["RaceList"], "Value", "Text", Model.theProfile.Race), "Choose...", new { @class = "form-select", @id = "ddlRace" })
+    </div>
+    <hr style="margin-top:3rem;">
+    <div><span style="background-color:var(--clr-secondary);color:var(--clr-wht);padding:6px 10px;"><strong class="fs-5">Private</strong> <span style="color:rgba(255,255,255,.8);font-size:.75rem;">(only for you)</span></span></div>
+    <div class="col-md-4">
+        <label for="validationCustom03" class="form-label">Phone No.</label>
+        @Html.TextBoxFor(model => model.theProfile.Phone, new { @class = "form-control", @id = "txtPhone", @required = "required", @maxLength = "10" })
+        @Html.ValidationMessageFor(model => model.theProfile.Phone, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-8">
+        <label for="validationCustomUsername" class="form-label">Email</label>
+        <div class="input-group has-validation">
+            <span class="input-group-text" id="inputGroupPrepend">@@</span>
+            @Html.TextBoxFor(model => model.theProfile.Email, new { @class = "form-control", @id = "txtEmail", @disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.theProfile.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-10">
+        <label for="address" class="form-label">Address</label>
+        @Html.TextBoxFor(model => model.theProfile.Address, new { @class = "form-control", @id = "txtAddress", @required="required"})
+    </div>
+    <div class="col-md-2">
+        <label for="validationCustom05" class="form-label">Zip code</label>
+        @Html.TextBoxFor(model => model.theProfile.PinCode, new { @class = "form-control", @id = "txtPinCode", @required = "required", @type = "text" })
+        @Html.ValidationMessageFor(model => model.theProfile.PinCode, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-4">
+        <label for="validationCustom04" class="form-label">Country</label>
+        <div>
+            @Html.DropDownListFor(model => model.theProfile.CountryId, new SelectList((IEnumerable<SelectListItem>)ViewData["Country"], "Value", "Text", Model.theProfile.CountryId), "Choose...", new { @class = "form-select", @id = "ddlCountry", @onChange = "GetCountryState()", @required = "required" })
+            @Html.ValidationMessageFor(model => model.theProfile.CountryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label for="validationCustom04" class="form-label">State</label>
+        <div>
+            @Html.DropDownListFor(model => model.theProfile.StateId, new SelectList((IEnumerable<SelectListItem>)ViewData["State"], "Value", "Text", Model.theProfile.StateId), "Choose...", new { @class = "form-select", @id = "ddlState", @required = "required" })
+            @Html.ValidationMessageFor(model => model.theProfile.StateId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label for="validationCustom05" class="form-label">City</label>
+        @Html.TextBoxFor(model => model.theProfile.City, new { @class = "form-control", @id = "txtCity", @required = "required" })
+        @Html.ValidationMessageFor(model => model.theProfile.City, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-12 text-center mt-5">
+        <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+    </div>
+}
+

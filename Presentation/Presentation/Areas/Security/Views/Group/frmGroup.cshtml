@@ -1,0 +1,181 @@
+﻿@model Presentation.Areas.Security.Models.GroupModel
+@{
+    ViewBag.Title = "Group";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section headerSeparate {
+
+}
+
+<main id="main">
+    <div class="container-fluid">
+        <div class="row p-4">
+
+            <section class="col m-2 p-0 rounded-2 bg-white">
+
+                <div class="py-3 px-4 border-bottom">
+                    <h1 class="st-heading text-center">@ViewBag.Title</h1>
+                </div>
+
+                @Html.AntiForgeryToken()
+                <div class="row py-3 px-5">
+                    @Html.ValidationSummary(true)
+
+                    <div class="col-lg-4">
+                        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @autofocus = "autofocus", @id = "txtName" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger", })
+                    </div>
+                    <div class="col-lg-4">
+                        @Html.LabelFor(m => m.Deleted, new { @class = "form-label" })
+
+                        @Html.DropDownListFor(m => m.Deleted, new List<SelectListItem> { new SelectListItem{ Text="Active",Value="0"},
+                            new SelectListItem{Text="In-Active", Value="1"}}, "Select", new { @class = "form-select", @id = "ddlStatus" })
+                        @Html.ValidationMessageFor(m => m.Deleted, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div id="ControlPanel" class="py-3 px-5">
+                        @foreach (var item in @ViewBag.theModules)
+                        {
+                            <span class="label label-primary" style="font-size:13px;">Area : @item.Name</span>
+                            <div class="panel-body">
+                                <table class="table table-striped table-hover">
+                                    <thead class="webgrid-header">
+                                        <tr>
+                                            <th width="50">Select</th>
+                                            <th width="300">Feature</th>
+                                            <th width="70">Save</th>
+                                            <th width="70">Update</th>
+                                            <th width="70">View</th>
+                                            <th width="70">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach (var itemFeature in @TempData["GridData" + @item.Id])
+                                    {
+                                        <tr>
+                                            <td><input type="checkbox" onchange="CheckAll(this)" id="Select_@itemFeature.Id" class="form-check-input"></td>
+                                            <td>@itemFeature.Name</td>
+                                            <td><input type="checkbox" onchange="GetCheckBoxValue(this)" id="Save_@itemFeature.Id" class="form-check-input"></td>
+                                            <td><input type="checkbox" onchange="GetCheckBoxValue(this)" id="Update_@itemFeature.Id" class="form-check-input"></td>
+                                            <td><input type="checkbox" onchange="GetCheckBoxValue(this)" id="View_@itemFeature.Id" class="form-check-input"></td>
+                                            <td><input type="checkbox" onchange="GetCheckBoxValue(this)" id="Delete_@itemFeature.Id" class="form-check-input"></td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="text-center pt-3 pb-5">
+                    <button type="submit" name="theParameter" class="btn btn-primary st-i-save" onclick="SaveCall()" value="Save">Save</button>
+                    <button type="submit" name="theParameter" class="btn btn-danger st-i-exit" onclick="location.href='@Url.Action("frmGroupList","Group")'" value="Close">Exit</button>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+
+@section footerSeparate {
+    <script type="text/javascript">
+    var CheckArray = [];
+    $(function(){
+        var ChkBoxArray = @Html.Raw(Json.Encode(ViewData["CheckBoxArray"]));
+        var i;
+        for(i=0;i<ChkBoxArray.length; i++)
+        {
+            var checkbox = document.getElementById(ChkBoxArray[i]);
+            checkbox.checked=true;
+            GetCheckBoxValue(checkbox);
+        }
+    })
+
+    function CheckAll(chkbox)
+    {
+        //var theFeatureId = chkbox.id.substring(chkbox.id.length - 1, chkbox.id.length);
+        var theFeatureId = chkbox.id.split('_')[1];
+
+        if(chkbox.checked==true)
+        {
+            var chkSave = document.getElementById("Save_"+theFeatureId);
+            if(chkSave.checked==false)
+            {
+                chkSave.checked=true;
+                GetCheckBoxValue(chkSave);
+            }
+            var chkUpdate = document.getElementById("Update_"+theFeatureId);
+            if(chkUpdate.checked==false)
+            {
+                chkUpdate.checked=true;
+                GetCheckBoxValue(chkUpdate);
+            }
+            var chkView = document.getElementById("View_"+theFeatureId);
+            if(chkView.checked==false)
+            {
+                chkView.checked=true;
+                GetCheckBoxValue(chkView);
+            }
+            var chkDelete = document.getElementById("Delete_"+theFeatureId);
+            if(chkDelete.checked==false)
+            {
+                chkDelete.checked=true;
+                GetCheckBoxValue(chkDelete);
+            }
+        }
+        else
+        {
+            var chkSave = document.getElementById("Save_"+theFeatureId);
+            chkSave.checked=false;
+            GetCheckBoxValue(chkSave);
+            var chkUpdate = document.getElementById("Update_"+theFeatureId);
+            chkUpdate.checked=false;
+            GetCheckBoxValue(chkUpdate);
+            var chkView = document.getElementById("View_"+theFeatureId);
+            chkView.checked=false;
+            GetCheckBoxValue(chkView);
+            var chkDelete = document.getElementById("Delete_"+theFeatureId);
+            chkDelete.checked=false;
+            GetCheckBoxValue(chkDelete);
+        }
+    }
+    function gettoken()
+    {
+        var token = '@Html.AntiForgeryToken()';
+        token = $(token).val();
+        return token;
+    }
+    function GetCheckBoxValue(chkbox)
+    {
+        if(chkbox.checked == true)
+        {
+            CheckArray.push(chkbox.id);
+        }
+        else
+        {
+            var index =CheckArray.indexOf(chkbox.id);
+            delete CheckArray[index];
+        }
+        var Id = chkbox.id.split('_')[1];
+        var Select = document.getElementById("Select_" + Id.toString());
+        if (CheckArray.indexOf("Save_" + Id.toString()) >= 0 && CheckArray.indexOf("Update_" + Id.toString()) >= 0 && CheckArray.indexOf("View_" + Id.toString()) >= 0 && CheckArray.indexOf("Delete_" + Id.toString()) >= 0) {
+            Select.checked = true;
+        }
+        else {
+            Select.checked = false;
+        }
+
+    }
+    function SaveCall()
+    {
+        var url = '@Url.Action("PostData", "Group")';
+        var model = { Name: txtName.value.trim(), Deleted: ddlStatus.value};
+        $.ajax({
+            type: "POST" , url: url,  data: {__RequestVerificationToken:gettoken(), "theCheckBoxArray": CheckArray, "theModel":model}, success:function(){location.href="/Security/Group/frmGroupList";}, error: function () { alert("Error in Call"); }
+
+        })
+    }
+    </script>
+}

@@ -1,0 +1,131 @@
+﻿@model Presentation.Areas.Profile.Models.NDUserProfile
+
+@using (Html.BeginForm("SaveUpdateLifeInPic", "Profile", FormMethod.Post, new { enctype = "multipart/form-data", @id= "frmLifeInPic", @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="row g-3 needs-validation ps-lg-4">
+        <div class="col-md-4 p-4">
+            <div class="fav-pic mb-4" style="background-image:url(@ViewBag.LifePic1);">
+                <input name="LifePic1Name" type="hidden" value="@ViewBag.LifePic1Name">                
+                <input type="file" id="FUSectionSelector1" name="FUSectionSelector1" hidden accept=".png,.jpeg,.jpg" />
+                <label for="FUSectionSelector1" class="add-fav-pic-btn"></label>
+            </div>            
+            @Html.DropDownList("ddlProfileSection1", new SelectList((IEnumerable<SelectListItem>)ViewData["ProfileSection1"], "Value", "Text"), "Choose...", new { @class = "form-select mb-2" })
+            <input id="SectionAbout1" name="SectionAbout1" type="text" class="form-control" value="@ViewBag.LifePic1About" placeholder="About Picture">
+            <input name="ddlProfileSection1" type="hidden" value="@ViewBag.LifePic1Section">
+            <script>
+                var LifePicSection = "@ViewBag.LifePic1Section";
+               
+                if (LifePicSection != null && parseInt(LifePicSection) > 0) {
+                    var ele = document.getElementById("ddlProfileSection1");
+                    ele.value = LifePicSection;
+                    ele.setAttribute("disabled", "disabled");
+                }
+               
+
+            </script>
+        </div>
+        <div class="col-md-4 p-4">
+            <div class="fav-pic mb-4" style="background-image:url(@ViewBag.LifePic2);">
+                <input name="LifePic2Name" type="hidden" value="@ViewBag.LifePic2Name">
+                <input type="file" id="FUSectionSelector2" name="FUSectionSelector2" hidden accept=".png,.jpeg,.jpg" />
+                <label for="FUSectionSelector2" class="add-fav-pic-btn"></label>
+            </div>
+            @Html.DropDownList("ddlProfileSection2", new SelectList((IEnumerable<SelectListItem>)ViewData["ProfileSection2"], "Value", "Text"), "Choose...", new { @class = "form-select mb-2" })
+            <input id="SectionAbout2" name="SectionAbout2" type="text" class="form-control" value="@ViewBag.LifePic2About" placeholder="About Picture">
+            <input name="ddlProfileSection2" type="hidden" value="@ViewBag.LifePic2Section">
+            <script>
+                var LifePicSection = "@ViewBag.LifePic2Section";
+                if (LifePicSection != null && parseInt(LifePicSection) > 0) {
+                    var ele = document.getElementById("ddlProfileSection2");
+                    ele.value = LifePicSection;
+                    ele.setAttribute("disabled", "disabled");
+                }
+
+            </script>
+        </div>
+        <div class="col-md-4 p-4">
+            <div class="fav-pic mb-4" style="background-image:url(@ViewBag.LifePic3);">
+                <input name="LifePic3Name" type="hidden" value="@ViewBag.LifePic3Name">
+                <input type="file" id="FUSectionSelector3" name="FUSectionSelector3" hidden accept=".png,.jpeg,.jpg" />
+                <label for="FUSectionSelector3" class="add-fav-pic-btn"></label>
+            </div>
+            @Html.DropDownList("ddlProfileSection3", new SelectList((IEnumerable<SelectListItem>)ViewData["ProfileSection3"], "Value", "Text"), "Choose...", new { @class = "form-select mb-2" })
+            <input id="SectionAbout3" name="SectionAbout3" type="text" class="form-control" value="@ViewBag.LifePic3About" placeholder="About Picture">
+            <input name="ddlProfileSection3" type="hidden" value="@ViewBag.LifePic3Section">
+            <script>
+                var LifePicSection = "@ViewBag.LifePic3Section";
+                if (LifePicSection != null && parseInt(LifePicSection) > 0) {
+                    var ele = document.getElementById("ddlProfileSection3");
+                    ele.value = LifePicSection;
+                    ele.setAttribute("disabled", "disabled");
+                }
+
+            </script>
+        </div>
+    </div>
+    <div class="row g-3 needs-validation ps-lg-4">
+        <div class="col-md-4 p-4">
+            <div class="fav-pic mb-4" style="background-image:url(@ViewBag.LifePic4);">
+                <input name="LifePic4Name" type="hidden" value="@ViewBag.LifePic4Name">
+                <input type="file" id="FUSectionSelector4" name="FUSectionSelector4" hidden accept=".png,.jpeg,.jpg" />
+                <label for="FUSectionSelector4" class="add-fav-pic-btn"></label>
+            </div>
+            @Html.DropDownList("ddlProfileSection4", new SelectList((IEnumerable<SelectListItem>)ViewData["ProfileSection4"], "Value", "Text"), "Choose...", new { @class = "form-select mb-2" })
+            <input id="SectionAbout4" name="SectionAbout4" type="text" class="form-control" value="@ViewBag.LifePic4About" placeholder="About Picture">
+            <input name="ddlProfileSection4" type="hidden" value="@ViewBag.LifePic4Section">
+            <script>
+                var LifePicSection = "@ViewBag.LifePic4Section";
+                if (LifePicSection != null && parseInt(LifePicSection) > 0) {
+                    var ele = document.getElementById("ddlProfileSection4");
+                    ele.value = LifePicSection;
+                    ele.setAttribute("disabled", "disabled");
+                }
+
+            </script>
+        </div>
+        <div class="col-md-4 p-4">
+            <div class="fav-pic mb-4" style="background-image:url(@ViewBag.LifePic5);">
+                <input name="LifePic5Name" type="hidden" value="@ViewBag.LifePic5Name">
+                <input type="file" id="FUSectionSelector5" name="FUSectionSelector5" hidden accept=".png,.jpeg,.jpg" />
+                <label for="FUSectionSelector5" class="add-fav-pic-btn"></label>
+            </div>
+            @Html.DropDownList("ddlProfileSection5", new SelectList((IEnumerable<SelectListItem>)ViewData["ProfileSection5"], "Value", "Text"), "Choose...", new { @class = "form-select mb-2" })
+            <input id="SectionAbout5" name="SectionAbout5" type="text" class="form-control" value="@ViewBag.LifePic5About" placeholder="About Picture">
+            <input name="ddlProfileSection5" type="hidden" value="@ViewBag.LifePic5Section">
+            <script>
+                var LifePicSection = "@ViewBag.LifePic5Section";
+                if (LifePicSection != null && parseInt(LifePicSection) > 0) {
+                    var ele = document.getElementById("ddlProfileSection5");
+                    ele.value = LifePicSection;
+                    ele.setAttribute("disabled", "disabled");
+                }
+
+            </script>
+        </div>
+        <div class="col-md-4 p-4">
+            <div class="fav-pic mb-4" style="background-image:url(@ViewBag.LifePic6);">
+                <input name="LifePic6Name" type="hidden" value="@ViewBag.LifePic6Name">
+                <input type="file" id="FUSectionSelector6" name="FUSectionSelector6" hidden accept=".png,.jpeg,.jpg" />
+                <label for="FUSectionSelector6" class="add-fav-pic-btn"></label>
+            </div>
+            @Html.DropDownList("ddlProfileSection6", new SelectList((IEnumerable<SelectListItem>)ViewData["ProfileSection6"], "Value", "Text"), "Choose...", new { @class = "form-select mb-2" })
+            <input id="SectionAbout6" name="SectionAbout6" type="text" class="form-control" value="@ViewBag.LifePic6About" placeholder="About Picture">
+            <input name="ddlProfileSection6" type="hidden" value="@ViewBag.LifePic6Section">
+            <script>
+                var LifePicSection = "@ViewBag.LifePic6Section";
+                if (LifePicSection != null && parseInt(LifePicSection) > 0) {
+                    var ele = document.getElementById("ddlProfileSection6");
+                    ele.value = LifePicSection;
+                    ele.setAttribute("disabled", "disabled");
+                }
+
+            </script>
+        </div>
+    </div>
+    <div class="col-12 text-center mt-5">
+        <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+    </div>
+    
+}

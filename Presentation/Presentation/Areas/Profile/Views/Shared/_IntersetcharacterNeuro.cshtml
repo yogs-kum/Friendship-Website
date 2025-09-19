@@ -1,0 +1,52 @@
+﻿
+@model Presentation.Areas.Profile.Models.Mst_Strengths
+@{
+    ViewBag.Title = "Masker";
+    // Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+}
+
+<div>
+    <input type="hidden" value="@ViewBag.SavedInterests" id="hdnSavedInterests" name="hdnSavedInterests" />
+    <input type="hidden" value="@ViewBag.SavedStrength" id="hdnSavedStrength" name="hdnSavedSavedStrength" />
+    <input type="hidden" value="@ViewBag.SavedDesiredStrength" id="hdnSavedDesiredStrength" name="hdnSavedDesiredStrength" />
+    @using (Html.BeginForm("PostDataInterestAndCharacterStrengthNew", "Profile", FormMethod.Post, new { id = "frmContactUs10", name = "frmContactUs10", enctype = "multipart/form-data" }))
+    {
+        <input type="hidden" id="ProfileId" name="ProfileId" value="@Application.Common.clsEncryptDecrypt.Encrypt(ViewBag.ProfileID.ToString())" />
+        <div class="st-row">
+            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                <label for="ddlSpecificInterests">My interests</label>
+                <div>
+                    <div>
+                        @Html.DropDownList("ddlSpecificInterests", (IEnumerable<SelectListItem>)ViewBag.SpecificInterests, new { @class = "form-control form-control-a ", id = "ddlSpecificInterests", name = "ddlSpecificInterests" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="st-row">
+            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                <label for="ddlSpecificInterests">My top 5 strengths</label>
+                <div>
+                    @Html.DropDownList("ddlStrength", (IEnumerable<SelectListItem>)ViewBag.StrengthsList, new { @class = "form-control form-control-a ", id = "ddlStrength", name = "ddlStrength" })
+                </div>
+            </div>
+        </div>
+        <div class="st-row">
+            <div class="st-row st-direction-column pf-field-cntnr st-flex">
+                <label for="ddlDesiredStrength">Strengths I desire in a friend</label>
+                <div>
+                    @Html.DropDownList("ddlDesiredStrength", (IEnumerable<SelectListItem>)ViewBag.StrengthsList, new { @class = "form-control form-control-a ", id = "ddlDesiredStrength", name = "ddlDesiredStrength" })
+                </div>
+            </div>
+        </div>
+        <div class="pf-field-cntnr st-row st-center" style="padding-top:25px;">
+            <input type="submit" value="Next &nbsp;&nbsp;&#10095;" class="btn-l btn-primary btn-next" />
+        </div>
+    }
+
+    <script>
+        function GetSelectedList() {
+            alert('hey');
+        }
+    </script>
+</div>
+

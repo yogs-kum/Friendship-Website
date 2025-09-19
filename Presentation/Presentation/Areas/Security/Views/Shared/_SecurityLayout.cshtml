@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+@{
+    Html.RenderPartial("_LayoutHeader");
+}
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light mt-3 p-2" style="background-color: #e3f2fd;">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"></a>
+        </div>
+       
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("frmSecurityHome", "SecurityHome", new { Area = "Security" })"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#"><i class="fa fa-user-circle"></i> User <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Groups", "frmGroupList", "Group", new { Area = "Security" }, new { @class = ""})</li>
+                        <li>@Html.ActionLink("User", "frmUserList", "User", new { Area = "Security" }, new { @class = ""})</li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("frmAppHome", "AppHome", new { Area="" })"><i class="fa fa-sign-out-alt"></i> Exit</a>
+                </li>
+            </ul>
+       
+    </nav>
+    <div class="container body-content">
+        <div class="formstyle">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+<hr />
+@{
+    Html.RenderPartial("_LayoutFooter");
+}
+</html>

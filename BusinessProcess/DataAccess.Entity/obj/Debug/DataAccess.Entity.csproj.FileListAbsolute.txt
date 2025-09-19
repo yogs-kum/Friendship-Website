@@ -1,0 +1,13 @@
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\bin\Debug\DataAccess.Entity.dll
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\bin\Debug\DataAccess.Entity.pdb
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\bin\Debug\DataAccess.Base.dll
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\bin\Debug\DataAccess.Common.dll
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\bin\Debug\Application.Common.dll
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\bin\Debug\DataAccess.Base.pdb
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\bin\Debug\DataAccess.Common.pdb
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\bin\Debug\Application.Common.pdb
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\obj\Debug\DataAccess.Entity.csproj.AssemblyReference.cache
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\obj\Debug\DataAccess.Entity.csproj.CoreCompileInputs.cache
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\obj\Debug\DataAccess.Entity.csproj.CopyComplete
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\obj\Debug\DataAccess.Entity.dll
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Entity\obj\Debug\DataAccess.Entity.pdb

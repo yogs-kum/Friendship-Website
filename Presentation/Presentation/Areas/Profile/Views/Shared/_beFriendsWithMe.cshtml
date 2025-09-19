@@ -1,0 +1,22 @@
+﻿@using System.Web
+
+    @using (Html.BeginForm("PostDataQuesAns", "Profile", FormMethod.Post, new { id = "frmContactUs10", name = "frmContactUs10", enctype = "multipart/form-data" }))
+    {
+        <input type="hidden" id="ProfileId" name="ProfileId" value="@Application.Common.clsEncryptDecrypt.Encrypt(ViewBag.ProfileID.ToString())" />
+        <div class="profileques">
+            @foreach (var questions in ViewBag.FriendsWithMeList)
+            {
+            <div class="st-row st-direction-column pf-field-cntnr">
+
+                <label>@questions.Name</label>
+                @*<input type="text" id="txt_@questions.Id" name="txt_@questions.Id" value="@questions.Response" />*@
+                <textarea id="@questions.Id" name="@questions.Id" class="pf-input pf-textarea">@questions.Response</textarea>
+
+            </div>
+            }
+        </div>
+        <div class="pf-field-cntnr st-row st-center" style="padding-top:25px;">
+            <input type="submit" value="Next &nbsp;&nbsp;&#10095;" class="btn-l btn-primary btn-next" />
+        </div>
+    }
+

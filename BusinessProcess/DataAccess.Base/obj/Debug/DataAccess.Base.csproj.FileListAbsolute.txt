@@ -1,0 +1,9 @@
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Base\bin\Debug\DataAccess.Base.dll
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Base\bin\Debug\DataAccess.Base.pdb
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Base\bin\Debug\Application.Common.dll
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Base\bin\Debug\Application.Common.pdb
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Base\obj\Debug\DataAccess.Base.csproj.AssemblyReference.cache
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Base\obj\Debug\DataAccess.Base.csproj.CoreCompileInputs.cache
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Base\obj\Debug\DataAccess.Base.csproj.CopyComplete
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Base\obj\Debug\DataAccess.Base.dll
+C:\Projects\NDFriends2022\BusinessProcess\DataAccess.Base\obj\Debug\DataAccess.Base.pdb

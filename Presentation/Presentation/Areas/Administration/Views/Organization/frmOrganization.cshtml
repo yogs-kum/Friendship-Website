@@ -1,0 +1,228 @@
+﻿@model Presentation.Areas.Administration.Models.OrganizationModel
+
+@using Presentation.Models
+@{
+    ViewBag.Title = "Organization - The Zone";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section headerSeparate {
+    
+}
+
+
+<main id="main">
+    <div class="container-fluid">
+        <div class="row p-4">
+
+            <section class="col m-2 p-0 rounded-2 bg-white">
+                @using (Html.BeginForm("PagePost", "Organization", FormMethod.Post, new { enctype = "multipart/form-data", @class = "st-float-form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="py-3 px-4 border-bottom">
+                        <h1 class="st-heading text-center">Organization</h1>
+                    </div>
+
+                    <div class="py-3 px-5">
+                        @Html.ValidationSummary(true)
+
+                        <div class="row py-4">
+
+                            <div class="col-lg-3">
+                                <p class="my-0" style="color:var(--clr-txt-grey);font-weight:500;">01</p>
+                                <h2 class="st-heading">Organization</h2>
+                            </div>
+
+                            <div class="col-lg-9">
+                                <div class="row">
+                                    @*<div class="col-md-2 my-3 st-input-cntnr">
+                @Html.LabelFor(model => model.Code, new { @class = "form-label" })
+
+                @Html.TextBoxFor(model => model.Code, new { @class = "form-control form-control-lg", @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+            </div>*@
+                                    <div class="col my-3 st-input-cntnr">
+                                        <label class="form-label" for="Name">Organization Name<span class="mandatory">*</span></label>
+
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control form-control-lg", @required = "required" })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 my-3 st-input-cntnr">
+                                        @Html.LabelFor(model => model.Token, new { @class = "form-label" })
+
+                                        @Html.TextBoxFor(model => model.Token, new { @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(model => model.Token, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col my-3 st-input-cntnr">
+                                        @Html.LabelFor(model => model.Website, new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.Website, new { @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 my-3 st-input-cntnr">
+                                        @Html.LabelFor(model => model.ShortName, new { @class = "form-label" })
+
+                                        @Html.TextBoxFor(model => model.ShortName, new { @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col my-3">
+                                        <div class="row">
+                                            @if (Model != null)
+                                            {
+
+
+                                                <div class="col pe-0 ps-0" style="flex:0">
+                                                    @if (!string.IsNullOrEmpty(Model.LogoFile))
+                                                    {
+                                                        <img src="/Uploads/OrgUpload/@Model.LogoFile" alt="@Model.Name" height="45">
+                                                    }
+                                                    @*@Html.DisplayFor(m => m.LogoFile, new { @class = "form-control form-control-lg col-md-4" })*@
+                                                    @Html.TextBoxFor(m => m.LogoFile, new { @class = "d-none" })
+                                                </div>
+                                            }
+                                            <div class="col st-input-cntnr">
+                                                @Html.LabelFor(model => model.LogoFile, new { @class = "form-label", @style = "left:136px" })
+                                                <input type="file" name="fileupload" id="logoUpload" class="form-control form-control-lg">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="st-input-cntnr col-md-3 my-3">
+                                        @Html.LabelFor(model => model.Deleted, new { @class = "form-label" })
+
+                                        @Html.DropDownListFor(m => m.Deleted, new List<SelectListItem>
+                                        {
+                                        new SelectListItem{ Text="Active", Value = "0" },
+                                        new SelectListItem{ Text="De-Active", Value = "1" }
+                                        }, "Select Status", new { @class = "form-select form-select-lg" })
+                                        @Html.ValidationMessageFor(model => model.Deleted, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row py-4">
+
+                            <div class="col-lg-3">
+                                <p class="my-0" style="color:var(--clr-txt-grey);font-weight:500;">02</p>
+                                <h2 class="st-heading">Address Details</h2>
+                            </div>
+
+                            <div class="col-lg-9">
+                                <div class="row">
+                                    <div class="st-input-cntnr col-md-6 my-3">
+                                        @Html.LabelFor(model => model.Address1, new { @class = "form-label" })
+
+                                        @Html.TextBoxFor(model => model.Address1, new { @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="st-input-cntnr col-md-6 my-3">
+                                        @Html.LabelFor(model => model.Address2, new { @class = "form-label" })
+
+                                        @Html.TextBoxFor(model => model.Address2, new { @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="st-input-cntnr col-md-3 my-3">
+                                        @Html.LabelFor(model => model.CountryId, new { @class = "form-label" })
+
+                                        @Html.DropDownListFor(model => model.CountryId, new SelectList((IEnumerable<SelectListItem>)ViewData["Country"], "Value", "Text"), "Select Country", new { @class = "form-select form-select-lg", @id = "ddlCountry", @onChange = "GetCountryState()" })
+                                        @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="st-input-cntnr col-md-3 my-3">
+                                        @Html.LabelFor(model => model.StateId, new { @class = "form-label" })
+
+                                        @Html.DropDownListFor(model => model.StateId, new SelectList((IEnumerable<SelectListItem>)ViewData["State"], "Value", "Text"), "Select State", new { @class = "form-select form-select-lg", @id = "ddlState" })
+                                        @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="st-input-cntnr col-md-4 my-3">
+                                        @Html.LabelFor(model => model.City, new { @class = "form-label" })
+
+                                        @Html.TextBoxFor(model => model.City, new { @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="st-input-cntnr col-md-2 my-3">
+                                        @Html.LabelFor(model => model.Pin, new { @class = "form-label" })
+
+                                        @Html.TextBoxFor(model => model.Pin, new { @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row py-4">
+
+                            <div class="col-lg-3">
+                                <p class="my-0" style="color:var(--clr-txt-grey);font-weight:500;">03</p>
+                                <h2 class="st-heading">Contact Details</h2>
+                                <h5>Organizational Admin</h5>
+                            </div>
+
+                            <div class="col-lg-9">                                
+                                <div class="row">
+                                    <div class="st-input-cntnr col-md-6 my-3">
+                                        <label class="form-label" for="Email">Email<span class="mandatory">*</span></label>
+                                        @Html.TextBoxFor(model => model.Email, new { @type = "email", @class = "form-control form-control-lg", @required = "required" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="st-input-cntnr col-md-6 my-3">
+                                        @Html.LabelFor(model => model.Phone, new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>                                
+                            </div>
+
+                        </div>
+
+                        <div class="text-center py-3">
+                            <button name="theParameter" type="submit" value="Save" class="btn btn-primary st-i-save @(ViewBag.Organization ? "" : "menudisable")">Save</button>
+                            <button name="theParameter" type="submit" value="Close" class="btn btn-danger st-i-exit">Exit</button>
+                        </div>
+                    </div>
+                }
+            </section>
+
+        </div>
+    </div>
+</main>
+@section footerSeparate {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var CntryId = $("#ddlCountry").val();
+            if (CntryId != "") {
+                GetCountryState();
+            }
+        });
+
+    function GetCountryState() {
+        var theUrl = '@Url.Action("GetCountryState", "Organization")';
+        var theCountryId = $("#ddlCountry").val();
+        $.ajax({
+            type: "GET", dataType:"json", url: theUrl,
+            data: { theCountryId: theCountryId }, success: function (response) {
+                $("#ddlState").empty();
+                $.each(response, function (index, item) {
+                    $("#ddlState").append($("<option></option>").val(item['Value']).text(item['Text']));
+                })
+                $(document).ready(function () { $("#ddlState").val(@ViewBag.StateId);})
+            }, error: function () { alert("Error in Call"); }
+        })
+
+    }
+
+    </script>
+}

@@ -1,0 +1,246 @@
+﻿@using System.Configuration
+@model Presentation.Areas.Profile.Models.NDUserProfile
+
+
+<div class="user-pic p-0 mb-3">
+    <div class="img-wrap">
+        @*<img src="~/Content/assets/images/blank-user.png" class="w-100 h-auto" alt="User Name">*@
+        <img src="@Session["ProfilePic"]" class="w-100 h-auto" alt="User Name">
+    </div>
+    <span class="add-user-pic-btn"></span>
+</div>
+
+<script>
+    var theDivCounter = @ViewBag.DivCounter;
+    var ProfileImageArr = [];
+    var base64String = "";
+    var ImgBase64StringResult = "";
+    var theImgName;
+    var theImgIsProfile;
+
+    function onlyOne(checkbox) {
+        //var checkboxes = document.getElementsByName('check')
+        var checkboxes = document.getElementsByName('check')
+        checkboxes.forEach((item) => {
+            if (item !== checkbox) {
+                item.checked = false;
+                for (i = 0; i < ProfileImageArr.length; i++) {
+                    if (checkbox.id != ProfileImageArr[i][1]) {
+                        ProfileImageArr[i][2] = 0;
+                    }
+                }
+            }
+            else {
+                for (i = 0; i < ProfileImageArr.length; i++) {
+                    if (checkbox.id == ProfileImageArr[i][1]) {
+                        ProfileImageArr[i][2] = 1;
+                    }
+                }
+            }
+        })
+    }
+
+    function DeleteDiv(theDiv, theImage) {
+        var item = 'PicDiv' + theDiv.toString();
+        document.getElementById(item).remove();
+        for (i = 0; i < ProfileImageArr.length; i++) {
+            if (theImage.id == ProfileImageArr[i][1]) {
+                ProfileImageArr.splice(i, 1);
+            }
+        }
+    }
+
+
+    function previewImage() {
+        var total_file = document.getElementById("theFileUpload").files.length;
+        for (var i = 0; i < total_file; i++) {
+            var theHtml = "<div id = 'PicDiv" + theDivCounter.toString() + "' class='p-2' > <div class='rounded-3 position-relative overflow-hidden box'><img src='" + URL.createObjectURL(event.target.files[i]) + "' alt='" + event.target.files[i].name + "' class='w-100 h-auto my-match-frnd'>";
+            theHtml += "<button id = '" + event.target.files[i].name + "' class='delete-btn' onclick='DeleteDiv(" + theDivCounter.toString() + ",this)'></button><input id ='" + event.target.files[i].name + "' type='checkbox' value='1' name='check' onclick='onlyOne(this)' class='form-check-input default-profile radio'></div></div>";
+            $('#FilePreview').append(theHtml);
+            theDivCounter++;
+
+            const file = event.target.files[i];
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+                ProfileImageArr.push([reader.result, file.name, 0]);
+            })
+            reader.readAsDataURL(file);
+
+        }
+        //ProfileImageArr.push([ImgBase64StringResult, event.target.files[i].name.toString(), 0]);
+    }
+
+    function ImgLoadfromDB(img, imgName, isProfile) {
+        const file = img.src;
+        theImgName = imgName;
+        theImgIsProfile = isProfile;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", file);
+        xhr.responseType = "blob";
+        xhr.onload = function (e) {
+            const theFile = this.response;
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+                ProfileImageArr.push([reader.result, imgName, isProfile]);
+                
+            })
+            reader.readAsDataURL(theFile)
+        };
+        xhr.send();
+    }
+
+    function response(e) {
+        const theFile = this.response;
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            ProfileImageArr.push([reader.result, theImgName, theImgIsProfile]);
+        })
+        reader.readAsDataURL(theFile)
+
+    }
+
+
+    function SaveCall() {
+        
+        var url = "/Profile/Profile/Profile_UserGallerySave";
+        var fd = new FormData();
+        fd.append('ProfileArray', ProfileImageArr);
+        $.ajax({
+            type: "POST",
+            processData: false,
+            contentType: false,
+            url: url,
+            data: fd,
+            success: function () {
+                alert("Profile images updated.");
+                window.location = "";
+            }, error: function () { alert("Error in User Gallery Call"); }
+        })
+    }
+</script>
+<div id="profileImgPop" class="rounded-4">
+    <div class="img-wrap d-flex align-items-center">
+        @*@using (Html.BeginForm("_Profile_UserGallery", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {*@
+        <div>
+            @Html.AntiForgeryToken()
+            <label for="myfile" class="me-2 fw-bold">Select your profile pictures:</label>
+            <input type="file" id="theFileUpload" onchange="previewImage()" multiple="multiple" accept="image/png, image/jpeg, image/jpg" >
+            @*@Html.TextBoxFor(m => m.theProfilePics.theProfilePic, "", new { @onchange = "previewImage()", @type = "file", @multiple = "multiple", @accept = "image/png, image/jpeg, image/jpg", @id = "theFileUpload" })
+            @Html.ValidationMessageFor(m => m.theProfilePics.theProfilePic, "", new { @class = "text-danger" })*@
+
+            <input type="submit" onclick="SaveCall()" value="Upload" class="btn-sm btn-primary rounded-pill">
+        </div>
+        @*}*@
+        @*<form action="/action_page.php" class="d-flex align-items-center p-3">
+                <label for="myfile" class="me-2 fw-bold">Select your profile pictures:</label>
+                <input type="file" id="myfile" name="myfile">
+                <input type="submit" value="Upload" class="btn-sm btn-primary rounded-pill">
+            </form>*@
+        <button class="hide-profileImgPop"></button>
+    </div>
+    <div id="profileImgGallery" class="mdrn-scrollbar" style="margin-top:10px;overflow-y:auto;height:calc(100% - 125px);">
+        <section class="wrapper p-3">
+            <div id="FilePreview">
+                @if (ViewBag.ProfilePicDT != null)
+                {
+                    var theCounter = 1;
+                    var theDivName = "";
+                    foreach (var item in ViewBag.ProfilePicDT)
+                    {
+                        theDivName = "PicDiv" + theCounter;
+                        if (item["SectionId"] == "10")
+                        {
+                            <div id="@theDivName" class="p-2">
+                                <div class="rounded-3 position-relative overflow-hidden box">
+                                    <img id="@item["PicName"]" src="@ViewBag.PicPath/@item["PicName"]" onload="ImgLoadfromDB(this,'@item["PicName"]',@item["isProfile"])" alt="" class="w-100 h-auto my-match-frnd">
+                                    <button id="@item["PicName"]" class="delete-btn" onclick="DeleteDiv('@theCounter', this)"></button>
+                                    <input id="@item["PicName"]" type="checkbox" @( item["isProfile"] == "1" ? "checked" : "" ) onclick="onlyOne(this)" name="check" class="form-check-input default-profile">
+                                </div>
+                            </div>
+                        }
+                        theCounter = theCounter + 1;
+                    }
+                }
+            </div>
+            @*<div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-1.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-2.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-3.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-4.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-5.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-6.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-7.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-8.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-9.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-10.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="rounded-3 position-relative overflow-hidden box">
+                        <img src="/Content/assets/images/users/user-11.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                        <button class="delete-btn"></button>
+                        <input type="checkbox" value="1" name="defaultProfile" class="form-check-input default-profile">
+                    </div>
+                </div>*@
+        </section>
+    </div>
+</div>
+<div id="profileImgPopOverlay"></div>

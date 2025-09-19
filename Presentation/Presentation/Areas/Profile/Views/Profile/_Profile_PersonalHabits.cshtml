@@ -1,0 +1,121 @@
+﻿@model Presentation.Areas.Profile.Models.NDUserProfile
+
+@using (Html.BeginForm("SaveUpdatePersonalHabits", "Profile", FormMethod.Post, new { @class = "row g-3 needs-validation ps-lg-4" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">Are you a night owl or a morning person?</label>
+            <div>
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q1_are_you_a_night_owl_or_a_morning_person, "Night owl", new { @class = "form-check-input ms-2", @checked= "checked" }) Night owl
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q1_are_you_a_night_owl_or_a_morning_person, "Morning person", new { @class = "form-check-input ms-2" }) Morning person
+                @Html.ValidationMessageFor(m => m.thePersonalHabits.Q1_are_you_a_night_owl_or_a_morning_person, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">Are you someone who enjoys physical activity or more of a couch potato?</label>
+            <div>
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q2_are_you_someone_who_enjoys_physical_activity_or_more_of_a_couch_potato, "Physical activity", new { @class = "form-check-input ms-2", @checked = "checked" }) Physical activity
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q2_are_you_someone_who_enjoys_physical_activity_or_more_of_a_couch_potato, "Couch potato", new { @class = "form-check-input ms-2" }) Couch potato
+                @Html.ValidationMessageFor(m => m.thePersonalHabits.Q2_are_you_someone_who_enjoys_physical_activity_or_more_of_a_couch_potato, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">Do you like to travel or are you a homebody?</label>
+            <div>
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q3_do_you_like_to_travel_or_are_you_a_homebody, "Travel", new { @class = "form-check-input ms-2", @checked = "checked" }) Travel
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q3_do_you_like_to_travel_or_are_you_a_homebody, "Homebody", new { @class = "form-check-input ms-2" }) Homebody
+                @Html.ValidationMessageFor(m => m.thePersonalHabits.Q3_do_you_like_to_travel_or_are_you_a_homebody, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">Do you drink alcohol?</label>
+            <div class="row row-cols-4">
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q4_do_you_drink_alcohol, "Never", new { @class = "form-check-input ms-2", @checked = "checked" }) Never</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q4_do_you_drink_alcohol, "Rarely", new { @class = "form-check-input ms-2" }) Rarely</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q4_do_you_drink_alcohol, "Socially", new { @class = "form-check-input ms-2" }) Socially</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q4_do_you_drink_alcohol, "Regularly", new { @class = "form-check-input ms-2" }) Regularly</div>
+                @Html.ValidationMessageFor(m => m.thePersonalHabits.Q4_do_you_drink_alcohol, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">Do you smoke tobacco products?</label>
+            <div class="row row-cols-4">
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q5_do_you_smoke_tobacco_products, "Never", new { @class = "form-check-input ms-2", @checked = "checked" }) Never</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q5_do_you_smoke_tobacco_products, "Rarely", new { @class = "form-check-input ms-2" }) Rarely</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q5_do_you_smoke_tobacco_products, "Socially", new { @class = "form-check-input ms-2" }) Socially</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q5_do_you_smoke_tobacco_products, "Regularly", new { @class = "form-check-input ms-2" }) Regularly</div>
+                @Html.ValidationMessageFor(m => m.thePersonalHabits.Q5_do_you_smoke_tobacco_products, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">Do you use recreational drugs?</label>
+            <div class="row row-cols-4">
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q6_do_you_use_recreational_drugs, "Never", new { @class = "form-check-input ms-2", @checked = "checked" }) Never</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q6_do_you_use_recreational_drugs, "Rarely", new { @class = "form-check-input ms-2" }) Rarely</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q6_do_you_use_recreational_drugs, "Socially", new { @class = "form-check-input ms-2" }) Socially</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q6_do_you_use_recreational_drugs, "Regularly", new { @class = "form-check-input ms-2" }) Regularly</div>
+                @Html.ValidationMessageFor(m => m.thePersonalHabits.Q6_do_you_use_recreational_drugs, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">Is there anything you watch regularly on television?</label>
+            <div>
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q7_is_there_anything_you_watch_regularly_on_television, "No", new { @class = "form-check-input ms-2", @checked = "checked" }) No
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q7_is_there_anything_you_watch_regularly_on_television, "Yes", new { @class = "form-check-input ms-2" }) Yes
+                @Html.ValidationMessageFor(m => m.thePersonalHabits.Q7_is_there_anything_you_watch_regularly_on_television, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">Do you have pets?</label>
+            <div>
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q8_do_you_have_pets, "No", new { @class = "form-check-input ms-2", @checked = "checked" }) No
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q8_do_you_have_pets, "Yes", new { @class = "form-check-input ms-2" }) Yes
+                @Html.ValidationMessageFor(m => m.thePersonalHabits.Q8_do_you_have_pets, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">What kind of music do you like?</label>
+            <div>
+                @*@Html.DropDownListFor(model => model.thePersonalHabits.SelectedMultiMusicId, new SelectList((IEnumerable<SelectListItem>)ViewData["Music"], "Value", "Text", Model.thePersonalHabits.SelectedMultiMusicId), new {
+        @class = "js-example-placeholder-multiple col-sm-12 form-select form-control",
+        @multiple = "multiple", @id = "testSelect1", })*@
+
+                @Html.ListBoxFor(model => model.thePersonalHabits.SelectedMultiMusicId, new SelectList((IEnumerable<SelectListItem>)ViewData["Music"], "Value", "Text", Model.thePersonalHabits.SelectedMultiMusicId), new { id = "ddlMusic", @class = "selectMusic show-tick form-select form-control" })
+                    @Html.ValidationMessageFor(model => model.thePersonalHabits.SelectedMultiMusicId, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">Do you have strong political affiliations?</label>
+            <div class="row row-cols-4">
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q10_do_you_have_strong_political_affiliations, "No", new { @class = "form-check-input ms-2", @checked = "checked" }) No</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q10_do_you_have_strong_political_affiliations, "Democrat", new { @class = "form-check-input ms-2" }) Democrat</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q10_do_you_have_strong_political_affiliations, "Republican", new { @class = "form-check-input ms-2" }) Republican</div>
+                <div>@Html.RadioButtonFor(m => m.thePersonalHabits.Q10_do_you_have_strong_political_affiliations, "Libertarian", new { @class = "form-check-input ms-2" }) Libertarian</div>
+                @Html.ValidationMessageFor(m => m.thePersonalHabits.Q10_do_you_have_strong_political_affiliations, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="validationCustom01" class="form-label">Would you consider relocating?</label>
+            <div>
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q11_would_you_consider_relocating, "No", new { @class = "form-check-input ms-2", @checked = "checked" }) No
+                @Html.RadioButtonFor(m => m.thePersonalHabits.Q11_would_you_consider_relocating, "Yes", new { @class = "form-check-input ms-2" }) Yes
+                @Html.ValidationMessageFor(m => m.thePersonalHabits.Q11_would_you_consider_relocating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-12 text-center mt-5">
+            <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+        </div>
+    
+}

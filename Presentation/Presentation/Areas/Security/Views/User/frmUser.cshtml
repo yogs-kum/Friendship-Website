@@ -1,0 +1,195 @@
+﻿@model Presentation.Areas.Security.Models.UserModel
+
+@{
+    ViewBag.Title = "User Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section headerSeparate {
+    <style>
+        .nav-tabs {
+            height: 25px !important;
+        }
+
+            .nav-tabs li a {
+                padding: 5px 10px;
+                background: #f3f6f9;
+                color: #000;
+            }
+
+                .nav-tabs li a.active {
+                    padding: 5px 10px;
+                    background: #3e9296;
+                    color: #FFF;
+                }
+    </style>
+}
+<main id="main">
+    <div class="container-fluid">
+        <div class="row p-4">
+
+            <section class="col m-2 p-0 rounded-2 bg-white">
+
+                <div class="py-3 px-4 border-bottom">
+                    <h1 class="st-heading text-center">@ViewBag.Title</h1>
+                </div>
+
+                @Html.AntiForgeryToken()
+                <div class="py-4 px-5 st-float-form">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-6 my-3 st-input-cntnr">
+                            @Html.LabelFor(model => model.UserFirstName, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.UserFirstName, new { htmlAttributes = new { @class = "form-control form-control-lg", @id = "txtFirstName" } })
+                            @Html.ValidationMessageFor(model => model.UserFirstName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 my-3 st-input-cntnr">
+                            @Html.LabelFor(model => model.UserLastName, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.UserLastName, new { htmlAttributes = new { @class = "form-control form-control-lg", @id = "txtLastName" } })
+                            @Html.ValidationMessageFor(model => model.UserLastName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-4 my-3 st-input-cntnr">
+                            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "form-label" })
+                                @if (Model == null)
+                                {
+                                    @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control form-control-lg", @id = "txtUserId" } })
+                                }
+                                else
+                                {
+                                    @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control form-control-lg disable", @id = "txtUserId" } })
+                                }
+                                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-8 my-3 st-input-cntnr">
+                            @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "form-label" })
+                                @if (Model == null)
+                                {
+                                    @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control form-control-lg", @id = "txtMailId" } })
+
+                                }
+                                else
+                                {
+                                    @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control form-control-lg disable", @id = "txtMailId" } })
+
+                                }
+                                @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-4 col-md-3 my-3 st-input-cntnr">
+                            @Html.LabelFor(model => model.Deleted, htmlAttributes: new { @class = "form-label" })
+                            @Html.DropDownListFor(m => m.Deleted, new List<SelectListItem> { new SelectListItem{ Text="Active",Value="0"},
+                                new SelectListItem{Text="In-Active", Value="1"}}, "Select", new { @class = "form-select form-select-lg", @id = "ddlStatus" })
+                            @Html.ValidationMessageFor(m => m.Deleted, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <ul class="nav nav-tabs mt-3 mb-2">
+                        <li><a href="#group" data-bs-toggle="tab" class="active">User Group</a></li>
+                        <li><a href="#location" data-bs-toggle="tab">User Location</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="group">
+                            <div class="form-group">
+                                @Html.Label("Groups", htmlAttributes: new { @class = "control-label" })
+                                <div class="col-md-10">
+                                    <div class="chkBoxList">
+                                        @foreach (var theGroup in ViewBag.GroupList)
+                                        {
+                                            <div id="chkLstGroup@(theGroup.Id)" class="form-check">
+                                                <input id="Grp-@theGroup.Id" type="checkbox" onchange="GetCheckBoxValue(this, GroupArr)" value="@theGroup.Id" class="form-check-input" />
+                                                <label for="@theGroup.Id" class="form-check-label">@theGroup.Name</label>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="location">
+                            <div class="form-group">
+                                @Html.Label("Location", htmlAttributes: new { @class = "control-label" })
+                                <div class="col-md-10">
+                                    <div class="chkBoxList">
+                                        @foreach (var theLocation in ViewBag.LocationList)
+                                        {
+                                            <div id="chkLstLocation@(theLocation.Id)" class="form-check">
+                                                <input id="Loc-@theLocation.Id" type="checkbox" onchange="GetCheckBoxValue(this, LocArr)" value="@theLocation.Id" class="form-check-input" />
+                                                <label for="@theLocation.Id" class="form-check-label">@theLocation.Name</label>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="text-center py-3">
+                        <button type="submit" name="theParameter" class="btn btn-primary st-i-save" onclick="SaveCall()" value="Save">Save</button>
+                        <button type="submit" name="theParameter" class="btn btn-danger st-i-exit" onclick="location.href='@Url.Action("frmUserList","User")'" value="Close">Exit</button>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+</main>
+@section footerSeparate {
+    <script type="text/javascript">
+    var GroupArr = [];
+    var LocArr = [];
+    $(function(){
+        var GrpArr = @Html.Raw(Json.Encode(ViewData["GroupArr"]));
+        var i;
+        for (i = 0; i < GrpArr.length; i++)
+        {
+            var checkbox = document.getElementById("Grp-"+GrpArr[i]);
+            checkbox.checked=true;
+            GetCheckBoxValue(checkbox, GroupArr);
+        }
+        var LArr = @Html.Raw(Json.Encode(ViewData["LocationArr"]));
+        var i;
+        for (i = 0; i < LArr.length; i++)
+        {
+            var checkbox = document.getElementById("Loc-"+LArr[i]);
+            checkbox.checked = true;
+            GetCheckBoxValue(checkbox, LocArr);
+        }
+
+    })
+
+    function GetCheckBoxValue(chkbox, Arr) {
+        var chkId = chkbox.id.substring(4, chkbox.id.length);
+        if (chkbox.checked == true) {
+            Arr.push(chkId);
+        }
+        else {
+            var index = Arr.indexOf(chkId);
+            if (index > -1) {
+                //delete Arr[index];
+                Arr.splice(index, 1);
+            }
+        }
+
+    }
+
+    function gettoken()
+    {
+        var token = '@Html.AntiForgeryToken()';
+        token = $(token).val();
+        return token;
+    }
+
+    function SaveCall() {
+
+        var url = '@Url.Action("PostData", "User")';
+        var model = { UserFirstName: txtFirstName.value.trim(), UserLastName: txtLastName.value.trim(), UserId: txtUserId.value.trim(), EmailId: txtMailId.value.trim(), Deleted: ddlStatus.value };
+        $.ajax({
+            type: "POST", url: url, data: { __RequestVerificationToken: gettoken(), "theGroupArr": GroupArr, "theLocArr": LocArr, "theModel": model }, success: function () { location.href = "/Security/User/frmUserList"; }, error: function () { alert("Error in Call"); }
+
+        })
+    }
+    </script>
+}

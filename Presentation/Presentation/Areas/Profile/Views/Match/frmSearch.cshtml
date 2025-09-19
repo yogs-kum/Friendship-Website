@@ -1,0 +1,355 @@
+﻿@model List<Presentation.Areas.Profile.Models.Profile>
+
+
+@{
+	ViewBag.Title = "frmSearch";
+	Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+	var UserId = HttpContext.Current.Session["UserId"].ToString();
+	string IsFreind = "";
+	int IsFreindStatus = 4;
+}
+<style>
+	.life-in-pic-box .img-input::before {
+		display: none;
+	}
+</style>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var CntryId = $("#ddlCountry").val();
+		// var Demographic = '';
+		if (CntryId != "") {
+			// GetCountryState();
+		}
+
+		$('.loader').show();
+		$('#profileDisp').css('opacity', '0.3');
+		ShowDemographic()
+		openLifeMyPictureView(1);
+		openLifeFriendsWithMeView(1)
+		openSpecificInterestsView(1);
+		openNeurodiverseStrengthsView(1);
+
+	});
+
+	function SendFreindRequest($this) {
+		if ($this.dataset.isfreind == "CHAT REQUEST") {
+			$('.loader').show();
+			$('#profileDisp').css('opacity', '0.3');
+	    	var theUrl = '@Url.Action("SendFriendRequest", "Match")';
+			$.ajax({
+				type: "GET", url: theUrl,
+				data: {
+					UserId: $('#MasterUserId').val(), RequestUserId: $('#UserId').val()
+				},
+				success: function (response) {
+					//Friend request send
+					$this.dataset.isfreind = "REQUEST PENDING";
+					$this.dataset.status =0;
+					$('.isMyFreind').val("REQUEST PENDING");
+					$('.isMyFreind').attr('disabled', 'disabled');
+					alert("Chat request sent successfully!");
+					$('.loader').hide();
+					$('#profileDisp').css('opacity', '1');
+				}, error: function () { alert("Error in Call"); }
+			})
+		}
+	}
+    function loadProfile(index) {
+		$('.loader').show();
+		$('#profileDisp').css('opacity', '0.3');
+        var userId = $('#UserId_' + index).val();
+		$('#UserId').val(userId);
+		$('#UserId').val(userId);
+		$('#PicName').removeAttr('src');
+		$('.isMyFreind').removeAttr('disabled');
+		$('#PicName').attr('src',$('#hdPicName_' + index).val());
+		$('#ProfileName').text($('#hdProfileName_' + index).val());
+		ShowDemographic()
+		openLifeMyPictureView(1);
+		openLifeFriendsWithMeView(1)
+		openSpecificInterestsView(1);
+		openNeurodiverseStrengthsView(1);
+	}
+    function GetCountryState() {
+        var theUrl = '@Url.Action("GetCountryState", "Profile")';
+        var theCountryId = $("#ddlCountry").val();
+        $.ajax({
+            type: "GET", dataType:"json", url: theUrl,
+            data: { theCountryId: theCountryId }, success: function (response) {
+                $("#ddlState").empty();
+                $.each(response, function (index, item) {
+                    $("#ddlState").append($("<option></option>").val(item['Value']).html(item['Text']));
+                })
+                $(document).ready(function () { $("#ddlState").val(@ViewBag.StateId);})
+            }, error: function () { alert("Error in Call"); }
+        })
+    }
+
+	function ShowDemographic() {
+	    $('#profileData').show();
+         var userID = $('#UserId').val();
+        var obj = {
+            id: '_profileInformation',
+           // UserID: $('#UserId').val()//'M7VuQHORs+4='
+             UserID: userID
+        };
+        $.ajax({
+            url: '@Url.Action("_profileInformation", "Match")',
+            data: obj,
+            type: "POST",
+            success: function (data) {
+				$('#profileInformation').html('');
+				$('#profileInformation').html(data);
+				$('.isMyFreind').removeAttr('disabled');
+				if ($('#IsFreind').val() == "0") {
+					$('.isMyFreind').val("REQUEST PENDING");
+					$('.isMyFreind').attr('data-isFreind', 'REQUEST PENDING');
+					$('.isMyFreind').attr('data-status', '0');
+				}
+				else if ($('#IsFreind').val() == "1") {
+                    $('.isMyFreind').val("FRIEND");
+                    $('.isMyFreind').attr('data-isFreind', 'FRIEND');
+					$('.isMyFreind').attr('data-status', '1');
+				}
+				else if ($('#IsFreind').val() == "2") {
+					$('.isMyFreind').val("REQUEST DECLINED");
+					$('.isMyFreind').attr('data-isFreind', 'REQUEST DECLINED');
+					$('.isMyFreind').attr('data-status', '2');
+				}
+				else if ($('#IsFreind').val() == "4") {
+					$('.isMyFreind').val("CHAT REQUEST");
+					$('.isMyFreind').attr('data-isFreind', 'CHAT REQUEST');
+					$('.isMyFreind').attr('data-status', '3');
+				}
+            }
+        });
+	}
+
+    function openLifeMyPictureView(partialViewToInsert) {
+        var userID = $('#UserId').val();
+        var obj = {
+            id: '_myLifeMyPicture',
+           // UserID: $('#UserId').val()//'M7VuQHORs+4='
+             UserID: userID
+
+        };
+        $.ajax({
+            url: '@Url.Action("_profileMyLifeInPicture", "Match")',
+            data: obj,
+            type: "POST",
+            success: function (data) {
+                $('#mylifeinPicture').html(data);
+				$('.profile-edit-btn').hide();
+            }
+        });
+    }
+
+     function openLifeFriendsWithMeView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_profilebeFriendsWithMe", "Match")',
+			data: { id: partialViewToInsert, UserID: $('#UserId').val()},
+            type: "POST",
+            success: function (data) {
+                $('#beFriendsWithMe').html(data);
+				$('.profile-edit-btn').hide();
+
+            }
+        });
+    }
+
+     function openSpecificInterestsView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_profileIntersetcharacterNeuro", "Match")',
+			data: { id: partialViewToInsert, UserID: $('#UserId').val()},
+            type: "POST",
+            success: function (data) {
+                $('#SpecificInterests').html(data);
+				$('.profile-edit-btn').hide();
+                $('#ddlSpecificInterests').select2(
+                    {
+                        multiple: true,
+                        placeholder: 'Select your interests'
+                    });
+
+                $('#ddlSpecificInterests').val(null);
+                $('#ddlSpecificInterests').change();
+                var SpecificInterests = $('#hdnSavedInterests').val();
+                $('#ddlSpecificInterests').val(SpecificInterests.split(', '));
+                $('#ddlSpecificInterests').change();
+
+                $('#ddlStrength').select2(
+                    {
+                        multiple: true,
+                        placeholder: 'Select your top 5 strengths',
+                        maximumSelectionLength: 5
+                    });
+
+                $('#ddlStrength').val(null);
+                $('#ddlStrength').change();
+                var Strength = $('#hdnSavedStrength').val();
+                $('#ddlStrength').val(Strength.split(', '));
+                $('#ddlStrength').change();
+
+
+                $('#ddlDesiredStrength').select2(
+                    {
+                        multiple: true,
+                        placeholder: 'Select top 5 strengths you desire in a friend',
+                        maximumSelectionLength: 5
+                    });
+
+                $('#ddlDesiredStrength').val(null);
+                $('#ddlDesiredStrength').change();
+                var DesiredStrength = $('#hdnSavedDesiredStrength').val();
+                $('#ddlDesiredStrength').val(DesiredStrength.split(', '));
+                $('#ddlDesiredStrength').change();
+
+
+            }
+        });
+    }
+
+
+
+    function openNeurodiverseStrengthsView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_profileNeurodiverseStrengths", "Match")',
+			data: { id: partialViewToInsert, UserID: $('#UserId').val()},
+            type: "POST",
+            success: function (data) {
+				$('#NeurodiverseStrengths').html(data);
+				$('#editProfileCntnr :input').attr('disabled', true);
+				$('.loader').hide();
+				$('#profileDisp').css('opacity', '1');
+				$('.profile-edit-btn').hide();
+            }
+        });
+    }
+
+     function openMaskerView(partialViewToInsert) {
+        $.ajax({
+            url: '@Url.Action("_profileMasker", "Match")',
+			data: { id: partialViewToInsert,UserID: $('#UserId').val()},
+            type: "POST",
+            success: function(data) {
+                $('#Masker').html(data);
+				$('.profile-edit-btn').hide();
+
+            }
+        });
+    }
+
+	function UploadPhoto(id) {
+		$('#btnUPload_' + id).click();
+	}
+
+var imagesPreview = function (input, placeToInsertImagePreview) {
+		if (input.files) {
+			var filesAmount = input.files.length;
+			debugger;
+			for (i = 0; i < filesAmount; i++) {
+				var reader = new FileReader();
+
+				reader.onload = function (event) {
+					$('#' + placeToInsertImagePreview).attr('src', event.target.result);
+				}
+
+				reader.readAsDataURL(input.files[i]);
+			}
+		}
+    };
+
+
+</script>
+
+<main id="profileDisp">
+
+	<div class="st-responsive st-pdg st-pdg-section">
+		<div class="profile-disp-cntnr st-row">
+
+			@if (Model.Count() > 0)
+			{
+				<section class="left-col st-pdg" style="border-right: 1px solid #dbe1e3; background-color: #f5f5fa">
+					<h3 style="font-weight: bold"> Your Matches</h3>
+					@for (int i = 0; i < Model.Count(); i++)
+					{
+						<div style="padding-bottom:20px">
+							<div class="user-img-box-search"><img src="@Model[i].PicName" alt="User Img" width="70" height="70"></div>
+							<div class="user-detail-box">
+								<input type="button" value="@Model[i].FirstName @Model[i].LastName" onclick="loadProfile(@i)" />
+								<input type="hidden" id="hdPicName_@i" value="@Model[i].PicName" />
+								<input type="hidden" id="hdProfileName_@i" value="@Model[i].FirstName @Model[i].LastName" />
+								<input type="hidden" id="UserId_@i" value="@Model[i].UserId.ToString()" />
+
+							</div>
+						</div>
+
+					}
+				</section>
+				<input type="hidden" id="MasterUserId" name="UserId" value="@UserId.ToString()" />
+				<input type="hidden" id="UserId" name="UserId" value="@Model[0].UserId.ToString()" />
+				<input type="hidden" id="Id" name="Id" value="@Model[0].Id" />
+
+
+
+
+
+
+				<div class="right-col st-pdg">
+					<section class="st-pdg" style="text-align:center;border-bottom:none">
+
+						@*<a  onclick="OpenChatBox()" style="padding-left: 80%;" class="search-icon">CHAT</a>*@
+						@{
+							if (Model[0].IsFreind == 0) { IsFreind = "REQUEST PENDING"; IsFreindStatus = 0; }
+							else if (Model[0].IsFreind == 1) { IsFreind = "FRIEND"; IsFreindStatus = 1; }
+							else if (Model[0].IsFreind == 2) { IsFreind = "REQUEST DECLINED"; IsFreindStatus = 2; }
+							else { IsFreind = "CHAT REQUEST"; IsFreindStatus = 4; }
+						}
+						@*<a onclick="SendFreindRequest()" style="padding-left:80%;" class="search-icon isMyFreind">@IsFreind</a>*@
+						<input type="button" style="border-radius: 4.5px; height: 38px; margin-left: 80%;" data-status="@IsFreindStatus" data-isFreind="@IsFreind" onclick="SendFreindRequest(this)" value="@IsFreind" class="btn-l btn-primary btn-next isMyFreind" />
+
+						<div class="user-img-box"><img src="@Model[0].PicName" alt="User Img" id="PicName" width="150" height="150"></div>
+						<div class="user-detail-box">
+							<h3 id="ProfileName">@Model[0].FirstName @Model[0].LastName</h3>
+						</div>
+					</section>
+					<section class="st-pdg">
+						<div id="profileInformation">
+
+						</div>
+
+					</section>
+
+					<section class="st-pdg">
+						<div id="mylifeinPicture">
+
+						</div>
+					</section>
+					<section class="st-pdg">
+						<div id="beFriendsWithMe">
+
+						</div>
+					</section>
+					<section class="st-pdg">
+						<div id="SpecificInterests">
+
+						</div>
+					</section>
+
+					<section class="st-pdg" style="border:none;">
+						<div id="NeurodiverseStrengths">
+
+						</div>
+					</section>
+
+
+				</div>
+
+			}
+		</div>
+	</div>
+
+</main>
+

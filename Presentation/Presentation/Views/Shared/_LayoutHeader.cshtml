@@ -1,0 +1,31 @@
+﻿<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Framework</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/fontawesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/fontawesome-all.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/gridmvc.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+@*<body>*@
+    <div class="row">
+        <div class="col-md-5" >
+            <img style="width:130px;height:65px" src=@Session["LogoPath"] />
+        </div>
+        <div class="col-md-5">
+            <strong><i class="fa fa-location-arrow"></i> @ViewBag.LocationName</strong>
+        </div>
+        <div class="col-md-2 text-left">
+            <p class="text-primary">
+                <strong><i class="fa fa-user-alt"></i> Welcome @Session["UserName"]. </strong><br />
+                <i class="fa fa-key"></i> @Html.ActionLink("Change Password", "frmChangePassword", new { area = "", controller = "ChangePassword" })  <i class="fa fa-power-off"></i> @Html.ActionLink("Logout", "Logout", new { area = "", controller = "AppHome" })
+            </p>
+        </div>
+    </div>
+@*</body>*@
+

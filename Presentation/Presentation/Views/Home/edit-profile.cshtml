@@ -1,0 +1,746 @@
+﻿@{
+    ViewBag.Title = "ND Frients";
+    ViewBag.MetaDescription = "ND Frients";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section headerSeparate{
+    <script src="~/Content/assets/js/multiselect.min.js"></script>
+}
+
+<main id="editProfile">
+
+    <div class="profile-bg">
+        <span class="s-150"></span>
+        <span class="s-50"></span>
+        <span class="s-50"></span>
+        <span class="s-75"></span>
+        <span class="s-100"></span>
+        <span class="s-200"></span>
+        <span class="s-50"></span>
+        <span class="s-100"></span>
+        <span class="s-50"></span>
+        <span class="s-100"></span>
+        <div class="skew">
+            <svg x="0" y="0" viewBox="0 0 2560 120" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="2560 0 2560 120 0 120"></polygon>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row tabs js-tabs">
+            <section class="col-12 col-lg-5 col-xl-4 col-xxl-3 p-lg-0 left">
+
+                @Html.Partial("_Profile_userPicGallery_static")
+
+                <div class="d-block d-lg-none">
+                    <div class="mb-2 text-center">
+                        <h3 class="mb-0 fs-1 fw-normal">Eliana Romero</h3>
+                        <span>eliana.romero@neurologically.com</span>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="fs-3">100%</div>
+                        <span style="font-size:.875rem;margin-left:6px;">COMPLETE</span>
+                    </div>
+                </div>
+
+                <div id="menuWrap">
+                    <ul id="tabs">
+                        <li class="js-tabs-item active" id="tab1">
+                            <div class="p-tab js-tabs-link"><div style="left:0;">Demographic Information<p class="mb-0">About youeself</p></div></div>
+                        </li>
+                        <li class="js-tabs-item" id="tab2">
+                            <div class="p-tab js-tabs-link"><div style="right:-42px;">My Life in Pictures<p class="mb-0">Your favourite photo</p></div></div>
+                        </li>
+                        @*<li class="js-tabs-item" id="tab3">
+                    <div class="p-tab js-tabs-link"><div style="right:-75px;">How to Be Friends with Me<p class="mb-0">Ways to become a good friend</p></div></div>
+                </li>
+                <li class="js-tabs-item" id="tab4">
+                    <div class="p-tab js-tabs-link"><div style="right:-51px;">My Specific Interests<p class="mb-0">Your hobbies</p></div></div>
+                </li>
+                <li class="js-tabs-item" id="tab5">
+                    <div class="p-tab js-tabs-link"><div>My Neurodiverse Strengths<p class="mb-0">Ability to recognize your strengths</p></div></div>
+                </li>*@
+                        <li class="js-tabs-item" id="tab6">
+                            <div class="p-tab js-tabs-link"><div>Personal Habits<p class="mb-0">Personal development</p></div></div>
+                        </li>
+                        <li class="js-tabs-item" id="tab7">
+                            <div class="p-tab js-tabs-link"><div>Activity Preferences<p class="mb-0">Leisure time activities</p></div></div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <div class="col-12 col-lg-7 col-xl-8 col-xxl-9 px-lg-0 right tabs-content js-tabs-wrap">
+
+                <div class="row justify-content-lg-between flex-column flex-lg-row ps-lg-5 d-none d-lg-flex user-name">
+                    <div class="col-auto mb-2 mb-lg-0 text-center text-lg-start">
+                        <h3 class="mb-0 fs-1 fw-light">Eliana Romero</h3>
+                        <span>eliana.romero@neurologically.com</span>
+                    </div>
+                    <div class="col-auto text-center complete">
+                        <div class="fs-3 lh-sm">100%</div>
+                        <span>COMPLETE</span>
+                    </div>
+                </div>
+
+                <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab1C">
+                    <form class="row g-3 ps-lg-4">
+                        <div class="col-md-7">
+                            <label for="validationCustom01" class="form-label">First name</label>
+                            <input class="form-control" id="txtFirstName" name="FirstName" type="text" value="Eliana">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="validationCustom02" class="form-label">Last name</label>
+                            <input class="form-control" id="txtLastName" name="LastName" required="required" type="text" value="Romero">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select class="form-select" id="ddlGender" name="Gender" required="required">
+                                <option value="">Choose...</option>
+                                <option value="1">Man</option>
+                                <option value="2" selected>Women</option>
+                                @*<option value="3">Transgender</option>*@
+                                <option value="4">Non-binary@*/Non-conforming*@</option>
+                                @*<option value="5">Prefer not to respond</option>*@
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom05" class="form-label">DOB</label>
+                            <input class="form-control" id="txtDOB" name="DOB" required="required" type="date" value="06-18-1979">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="marital" class="form-label">Marital status</label>
+                            <select class="form-select" id="ddlMaritalStatus" name="MaritalStatus">
+                                <option value="">Choose...</option>
+                                <option value="1">Single</option>
+                                <option value="2">Married</option>
+                                <option value="3">Widowed</option>
+                                <option value="4">Separated</option>
+                                <option value="5" selected>Divorced</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-2 pe-0">
+                            <label for="feet" class="form-label">Height <span class="fw-normal">(feet)</span></label>
+                            <select class="form-select" id="ddlHeightFeets" name="Height_Feets">
+                                <option value="">Choose...</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-2 ps-0">
+                            <label for="inches" class="form-label">Height <span class="fw-normal">(inches)</span></label>
+                            <select class="form-select" id="ddlHeightInc" name="Height_Inc">
+                                <option value="">Choose...</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9" selected>9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="race" class="form-label">Race</label>
+                            <select class="form-select" id="ddlRace" name="Race">
+                                <option value="">Choose...</option>
+                                <option value="1">American Indian or Alaska Native</option>
+                                <option value="2">Asian</option>
+                                <option value="3">Black or African America</option>
+                                <option value="4" selected>Hispanic or Latino</option>
+                                <option value="5">Native Hawaiian or Other Pacific Islander</option>
+                                <option value="6">White</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="NeurodiverseDiagnosis" class="form-label">Neurodiverse diagnosis</label>
+                            <select class="form-select" name="NeurodiverseDiagnosis">
+                                <option value="">Choose...</option>
+                                <option value="1">None</option>
+                                <option value="2" selected>ASD/Asperger's</option>
+                                <option value="3">ADD/ADHD</option>
+                                <option value="4">PTSD</option>
+                            </select>
+                        </div>
+                        <hr style="margin-top:3rem;">
+                        <div>
+                            <span style="background-color:var(--clr-secondary);color:var(--clr-wht);padding:6px 10px;"><strong class="fs-5">Private</strong> <span style="color:rgba(255,255,255,.8);font-size:.75rem;">(only for you)</span></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom03" class="form-label">Phone No.</label>
+                            <input class="form-control" id="txtPhone" maxlength="10" name="Phone" required="required" type="text" value="+17135572727">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Phone" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="col-md-8">
+                            <label for="validationCustomUsername" class="form-label">Email</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text" id="inputGroupPrepend">@@</span>
+                                <input class="form-control" name="Email" type="text" value="eliana.romero@neurologically.com">
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <label for="address" class="form-label">Address</label>
+                            <input class="form-control" id="txtAddress" name="Address" required="required" type="text" value="1510 Primewest Parkway Katy">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="validationCustom05" class="form-label">Zip code</label>
+                            <input class="form-control" id="txtPinCode" name="PinCode" required="required" type="text" value="77479">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom04" class="form-label">Country</label>
+                            <div>
+                                <select class="form-select" id="ddlCountry" name="CountryId" onchange="GetCountryState()" required="required">
+                                    <option value="">Choose...</option>
+                                    <option value="215" selected>United States </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom04" class="form-label">State</label>
+                            <div>
+                                <select class="form-select" id="ddlState" name="StateId" required="required">
+                                    <option value="">Choose...</option>
+                                    <option value="1">Alabama</option>
+                                    <option value="2">Alaska</option>
+                                    <option value="3">Arizona</option>
+                                    <option value="4">Arkansas</option>
+                                    <option value="5">California</option>
+                                    <option value="6">Colorado</option>
+                                    <option value="7">Connecticut</option>
+                                    <option value="8">Delaware</option>
+                                    <option value="9">Florida</option>
+                                    <option value="10">Georgia</option>
+                                    <option value="11">Hawaii</option>
+                                    <option value="12">Idaho</option>
+                                    <option value="13">Illinois</option>
+                                    <option value="14">Indiana</option>
+                                    <option value="15">Iowa</option>
+                                    <option value="16">Kansas</option>
+                                    <option value="17">Kentucky</option>
+                                    <option value="18">Louisiana</option>
+                                    <option value="19">Maine</option>
+                                    <option value="20">Maryland</option>
+                                    <option value="21">Massachusetts</option>
+                                    <option value="22">Michigan</option>
+                                    <option value="23">Minnesota</option>
+                                    <option value="24">Mississippi</option>
+                                    <option value="25">Missouri</option>
+                                    <option value="26">Montana</option>
+                                    <option value="27">Nebraska</option>
+                                    <option value="28">Nevada</option>
+                                    <option value="29">New Hampshire</option>
+                                    <option value="30">New Jersey</option>
+                                    <option value="31">New Mexico</option>
+                                    <option value="32">New York</option>
+                                    <option value="33">North Carolina</option>
+                                    <option value="34">North Dakota</option>
+                                    <option value="35">Ohio</option>
+                                    <option value="36">Oklahoma</option>
+                                    <option value="37">Oregon</option>
+                                    <option value="38">Pennsylvania</option>
+                                    <option value="39">Rhode Island</option>
+                                    <option value="40">South Carolina</option>
+                                    <option value="41">South Dakota</option>
+                                    <option value="42">Tennessee</option>
+                                    <option selected="selected" value="43">Texas</option>
+                                    <option value="44">Utah</option>
+                                    <option value="45">Vermont</option>
+                                    <option value="46">Virginia</option>
+                                    <option value="47">Washington</option>
+                                    <option value="48">West Virginia</option>
+                                    <option value="49">Wisconsin</option>
+                                    <option value="50">Wyoming</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom05" class="form-label">City</label>
+                            <input class="form-control" id="txtCity" name="City" required="required" type="text" value="Fulshear">
+                        </div>
+                        <div class="col-12 text-center mt-5">
+                            <button class="btn btn-primary rounded-pill" type="submit">Next</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab2C">
+                    <form class="row g-3 needs-validation ps-lg-4" novalidate>
+                        <div class="col-md-4 px-4">
+                            @*<div class="fav-pic mb-4" style="background-image:url(../../Content/assets/images/empty-img.png);">*@
+                            <div class="fav-pic mb-4" style="background-image:url(../../Content/assets/images/temp/dog.jpg);">
+                                <button class="add-fav-pic-btn" accept=".jpg,.png,.jpeg"></button>
+                            </div>
+                            <select class="form-select mb-2">
+                                <option value="">Choose...</option>
+                                <option value="1" selected>A picture with your pet</option>
+                                <option value="0">I don't have one</option>
+                            </select>
+                            <input type="text" class="form-control" value="I love dogs" placeholder="About Picture">
+                        </div>
+                        <div class="col-md-4 px-4">
+                            @*<div class="fav-pic mb-4" style="background-image:url(../../Content/assets/images/empty-img.png);">*@
+                            <div class="fav-pic mb-4" style="background-image:url(../../Content/assets/images/temp/golf.jpg);">
+                                <button class="add-fav-pic-btn" accept=".jpg,.png,.jpeg"></button>
+                            </div>
+                            <select class="form-select mb-2">
+                                <option value="">Choose...</option>
+                                <option value="2" selected>A picture playing your favorite sport</option>
+                                <option value="0">I don't have one</option>
+                            </select>
+                            <input type="text" class="form-control" value="I love to play golf" placeholder="About Picture">
+                        </div>
+                        <div class="col-md-4 px-4">
+                            @*<div class="fav-pic mb-4" style="background-image:url(../../Content/assets/images/empty-img.png);">*@
+                            <div class="fav-pic mb-4" style="background-image:url(../../Content/assets/images/temp/old-north-church.jpg);">
+                                <button class="add-fav-pic-btn" accept=".jpg,.png,.jpeg"></button>
+                            </div>
+                            <select class="form-select mb-2">
+                                <option value="">Choose...</option>
+                                <option value="3" selected>A picture in your favorite place</option> 
+                                <option value="0">I don't have one</option>
+                            </select>
+                            <input type="text" class="form-control" value="I like to visit old churches" placeholder="About Picture">
+                        </div>
+                        <div class="col-12 text-center mt-5">
+                            <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+                        </div>
+                    </form>
+
+                </div>
+
+                @*<div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab3C">
+                        <form class="row g-3 needs-validation ps-lg-4" novalidate>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">What an ideal Neurodiverse friendship is to me:</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">How I am most comfortable communicating:</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">Things I look for in a friend:</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">Things I avoid in a friend:</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">Things that I consider 'fun':</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">Things that I consider 'not fun':</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-12 text-center mt-5">
+                                <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab4C">
+                        <form class="row g-3 needs-validation ps-lg-4" novalidate>
+                            <div class="col-md-6">
+                                <label for="validationCustom01" class="form-label">My Interests</label>
+                                <input type="text" class="form-control" placeholder="Select Top 5 Strengths You desire in a Friend">
+                                <div class="invalid-feedback">Please provide a valid city.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationCustom01" class="form-label">MY TOP 5 STRENGTHS</label>
+                                <input type="text" class="form-control" placeholder="Select Your Top 5 Strengths">
+                                <div class="invalid-feedback">Please provide a valid city.</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">STRENGTHS I DESIRE IN A FRIEND</label>
+                                <input type="text" class="form-control" placeholder="Select Top 5 Strengths You desire in a Friend">
+                                <div class="invalid-feedback">Please provide a valid city.</div>
+                            </div>
+                            <div class="col-12 text-center mt-5">
+                                <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab5C">
+                        <form class="row g-3 needs-validation ps-lg-4" novalidate>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">Neurodiverse Strengths</label>
+                                <textarea class="form-control" rows="4"></textarea>
+                                <div class="invalid-feedback">Please provide a valid city.</div>
+                            </div>
+                            <div class="col-12 text-center mt-5">
+                                <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+                            </div>
+                        </form>
+                    </div>*@
+
+                <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab6C">
+                    <form class="row g-3 needs-validation ps-lg-4" novalidate>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Are you a night owl or a morning person?</label>
+                            <div>
+                                <input type="radio" value="1" name="nightMorningPerson" class="form-check-input ms-2"> Night owl
+                                <input type="radio" value="0" name="nightMorningPerson" class="form-check-input ms-2" checked> Morning person
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Are you someone who enjoys physical activity or more of a couch potato?</label>
+                            <div>
+                                <input type="radio" value="1" name="activity" class="form-check-input ms-2" checked> Physical activity
+                                <input type="radio" value="0" name="activity" class="form-check-input ms-2"> Couch potato
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Do you like to travel or are you a homebody?</label>
+                            <div>
+                                <input type="radio" value="1" name="travelHomebody" class="form-check-input ms-2" checked> Travel
+                                <input type="radio" value="0" name="travelHomebody" class="form-check-input ms-2"> Homebody
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Do you drink alcohol?</label>
+                            <div class="row row-cols-4">
+                                <div><input type="radio" value="0" name="drink" class="form-check-input ms-2"> Never</div>
+                                <div><input type="radio" value="1" name="drink" class="form-check-input ms-2"> Rarely</div>
+                                <div><input type="radio" value="2" name="drink" class="form-check-input ms-2" checked> Socially</div>
+                                <div><input type="radio" value="3" name="drink" class="form-check-input ms-2"> Regularly</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Do you smoke tobacco products?</label>
+                            <div class="row row-cols-4">
+                                <div><input type="radio" value="0" name="smoke" class="form-check-input ms-2" checked> Never</div>
+                                <div><input type="radio" value="1" name="smoke" class="form-check-input ms-2"> Rarely</div>
+                                <div><input type="radio" value="2" name="smoke" class="form-check-input ms-2"> Socially</div>
+                                <div><input type="radio" value="3" name="smoke" class="form-check-input ms-2"> Regularly</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Do you use recreational drugs?</label>
+                            <div class="row row-cols-4">
+                                <div><input type="radio" value="0" name="drugs" class="form-check-input ms-2" checked> Never</div>
+                                <div><input type="radio" value="1" name="drugs" class="form-check-input ms-2"> Rarely</div>
+                                <div><input type="radio" value="2" name="drugs" class="form-check-input ms-2"> Socially</div>
+                                <div><input type="radio" value="3" name="drugs" class="form-check-input ms-2"> Regularly</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Is there anything you watch regularly on television?</label>
+                            <div>
+                                <input type="radio" value="1" name="television" class="form-check-input ms-2"> Yes
+                                <input type="radio" value="0" name="television" class="form-check-input ms-2" checked> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Do you have pets?</label>
+                            <div>
+                                <input type="radio" value="1" name="pets" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="pets" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">What kind of music do you like?</label>
+                            <div>
+                                <select id="testSelect1" multiple>
+                                    <option value="1" selected>Popular music</option>
+                                    <option value="2">Country music</option>
+                                    <option value="3">Music of the United States</option>
+                                    <option value="4">Soul music</option>
+                                    <option value="5">Electronic music</option>
+                                    <option value="6">Folk music</option>
+                                    <option value="7">Alternative rock</option>
+                                    <option value="8" selected>Disco</option>
+                                    <option value="9">Techno</option>
+                                    <option value="10">Ambient music</option>
+                                    <option value="11">Art music</option>
+                                    <option value="12">Pop rock</option>
+                                    <option value="13">Industrial music</option>
+                                    <option value="14">Jazz fusion</option>
+                                    <option value="15">K-pop</option>
+                                    <option value="16">Grunge</option>
+                                    <option value="17" selected>Rock</option>
+                                    <option value="18">Jazz</option>
+                                    <option value="19">Country music</option>
+                                    <option value="20">Electronic dance music</option>
+                                    <option value="21">Heavy metal</option>
+                                    <option value="22">World music</option>
+                                    <option value="23">Indie rock</option>
+                                    <option value="24" selected>Hip hop</option>
+                                    <option value="25">Latin music</option>
+                                    <option value="26">Dubstep</option>
+                                    <option value="27">Trance music</option>
+                                    <option value="28">Music of the United States</option>
+                                    <option value="29">Jungle music</option>
+                                    <option value="30">Flamenco</option>
+                                    <option value="31">Pop music</option>
+                                    <option value="32">Classical music</option>
+                                    <option value="33">Blues</option>
+                                    <option value="34">Dance music</option>
+                                    <option value="35">Reggae</option>
+                                    <option value="36">Funk</option>
+                                    <option value="37">Music of Latin America</option>
+                                    <option value="37">House music</option>
+                                    <option value="39">Punk rock</option>
+                                    <option value="40">New-age music</option>
+                                    <option value="41">Rock and roll</option>
+                                    <option value="42">Indian classical music</option>
+                                    <option value="43">Opera</option>
+                                    <option value="44">Ska</option>
+                                    <option value="45">Instrumental</option>
+                                    <option value="46">African-American music</option>
+                                    <option value="47">Children's music</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Do you have strong political affiliations?</label>
+                            <div class="row row-cols-4">
+                                <div><input type="radio" value="0" name="political" class="form-check-input ms-2" checked> No</div>
+                                <div><input type="radio" value="1" name="political" class="form-check-input ms-2"> Democrat</div>
+                                <div><input type="radio" value="2" name="political" class="form-check-input ms-2"> Republican</div>
+                                <div><input type="radio" value="3" name="political" class="form-check-input ms-2"> Libertarian</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Would you consider relocating?</label>
+                            <div>
+                                <input type="radio" value="1" name="relocating" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="relocating" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12 text-center mt-5">
+                            <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab7C">
+                    <form class="row g-3 needs-validation ps-lg-4" novalidate>
+                        <div class="col-12">
+                            <label class="form-label">Watching a movie?</label>
+                            <div class="row row-cols-4">
+                                <div class="mb-1"><input type="checkbox" value="1" name="movie" class="form-check-input ms-2 movie"> Drama</div>
+                                <div class="mb-1"><input type="checkbox" value="2" name="movie" class="form-check-input ms-2 movie"> Action</div>
+                                <div class="mb-1"><input type="checkbox" value="3" name="movie" class="form-check-input ms-2 movie" checked> Horror</div>
+                                <div class="mb-1"><input type="checkbox" value="4" name="movie" class="form-check-input ms-2 movie" checked> Thriller</div>
+                                <div class="mb-1"><input type="checkbox" value="5" name="movie" class="form-check-input ms-2 movie" checked> Science fiction</div>
+                                <div class="mb-1"><input type="checkbox" value="6" name="movie" class="form-check-input ms-2 movie" checked> Comedy</div>
+                                <div class="mb-1"><input type="checkbox" value="7" name="movie" class="form-check-input ms-2 movie" checked> Romance</div>
+                                <div class="mb-1"><input type="checkbox" value="8" name="movie" class="form-check-input ms-2 movie" checked> Documentary</div>
+                                <div class="mb-1"><input type="checkbox" value="9" name="movie" class="form-check-input ms-2 movie"> Adventure</div>
+                                <div class="mb-1"><input type="checkbox" value="10" name="movie" class="form-check-input ms-2 movie"> Fantasy</div>
+                                <div class="mb-1"><input type="checkbox" value="11" name="movie" class="form-check-input ms-2 movie" checked> Thriller</div>
+                                <div class="mb-1"><input type="checkbox" value="12" name="movie" class="form-check-input ms-2 movie"> Animation</div>
+                                <div class="mb-1"><input type="checkbox" value="13" name="movie" class="form-check-input ms-2 movie"> Mystery</div>
+                                <div class="mb-1"><input type="checkbox" value="14" name="movie" class="form-check-input ms-2 movie" checked> Historical</div>
+                                <div class="mb-1"><input type="checkbox" value="15" name="movie" class="form-check-input ms-2 movie" checked> Biographical</div>
+                                <div class="mb-1"><input type="checkbox" value="16" name="movie" class="form-check-input ms-2 movie"> Short</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Having tea/coffee?</label>
+                            <div>
+                                <input type="radio" value="1" name="teaCoffee" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="teaCoffee" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Going to a bar/sports bar?</label>
+                            <div>
+                                <input type="radio" value="1" name="sportsBar" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="sportsBar" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Going to a concert?</label>
+                            <div>
+                                <input type="radio" value="1" name="concert" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="concert" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Watching a live play?</label>
+                            <div>
+                                <input type="radio" value="1" name="livePlay" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="livePlay" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Watching a musical live/on TV?</label>
+                            <div>
+                                <input type="radio" value="1" name="liveMusical" class="form-check-input ms-2"> Yes
+                                <input type="radio" value="0" name="liveMusical" class="form-check-input ms-2" checked> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Fishing/hunting?</label>
+                            <div>
+                                <input type="radio" value="1" name="fishing" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="fishing" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Participating in water sports in an natural body of water?</label>
+                            <div>
+                                <input type="checkbox" value="1" name="waterSports" class="form-check-input ms-2" checked> Yes
+                                <input type="checkbox" value="2" name="waterSports" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Going for a motorcycle ride?</label>
+                            <div>
+                                <input type="radio" value="1" name="motorcycleRide" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="motorcycleRide" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Go on a hike?</label>
+                            <div>
+                                <input type="radio" value="1" name="hike" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="hike" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Going for a bike ride?</label>
+                            <div>
+                                <input type="radio" value="1" name="bikeRiding" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="bikeRiding" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Going for a run?</label>
+                            <div>
+                                <input type="radio" value="1" name="run" class="form-check-input ms-2"> Yes
+                                <input type="radio" value="0" name="run" class="form-check-input ms-2" checked> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Going for a leisurely walk?</label>
+                            <div>
+                                <input type="radio" value="1" name="walk" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="walk" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Going on a road trip/vacation?</label>
+                            <div>
+                                <input type="radio" value="1" name="trip" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="trip" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Going on a picnic?</label>
+                            <div>
+                                <input type="radio" value="1" name="picnic" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="picnic" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Bowling?</label>
+                            <div>
+                                <input type="radio" value="1" name="bowling" class="form-check-input ms-2"> Yes
+                                <input type="radio" value="0" name="bowling" class="form-check-input ms-2" checked> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Going to a museum?</label>
+                            <div>
+                                <input type="radio" value="1" name="museum" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="museum" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Going shopping?</label>
+                            <div>
+                                <input type="radio" value="1" name="shopping" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="shopping" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Going out to dinner?</label>
+                            <div class="row row-cols-4">
+                                <div class="mb-1"><input type="checkbox" value="1" name="dinner" class="form-check-input ms-2 dinner"> French</div>
+                                <div class="mb-1"><input type="checkbox" value="2" name="dinner" class="form-check-input ms-2 dinner" checked> Chinese</div>
+                                <div class="mb-1"><input type="checkbox" value="3" name="dinner" class="form-check-input ms-2 dinner"> Japanese</div>
+                                <div class="mb-1"><input type="checkbox" value="4" name="dinner" class="form-check-input ms-2 dinner" checked> Indian</div>
+                                <div class="mb-1"><input type="checkbox" value="5" name="dinner" class="form-check-input ms-2 dinner" checked> Italian</div>
+                                <div class="mb-1"><input type="checkbox" value="6" name="dinner" class="form-check-input ms-2 dinner"> Greek</div>
+                                <div class="mb-1"><input type="checkbox" value="7" name="dinner" class="form-check-input ms-2 dinner"> Spanish</div>
+                                <div class="mb-1"><input type="checkbox" value="8" name="dinner" class="form-check-input ms-2 dinner"> Middle Eastern</div>
+                                <div class="mb-1"><input type="checkbox" value="9" name="dinner" class="form-check-input ms-2 dinner"> Thai</div>
+                                <div class="mb-1"><input type="checkbox" value="10" name="dinner" class="form-check-input ms-2 dinner"> Latin</div>
+                                <div class="mb-1"><input type="checkbox" value="11" name="dinner" class="form-check-input ms-2 dinner"> Caribbean</div>
+                                <div class="mb-1"><input type="checkbox" value="12" name="dinner" class="form-check-input ms-2 dinner"> Barbecue</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="validationCustom01" class="form-label">Going dancing?</label>
+                            <div>
+                                <input type="radio" value="1" name="dance" class="form-check-input ms-2" checked> Yes
+                                <input type="radio" value="0" name="dance" class="form-check-input ms-2"> No
+                            </div>
+                        </div>
+                        <div class="col-12 text-center mt-5">
+                            <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+@section footerSeparate{
+    <script>
+        $(document).ready(function () {
+
+            $('#tabs li:not(:first)').addClass('inactive');
+            $('.tab').hide();
+            $('.tab:first').show();
+
+            $('#tabs li').click(function () {
+                var t = $(this).attr('id');
+                if ($(this).hasClass('inactive')) { //this is the start of our condition
+                    $('#tabs li').addClass('inactive');
+                    $('#tabs li').removeClass('active');
+                    $(this).removeClass('inactive');
+                    $(this).addClass('active');
+
+                    $('.tab').hide();
+                    $('#' + t + 'C').fadeIn('slow');
+                }
+            });
+
+        });
+
+
+        document.multiselect('#testSelect1')
+            .setCheckBoxClick("checkboxAll", function (target, args) {
+                console.log("Checkbox 'Select All' was clicked and got value ", args.checked);
+            })
+            .setCheckBoxClick("1", function (target, args) {
+                console.log("Checkbox for item with value '1' was clicked and got value ", args.checked);
+            });
+    </script>
+}

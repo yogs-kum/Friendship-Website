@@ -1,0 +1,177 @@
+﻿@using System.Data
+
+@model DataTable
+@{
+	Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+}
+<style>
+	.photouploader {
+		border-radius: 12px;
+		box-shadow: 0 16px 54px rgb(23 11 37 / 79%);
+		background: #ddcdf3;
+	}
+
+	.dropzone {
+		border-radius: 12px;
+		box-shadow: 0 16px 54px rgb(23 11 37 / 79%);
+	}
+</style>
+<script src="~/Scripts/dropzone/dropzone.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Scripts/dropzone/dropzone.min.css" rel="stylesheet" />
+<script type="text/javascript">
+
+    function gettoken()
+    {
+        var token = '@Html.AntiForgeryToken()';
+        token = $(token).val();
+        return token;
+    }
+
+
+	 $(document).ready(function () {
+
+     })
+
+	function ShowNext() {
+		location.reload();
+	}
+
+	function Finish() {
+		alert('Profile Photos Uploaded.');
+	}
+</script>
+<script type="text/javascript">
+	Dropzone.options.dropzoneForm =
+	{
+		addRemoveLinks: true,
+		maxFiles: 10,
+		init: function () {
+			this.on("complete", function (data) {
+				//var res = eval('(' + data.xhr.responseText + ')');
+				var res = JSON.parse(data.xhr.responseText);
+			});
+		}
+	};
+
+	function UploadPhoto(profilesectionid, profileid) {
+		$("#modProfilePics").modal("show");
+		$("#ProfileSectionId").val(profilesectionid);
+		$("#ProfileId").val(profileid);
+		
+	}
+
+	$(function () {
+		// Multiple images preview in browser
+		var imagesPreview = function (input, placeToInsertImagePreview) {
+
+			if (input.files) {
+				var filesAmount = input.files.length;
+
+				for (i = 0; i < filesAmount; i++) {
+					var reader = new FileReader();
+
+					reader.onload = function (event) {
+						$($.parseHTML('<img style="height:90px; width:90px;">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+					}
+
+					reader.readAsDataURL(input.files[i]);
+				}
+			}
+
+		};
+
+		$('#btnUPload').on('change', function () {
+			imagesPreview(this, 'div.gallery');
+		});
+	});
+
+	
+</script>
+<div class="container photouploader">
+	<div class="form-horizontal">
+		<h3>My Life - In Pictures</h3>
+		@foreach (DataRow row in Model.Rows)
+		{
+			if (row["ProfileSectionId"].ToString() !="10")
+			{
+			<div class="form-group col-sm-12">
+
+				@*onclick="UploadPhoto('@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileSectionId"].ToString())', '@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileID"].ToString())')"*@
+				<label class="control-label col-sm-5 btn btn-primary">
+					@row["Name"]
+				</label>
+				<div class="col-sm-12">
+
+					<img style="height: 100px;width: 100px;cursor:pointer;" src="@System.Configuration.ConfigurationManager.AppSettings["ProfileSection"]@row["SectionImage"]"
+						 onclick="UploadPhoto('@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileSectionId"].ToString())', '@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileID"].ToString())')" />
+
+					<img style="height: 100px;width: 100px;cursor:pointer;" src="@System.Configuration.ConfigurationManager.AppSettings["ProfileSection"]UploadImage.png"
+						 onclick="UploadPhoto('@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileSectionId"].ToString())', '@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileID"].ToString())')" />
+
+					<img style="height: 100px;width: 100px;cursor:pointer;" src="@System.Configuration.ConfigurationManager.AppSettings["ProfileSection"]UploadImage.png"
+						 onclick="UploadPhoto('@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileSectionId"].ToString())', '@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileID"].ToString())')" />
+
+					<img style="height: 100px;width: 100px;cursor:pointer;" src="@System.Configuration.ConfigurationManager.AppSettings["ProfileSection"]UploadImage.png"
+						 onclick="UploadPhoto('@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileSectionId"].ToString())', '@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileID"].ToString())')" />
+
+				</div>
+			</div>
+			}
+		}
+
+	</div>
+	<div class="form-group" style="padding-bottom:15px;">
+		<input type="button" value="Next" class="btn btn-primary" />
+	</div>
+</div>
+
+
+		<div id="modProfilePics" class="modal fade" role="dialog"  style="top:3% !important;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Upload Photos</h4>
+					</div>
+					<div class="modal-body">
+						@Html.AntiForgeryToken()
+
+						<div class="form-horizontal">
+							
+							<div class="col-sm-12" style="margin-left: 25px !important;margin-right: 25px !important;">
+								<div class="row">
+									<div class="col-sm-12">
+										<input type="file" accept="image/*" class="form-control" style="border:none;" id="btnUPload" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-sm-12">
+										<div class="col-md-12">
+											<lable class="col-form-label-lg">About Picture</lable>
+											<textarea class="form-control"></textarea>
+										</div>
+									</div>
+
+									<input type="hidden" id="ProfileSectionId" name="ProfileSectionId" value="" />
+									<input type="hidden" id="ProfileId" name="ProfileId" value="" />
+								</div>
+								<div class="row">
+									<div class="form-group col-sm-12 ">
+										<div class="col-md-12 gallery">
+										</div>
+									</div>
+								</div>
+								</div>
+
+							</div>
+					</div>
+
+					<div class="modal-footer">
+						<input type="button" name="theParameter" class="btn btn-primary" data-dismiss="modal" value="Upload" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+

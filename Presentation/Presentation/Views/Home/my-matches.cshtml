@@ -1,0 +1,609 @@
+﻿@{
+    ViewBag.Title = "ND Frients";
+    ViewBag.MetaDescription = "ND Frients";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section headerSeparate{
+}
+
+<main id="editProfile">
+
+    <div class="profile-bg">
+        <span class="s-150"></span>
+        <span class="s-50"></span>
+        <span class="s-50"></span>
+        <span class="s-75"></span>
+        <span class="s-100"></span>
+        <span class="s-200"></span>
+        <span class="s-50"></span>
+        <span class="s-100"></span>
+        <span class="s-50"></span>
+        <span class="s-100"></span>
+        <div class="skew">
+            <svg x="0" y="0" viewBox="0 0 2560 120" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="2560 0 2560 120 0 120"></polygon>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row tabs js-tabs">
+
+            <section class="col-12 col-lg-5 col-xl-4 col-xxl-3 p-lg-0 left">
+
+                @Html.Partial("_Profile_userPicGallery_static")
+
+
+                <div class="text-center mb-3 d-block d-lg-none">
+                    <h3 class="mb-0 fs-1 fw-normal">Eliana Romero</h3>
+                    <span>eliana.romero@neurologically.com</span>
+                </div>
+                <div class="mb-4 text-center d-block d-lg-none"><button id="yourProfileBtn" class="btn-sm rounded-pill">Full Your Profile</button></div>
+
+                <div id="editProfileView">
+                    <section class="row pb-2 mx-3 mt-4">
+                        <div class="col-6 px-3 pb-3">
+                            <label>Full Name:</label>
+                            <div>Eliana Romero</div>
+                        </div>
+                        <div class="col-6 px-3 pb-3">
+                            <label>Gender:</label>
+                            <div>Women</div>
+                        </div>
+                        <div class="col-6 px-3 pb-3">
+                            <label>DOB:</label>
+                            <div>06-18-1979</div>
+                        </div>
+                        <div class="col-6 px-3 pb-3">
+                            <label>Marital status:</label>
+                            <div>Divorced</div>
+                        </div>
+                        <div class="col-6 px-3 pb-3">
+                            <label>Height:</label>
+                            <div>5 feet 9 inches</div>
+                        </div>
+                        <div class="col-6 px-3 pb-3">
+                            <label>Race:</label>
+                            <div>Hispanic or Latino</div>
+                        </div>
+                        <div class="col-12 pb-3">
+                            <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                        </div>
+                    </section>
+                    <section class="row pt-4 pb-2 mx-3" id="favouriteSec">
+                        <div class="col-12 mb-3 heading">
+                            <h5 class="fw-semibold"><span class="material-symbols-outlined">favorite</span>My Life in Pictures</h5>
+                        </div>
+                        <div class="col-6 px-3 pb-3 text-center">
+                            @*<div class="img-box"><img src="~/Content/assets/images/blank-user.png" alt="image name"></div>*@
+                            <div class="img-box"><img src="~/Content/assets/images/temp/dog.jpg" alt="image name"></div>
+                            <label>A picture with your pet</label>
+                            <div>I love dogs</div>
+                        </div>
+                        <div class="col-6 px-3 pb-3 text-center">
+                            <div class="img-box"><img src="~/Content/assets/images/temp/golf.jpg" alt="image name"></div>
+                            <label>A picture playing your favorite sport</label>
+                            <div>I love to play golf</div>
+                        </div>
+                        <div class="col-6 px-3 pb-3 text-center">
+                            <div class="img-box"><img src="~/Content/assets/images/temp/old-north-church.jpg" alt="image name"></div>
+                            <label>A picture in your favorite place</label>
+                            <div>I like to visit old churches</div>
+                        </div>
+                        <div class="col-12 pb-3">
+                            <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                        </div>
+                    </section>
+                    <section class="row pt-4 pb-2 mx-3" id="goodFrndSec">
+                        <div class="col-12 mb-3 heading">
+                            <h5 class="fw-semibold"><span class="material-symbols-outlined">interests</span>Personal Habits</h5>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Are you a night owl or a morning person?</label>
+                            <div class="answer">Morning person</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Are you someone who enjoys physical activity or more of a couch potato?</label>
+                            <div class="answer">Physical activity </div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Do you like to travel or are you a homebody?</label>
+                            <div class="answer">Travel</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Do you drink alcohol?</label>
+                            <div class="answer">Socially</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Do you smoke tobacco products?</label>
+                            <div class="answer">Never</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Do you use recreational drugs?</label>
+                            <div class="answer">Never</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Is there anything you watch regularly on television?</label>
+                            <div class="answer">No</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Do you have pets?</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">What kind of music do you like?</label>
+                            <div class="answer">Popular music, Disco, Rock, Hip hop</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Do you have strong political affiliations?</label>
+                            <div class="answer">No</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Would you consider relocating?</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 pb-3">
+                            <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                        </div>
+                    </section>
+                    <section class="row pt-4 pb-2 mx-3" id="goodFrndSec">
+                        <div class="col-12 mb-3 heading">
+                            <h5 class="fw-semibold"><span class="material-symbols-outlined">diversity_3</span>Activity Preferences</h5>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Watching a movie?</label>
+                            <div class="answer">Horror, Thriller, Science fiction, Comedy, Romance, Documentary, Thriller, Historical, Biographical</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Having tea/coffee</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going to a bar/sports bar</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going to a concert</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Watching a live play</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Watching a musical live/on TV</label>
+                            <div class="answer">No</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Fishing/hunting</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Participating in water sports in an natural body of water</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going for a motorcycle ride</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Go on a hike</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going for a bike ride</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going for a run</label>
+                            <div class="answer">No</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going for a leisurely walk</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going on a road trip/vacation</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going on a picnic</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Bowling</label>
+                            <div class="answer">No</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going to a museum</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going shopping</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going out to dinner</label>
+                            <div class="answer">Chinese, Indian, Italian</div>
+                        </div>
+                        <div class="col-12 px-3 pb-4">
+                            <label class="question">Going dancing</label>
+                            <div class="answer">Yes</div>
+                        </div>
+                        <div class="col-12 pb-3">
+                            <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                        </div>
+                    </section>
+                </div>
+
+            </section>@*---Left End---*@
+
+            <div class="col-12 col-lg-7 col-xl-8 col-xxl-9 px-2 px-sm-3 px-lg-0 right">
+
+                <div class="row justify-content-lg-between flex-column flex-lg-row ps-lg-5 d-none d-lg-block user-name">
+                    <div class="col-auto">
+                        <h3 class="mb-0 fs-1">Eliana Romero</h3>
+                        <span>eliana.romero@neurologically.com</span>
+                    </div>
+                </div>
+
+                <div id="myMatchesUserSec" class="ps-lg-5 ps-0 pt-4 pt-lg-0">
+                    <div class="pageHeading text-center pb-4 mx-3">
+                        <h1 class="title">My Matches</h1>
+                        <div class="sub-title">Today</div>
+                    </div>
+                    <section class="wrapper">
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-1.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn disable"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>Jennifer</h6>
+                                    <div class="age">age<span>21</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-2.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>Laura</h6>
+                                    <div class="age">age<span>20</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-3.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn disable"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>William</h6>
+                                    <div class="age">age<span>26</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-4.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>Rachel</h6>
+                                    <div class="age">age<span>19</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-5.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn disable"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>Jason</h6>
+                                    <div class="age">age<span>24</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-6.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn disable"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>Charles</h6>
+                                    <div class="age">age<span>28</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-7.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn disable"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>Alice</h6>
+                                    <div class="age">age<span>25</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-8.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>Daniel</h6>
+                                    <div class="age">age<span>32</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-9.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn disable"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>Kathryn</h6>
+                                    <div class="age">age<span>26</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-10.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>Edward</h6>
+                                    <div class="age">age<span>30</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 p-sm-3">
+                            <div class="rounded-4 position-relative overflow-hidden box">
+                                <img src="~/Content/assets/images/users/user-11.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                <button class="invite-btn disable"></button>
+                                <button class="popup-trigger rounded-pill">Full Detail</button>
+                                <div class="details">
+                                    <h6>Kevin</h6>
+                                    <div class="age">age<span>25</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div id="myMatchUserPopup" class="rounded-4">
+                        <div class="img-wrap">
+                            <div class="img-box-outer">
+                                <div class="img-box">
+                                    <img src="~/Content/assets/images/users/user-1.jpg" alt="User Name" class="w-100 h-auto my-match-frnd">
+                                </div>
+                                <button class="invite-btn"></button>
+                                @*<button class="invite-btn disable"></button>*@
+                            </div>
+                            <button class="hide-myMatchUserPopup"></button>
+                        </div>
+                        <div id="editProfileView" class="mdrn-scrollbar" style="margin-top:85px;overflow-y:auto;height:calc(100% - 215px);">
+                            <section class="row pb-2 mx-3">
+                                <div class="col-12 ps-3 pe-0 pb-4">
+                                    <div class="text-center fs-3 text-uppercase">Jennifer</div>
+                                </div>
+                                <div class="col-6 px-3 pb-3">
+                                    <label>Gender:</label>
+                                    <div>Women</div>
+                                </div>
+                                <div class="col-6 px-3 pb-3">
+                                    <label>DOB:</label>
+                                    <div>2002-10-15</div>
+                                </div>
+                                <div class="col-6 px-3 pb-3">
+                                    <label>Marital status:</label>
+                                    <div>Divorced</div>
+                                </div>
+                                <div class="col-6 px-3 pb-3">
+                                    <label>Height:</label>
+                                    <div>5 feet 9 inches</div>
+                                </div>
+                                <div class="col-6 px-3 pb-3">
+                                    <label>Race:</label>
+                                    <div>Hispanic or Latino</div>
+                                </div>
+                            </section>
+                            <section class="row pt-4 pb-2 mx-3" id="favouriteSec">
+                                <div class="col-12 mb-3 heading">
+                                    <p class="mb-0">Your favourite photo</p>
+                                    <h5 class="fw-bold"><span class="material-symbols-outlined">favorite</span>My Life in Pictures</h5>
+                                </div>
+                                <div class="col-6 col-sm-4 px-3 pb-3 text-center">
+                                    <div class="img-box"><img src="~/Content/assets/images/temp/dog.jpg" alt="image name"></div>
+                                    <label>A picture with your pet</label>
+                                    <div>I love dogs</div>
+                                </div>
+                                <div class="col-6 col-sm-4 px-3 pb-3 text-center">
+                                    <div class="img-box"><img src="~/Content/assets/images/temp/golf.jpg" alt="image name"></div>
+                                    <label>A picture playing your favorite sport</label>
+                                    <div>I love to play golf</div>
+                                </div>
+                                <div class="col-6 col-sm-4 px-3 pb-3 text-center"> 
+                                    <div class="img-box"><img src="~/Content/assets/images/temp/old-north-church.jpg" alt="image name"></div>
+                                    <label>A picture in your favorite place</label>
+                                    <div>I like to visit old churches</div>
+                                </div>
+                            </section>
+                            <section class="row pt-4 pb-2 mx-3" id="goodFrndSec">
+                                <div class="col-12 mb-3 heading">
+                                    <p class="mb-0">Personal Habits</p>
+                                    <h5 class="fw-bold"><span class="material-symbols-outlined">interests</span>Personal Habits</h5>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Are you a night owl or a morning person?</label>
+                                    <div class="answer">Morning person</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Are you someone who enjoys physical activity or more of a couch potato?</label>
+                                    <div class="answer">Physical activity </div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Do you like to travel or are you a homebody?</label>
+                                    <div class="answer">Travel</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Do you drink alcohol?</label>
+                                    <div class="answer">Socially</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Do you smoke tobacco products?</label>
+                                    <div class="answer">Never</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Do you use recreational drugs?</label>
+                                    <div class="answer">Never</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Is there anything you watch regularly on television?</label>
+                                    <div class="answer">No</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Do you have pets?</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">What kind of music do you like?</label>
+                                    <div class="answer">Popular music, Disco, Rock, Hip hop</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Do you have strong political affiliations?</label>
+                                    <div class="answer">No</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Would you consider relocating?</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                            </section>
+
+                            <section class="row pt-4 pb-2 mx-3" id="goodFrndSec">
+                                <div class="col-12 mb-3 heading">
+                                    <p class="mb-0">Activity Preferences</p>
+                                    <h5 class="fw-bold"><span class="material-symbols-outlined">diversity_3</span>Activity Preferences</h5>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Watching a movie?</label>
+                                    <div class="answer">Horror, Thriller, Science fiction, Comedy, Romance, Documentary, Thriller, Historical, Biographical</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Having tea/coffee</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going to a bar/sports bar</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going to a concert</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Watching a live play</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Watching a musical live/on TV</label>
+                                    <div class="answer">No</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Fishing/hunting</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Participating in water sports in an natural body of water</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going for a motorcycle ride</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Go on a hike</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going for a bike ride</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going for a run</label>
+                                    <div class="answer">No</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going for a leisurely walk</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going on a road trip/vacation</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going on a picnic</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Bowling</label>
+                                    <div class="answer">No</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going to a museum</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going shopping</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going out to dinner</label>
+                                    <div class="answer">Chinese, Indian, Italian</div>
+                                </div>
+                                <div class="col-12 px-3 pb-4">
+                                    <label class="question">Going dancing</label>
+                                    <div class="answer">Yes</div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div id="myMatchUserPopupOverlay"></div>
+
+                </div>
+
+            </div>@*---Right End---*@
+
+        </div>
+    </div>
+
+</main>
+
+
+@section footerSeparate{
+    <script>
+        $(document).ready(function () {
+            $(".popup-trigger").click(function () {
+                $("#myMatchUserPopup").addClass("visible");
+                $("#myMatchUserPopupOverlay").addClass("visible");
+            });
+            $(".hide-myMatchUserPopup").click(function () {
+                $("#myMatchUserPopup").removeClass("visible");
+                $("#myMatchUserPopupOverlay").removeClass("visible");
+            });
+        });
+
+        $(document).ready(function () {
+            $("#yourProfileBtn").on("click", function () {
+                $("#editProfile .left #editProfileView").slideDown("slow");
+                $(this).addClass("deactivate");
+            });
+        });
+    </script>
+}

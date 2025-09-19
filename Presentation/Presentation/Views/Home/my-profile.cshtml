@@ -1,0 +1,384 @@
+﻿@{
+    ViewBag.Title = "ND Frients";
+    ViewBag.MetaDescription = "ND Frients";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section headerSeparate{
+}
+
+<main id="editProfile">
+
+    <div class="profile-bg">
+        <span class="s-150"></span>
+        <span class="s-50"></span>
+        <span class="s-50"></span>
+        <span class="s-75"></span>
+        <span class="s-100"></span>
+        <span class="s-200"></span>
+        <span class="s-50"></span>
+        <span class="s-100"></span>
+        <span class="s-50"></span>
+        <span class="s-100"></span>
+        <div class="skew">
+            <svg x="0" y="0" viewBox="0 0 2560 120" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="2560 0 2560 120 0 120"></polygon>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row tabs js-tabs">
+            <section class="col-12 col-lg-5 col-xl-4 col-xxl-3 p-lg-0 left">
+
+                @Html.Partial("_Profile_userPicGallery_static")
+
+                <div class="d-block d-lg-none">
+                    <div class="mb-2 text-center">
+                        <h3 class="mb-0 fs-1 fw-normal">Eliana Romero</h3>
+                        <span>eliana.romero@neurologically.com</span>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="fs-3">100%</div>
+                        <span style="font-size:.875rem;margin-left:6px;">COMPLETE</span>
+                    </div>
+                </div>
+
+                <div id="menuWrap">
+                    <ul id="tabs">
+                        <li class="js-tabs-item active" id="tab1">
+                            <div class="p-tab js-tabs-link"><div style="left:0;">Demographic Information<p class="mb-0">About youeself</p></div></div>
+                        </li>
+                        <li class="js-tabs-item" id="tab2">
+                            <div class="p-tab js-tabs-link"><div style="right:-42px;">My Life in Pictures<p class="mb-0">Your favourite photo</p></div></div>
+                        </li>
+                        @*<li class="js-tabs-item" id="tab3">
+                            <div class="p-tab js-tabs-link"><div style="right:-75px;">How to Be Friends with Me<p class="mb-0">Ways to become a good friend</p></div></div>
+                        </li>
+                        <li class="js-tabs-item" id="tab4">
+                            <div class="p-tab js-tabs-link"><div style="right:-51px;">My Specific Interests<p class="mb-0">Your hobbies</p></div></div>
+                        </li>
+                        <li class="js-tabs-item" id="tab5">
+                            <div class="p-tab js-tabs-link"><div>My Neurodiverse Strengths<p class="mb-0">Ability to recognize your strengths</p></div></div>
+                        </li>*@
+                        <li class="js-tabs-item" id="tab6">
+                            <div class="p-tab js-tabs-link"><div>Personal Habits<p class="mb-0">Personal Habits</p></div></div>
+                        </li>
+                        <li class="js-tabs-item" id="tab7">
+                            <div class="p-tab js-tabs-link"><div>Activity Preferences<p class="mb-0">Activity Preferences</p></div></div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <div class="col-12 col-lg-7 col-xl-8 col-xxl-9 px-0 right tabs-content js-tabs-wrap">
+
+                <div class="row justify-content-lg-between flex-column flex-lg-row ps-lg-5 d-none d-lg-flex user-name">
+                    <div class="col-auto mb-2 mb-lg-0 text-center text-lg-start">
+                        <h3 class="mb-0 fs-1 fw-light">Eliana Romero</h3>
+                        <span>eliana.romero@neurologically.com</span>
+                    </div>
+                    <div class="col-auto text-center complete">
+                        <div class="fs-3 lh-sm">100%</div>
+                        <span>COMPLETE</span>
+                    </div>
+                </div>
+
+                <div id="editProfileView" class="mt-lg-4">
+
+                    <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab1C">
+                        <section class="row pb-2 mx-3 border-bottom-0">
+                            <div class="col-6 px-3 pb-3">
+                                <label>Full Name:</label>
+                                <div>Eliana Romero</div>
+                            </div>
+                            <div class="col-6 px-3 pb-3">
+                                <label>Gender:</label>
+                                <div>Women</div>
+                            </div>
+                            <div class="col-6 px-3 pb-3">
+                                <label>DOB:</label>
+                                <div>06-18-1979</div>
+                            </div>
+                            <div class="col-6 px-3 pb-3">
+                                <label>Marital status:</label>
+                                <div>Divorced</div>
+                            </div>
+                            <div class="col-6 px-3 pb-3">
+                                <label>Height:</label>
+                                <div>5 feet 9 inches</div>
+                            </div>
+                            <div class="col-6 px-3 pb-3">
+                                <label>Race:</label>
+                                <div>Hispanic or Latino</div>
+                            </div>
+                            <div class="col-6 px-3 pb-3">
+                                <label>Neurodiverse diagnosis:</label>
+                                <div>ASD/Asperger's</div>
+                            </div>
+                            <div class="col-12 py-3">
+                                <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab2C">
+                        <section class="row flex-wrap row-cols-2 row-cols-sm-3 pb-2 mx-3 border-bottom-0" id="favouriteSec">
+                            <div class="col px-3 pb-3 text-center">
+                                @*<div class="img-box"><img src="~/Content/assets/images/blank-user.png" alt="image name"></div>*@
+                                <div class="img-box"><img src="~/Content/assets/images/temp/dog.jpg" alt="image name"></div>
+                                <label>A picture with your pet</label>
+                                <div>I love dogs</div>
+                            </div>
+                            <div class="col px-3 pb-3 text-center">
+                                <div class="img-box"><img src="~/Content/assets/images/temp/golf.jpg" alt="image name"></div>
+                                <label>A picture playing your favorite sport</label>
+                                <div>I love to play golf</div>
+                            </div>
+                            <div class="col px-3 pb-3 text-center"> 
+                                <div class="img-box"><img src="~/Content/assets/images/temp/old-north-church.jpg" alt="image name"></div>
+                                <label>A picture in your favorite place</label>
+                                <div>I like to visit old churches</div>
+                            </div>
+                            <div class="col-12 w-100 py-3">
+                                <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                            </div>
+                        </section>
+                    </div>
+
+                    @*<div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab3C">
+                        <section class="row pb-2 mx-3 border-bottom-0" id="goodFrndSec">
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">What an ideal neurodiverse friendship is to me?</label>
+                                <div class="answer">What an ideal neurodiverse friendship is to me</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">How i am most comfortable communicating?</label>
+                                <div class="answer">How i am most comfortable communicating</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Things i look for in a friend?</label>
+                                <div class="answer">Things i look for in a friend</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Things i avoid in a friend?</label>
+                                <div class="answer">Things i avoid in a friend</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Things that i consider 'fun'?</label>
+                                <div class="answer">Things that i consider 'fun'</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Things that i consider 'not fun'?</label>
+                                <div class="answer">Things that i consider 'not fun'</div>
+                            </div>
+                            <div class="col-12 py-3">
+                                <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab4C">
+                        <section class="row pb-2 mx-3 border-bottom-0" id="goodFrndSec">
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">My interests?</label>
+                                <div class="answer">My interests.</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">My top 5 strengths?</label>
+                                <div class="answer">My top 5 strengths.</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Strengths i desire in a friend?</label>
+                                <div class="answer">Strengths i desire in a friend.</div>
+                            </div>
+                            <div class="col-12 py-3">
+                                <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab5C">
+                        <section class="row pb-2 mx-3 border-bottom-0" id="goodFrndSec" style="border-bottom:none;">
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Neurodiverse strengths?</label>
+                                <div class="answer">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                            </div>
+                            <div class="col-12 py-3">
+                                <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                            </div>
+                        </section>
+                    </div>*@
+
+                    <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab6C">
+                        <section class="row pb-2 mx-3 border-bottom-0" id="goodFrndSec">
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Are you a night owl or a morning person?</label>
+                                <div class="answer">Morning person</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Are you someone who enjoys physical activity or more of a couch potato?</label>
+                                <div class="answer">Physical activity </div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Do you like to travel or are you a homebody?</label>
+                                <div class="answer">Travel</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Do you drink alcohol?</label>
+                                <div class="answer">Socially</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Do you smoke tobacco products?</label>
+                                <div class="answer">Never</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Do you use recreational drugs?</label>
+                                <div class="answer">Never</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Is there anything you watch regularly on television?</label>
+                                <div class="answer">No</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Do you have pets?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">What kind of music do you like?</label>
+                                <div class="answer">Popular music, Disco, Rock, Hip hop</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Do you have strong political affiliations?</label>
+                                <div class="answer">No</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Would you consider relocating?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 py-3">
+                                <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab7C">
+                        <section class="row pb-2 mx-3 border-bottom-0" id="goodFrndSec">
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Watching a movie?</label>
+                                <div class="answer">Horror, Thriller, Science fiction, Comedy, Romance, Documentary, Thriller, Historical, Biographical</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Having tea/coffee?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going to a bar/sports bar?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going to a concert?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Watching a live play?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Watching a musical live/on TV?</label>
+                                <div class="answer">No</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Fishing/hunting?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Participating in water sports in an natural body of water?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going for a motorcycle ride?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Go on a hike?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going for a bike ride?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going for a run?</label>
+                                <div class="answer">No</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going for a leisurely walk?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going on a road trip/vacation?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going on a picnic?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Bowling?</label>
+                                <div class="answer">No</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going to a museum?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going shopping?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going out to dinner?</label>
+                                <div class="answer">Chinese, Indian, Italian</div>
+                            </div>
+                            <div class="col-12 px-3 pb-4">
+                                <label class="question">Going dancing?</label>
+                                <div class="answer">Yes</div>
+                            </div>
+                            <div class="col-12 py-3">
+                                <a href="@Url.Action("edit-profile", "Home")" class="edit-btn">Edit</a>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+@section footerSeparate{
+    <script>
+        $(document).ready(function () {
+
+            $('#tabs li:not(:first)').addClass('inactive');
+            $('.tab').hide();
+            $('.tab:first').show();
+
+            $('#tabs li').click(function () {
+                var t = $(this).attr('id');
+                if ($(this).hasClass('inactive')) { //this is the start of our condition 
+                    $('#tabs li').addClass('inactive');
+                    $('#tabs li').removeClass('active');
+                    $(this).removeClass('inactive');
+                    $(this).addClass('active');
+
+                    $('.tab').hide();
+                    $('#' + t + 'C').fadeIn('slow');
+                }
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.MetaTitle</title>
+    <meta name="description" content="@ViewBag.MetaDescription">
+
+    @{string strCanonicalUrl = HttpContext.Current.Request.Url.AbsoluteUri;}
+    <link rel="canonical" href="@strCanonicalUrl">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+
+    @RenderSection("headerSeparate", false)
+
+    @*<link rel="shortcut icon" type="image/x-icon" href="~/Content/images/favicon/favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="~/Content/images/favicon/favicon32x32.png">
+        <link rel="icon" type="image/png" sizes="48x48" href="~/Content/images/favicon/favicon48x48.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="~/Content/images/favicon/favicon96x96.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="~/Content/images/favicon/favicon144x144.png">
+        <link rel="icon" type="image/png" sizes="196x196" href="~/Content/images/favicon/favicon196x196.png">*@
+</head>
+<body>
+
+    <header id="header">
+        <div class="container-fluid">
+            <div class="row justify-content-between align-items-center flex-md-row-reverse">
+                <div class="col-3 pe-md-5 d-none d-md-flex justify-content-end">
+                    <a href="@Url.Action("frmLogin","Login")" class="login-btn">Login</a>
+                </div>
+                <div class="col-auto" id="branding">
+                    <a href="@Url.Action("Index", "Home")" title="ND Friends Home">
+                        <img src="~/Content/assets/images/logo.png" width="352" height="148" alt="ND Friends Logo" class="logo">
+                        <img src="~/Content/assets/images/logo-w.png" width="352" height="148" alt="ND Friends Logo" class="logo-w">
+                    </a>
+                </div>
+                <div class="col-3 ps-md-5 d-flex justify-content-end justify-content-md-start">
+                    <button id="navIcon" class="rounded-circle"><span></span><span></span><span></span><span></span></button>
+                </div>
+            </div>
+        </div>
+
+        <nav id="nav">
+            <ul>
+                <li><a href="@Url.Action("Index", "Home")" class="link i-home @(ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">Home</a></li>
+                <li><a href="@Url.Action("about-the-creators", "Home")" class="link i-about">About the Creators</a></li>
+                <li><a href="@Url.Action("Index", "Home")#findingFriends" class="link i-friend page-scroll">Why ND Friends?</a></li>
+                <li><a href="@Url.Action("Index", "Home")#sampleProfileSec" class="link i-profile page-scroll">Sample Profile</a></li>
+                <li><a href="@Url.Action("frmLogin","Login")" class="link i-login">Login</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    @RenderBody()
+
+    <footer>
+    </footer>
+
+    <script src="~/Scripts/jquery-3.6.1.min.js"></script>
+
+    @RenderSection("footerSeparate", false)
+
+    @*<script src="~/Scripts/bootstrap.bundle.min.js"></script>*@
+    <script src="~/Content/assets/js/common.js"></script>
+
+    <script type="text/javascript">
+        jQuery.easing.jswing = jQuery.easing.swing; jQuery.extend(jQuery.easing, { easeInOutExpo: function (e, f, a, h, g) { if (f == 0) { return a } if (f == g) { return a + h } if ((f /= g / 2) < 1) { return h / 2 * Math.pow(2, 10 * (f - 1)) + a } return h / 2 * (-Math.pow(2, -10 * --f) + 2) + a } });
+        $(function () {
+            $('a.page-scroll[href*="#"]:not([href="#"])').on('click', function () {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html, body').animate({
+                            scrollTop: (target.offset().top - 84)       //Top Margin
+                        }, 400, "easeInOutExpo");                       //Speed
+                        return false;
+                    }
+                }
+            });
+        });
+        var scrollLink = $('.page-scroll');
+        $(window).on('scroll', function () {
+            var scrollbarLocation = $(this).scrollTop();
+            scrollLink.each(function () {
+                var sectionOffset = $(this.hash).offset().top - 90;    //For Active
+                if (sectionOffset <= scrollbarLocation) {
+                    $(this).parent().addClass('active');
+                    $(this).parent().siblings().removeClass('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

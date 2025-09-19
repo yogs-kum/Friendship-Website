@@ -1,0 +1,348 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @{
+        string FullUrl = HttpContext.Current.Request.Url.AbsoluteUri;
+        string BaseUrl = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+    }
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.MetaDescription">
+
+    <!--[if lt IE 9]><script src="/Content/js/html5shiv.min.js"></script><![endif]-->
+    <link type="text/css" href="/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Gridmvc.css" rel="stylesheet">
+    <link type="text/css" href="/Content/admin/css/style.css" rel="stylesheet">
+
+    <link type="text/css" href="~/Content/admin/fonts/remixicon/remixicon.css" rel="stylesheet">
+    <link type="text/css" href="~/Content/admin/css/style.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700;800&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    @RenderSection("headerSeparate", false)
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/images/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Content/images/favicon/favicon32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="~/Content/images/favicon/favicon48x48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/Content/images/favicon/favicon96x96.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Content/images/favicon/favicon144x144.png">
+    <link rel="icon" type="image/png" sizes="196x196" href="~/Content/images/favicon/favicon196x196.png">
+</head>
+<body class="animate skin-red">
+    <div id="preloader"><img src="~/Content/assets/images/preloader.gif" alt="preloader" width="64" height="64"></div>
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-header">
+            <a href="@Url.Action("frmAppHome", "AppHome", new { Area = "" })" class="sidebar-logo">
+                <img src="~/Content/assets/images/logo.png" width="54" height="80" alt="ND Friends Logo" class="logo">
+            </a>
+            </div><!-- sidebar-header -->
+        @*<div class="sidebar-search">
+                <div class="search-body">
+                    <i data-feather="search"></i>
+                    <input type="text" class="form-control" placeholder="Search...">
+                </div>
+            </div>*@
+
+        @*@if (Session["LoginRole"] != null && (Session["LoginRole"].ToString() == "1" || Session["LoginRole"].ToString() == "5"))
+            {
+                <div class="sidebar-search">
+                    <div class="search-body" style="padding-left:0;margin-bottom:15px;">
+                        <select id="lstGlobalOrganizations" class="form-select form-select-white-arrow" onchange="fnSelectOrganization()">
+                            @if (Session["theDTOrganizations"] != null)
+                            {
+                                <option value="0">Select Organization</option>
+                                foreach (System.Data.DataRow row in ((System.Data.DataTable)Session["theDTOrganizations"]).Rows)
+                                {
+                                    if (Session["OrganizationId"] != null && Session["OrganizationId"].ToString() == row["Id"].ToString())
+                                    {
+                                        <option value="@row["Id"]" selected="selected">@row["Name"]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@row["Id"]">@row["Name"]</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            }*@
+
+        <nav class="sidebar-body">
+
+            <div class="nav-group show">
+                <div class="nav-group-label">Navigation</div>
+                <ul class="nav-sidebar">
+
+                    <li class="nav-item">
+                        <a href="@Url.Action("frmAppHome", "AppHome", new { Area = "" })" class="nav-link"><i data-feather="bar-chart-2"></i><span>Home</span></a>
+                    </li>
+                    @*<li class="nav-item">
+                            <a href="@Url.Action("Dashboard", "Dashboard", new { Area = "Administration" })" class="nav-link"><i data-feather="bar-chart-2"></i><span>Dashboard</span></a>
+                        </li>*@
+
+
+                    @if (@ViewBag.UserGroup || @ViewBag.UserMaster)
+                    {
+                        <li class="nav-item">
+                            <button class="nav-link with-sub"><i data-feather="lock"></i><span>System Security</span></button>
+                            <ul class="nav-sub">
+                                @if (@ViewBag.UserGroup)
+                                {
+                                    <li>@Html.ActionLink("Groups", "frmGroupList", "Group", new { Area = "Security" }, new { @class = ViewBag.UserGroup ? "sub-link display-block" : "menudisable" })</li>
+                                }
+                                @if (@ViewBag.UserMaster)
+                                {
+                                    <li>@Html.ActionLink("User", "frmUserList", "User", new { Area = "Security" }, new { @class = ViewBag.UserMaster ? "sub-link display-block" : "menudisable" })</li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    @if (@ViewBag.Organization || @ViewBag.RefreshCache)
+                    {
+                        <li class="nav-item">
+                            <button class="nav-link with-sub"><i data-feather="user-check"></i><span>System</span></button>
+                            <ul class="nav-sub">
+                                @*@if (@ViewBag.Organization)
+                                {
+                                    <li>@Html.ActionLink("Organization", "frmOrganizationList", "Organization", new { Area = "Administration" }, new { @class = ViewBag.Organization ? "sub-link display-block" : "menudisable" })</li>
+                                }*@
+                                @*@if (@ViewBag.Location)
+                                    {
+                                        <li>@Html.ActionLink("Location", "frmLocationList", "Location", new { Area = "Administration" }, new { @class = ViewBag.Location ? "sub-link display-block" : "menudisable" })</li>
+                                    }*@
+                                @if (@ViewBag.RefreshCache)
+                                {
+                                    <li>@Html.ActionLink("Refresh System Cache", "RefreshSystemCache", "AppHome", new { Area = "" }, new { @class = ViewBag.RefreshCache ? "sub-link display-block" : "menudisable" })</li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div><!-- nav-group -->
+        </nav><!-- sidebar-body -->
+        <div class="sidebar-footer">
+            <a href="" class="avatar online"><span class="avatar-initial">N</span></a>
+            <div class="avatar-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6>Powerd By:</h6>
+                    @*<a href="" class="footer-menu"><i class="ri-settings-4-line"></i></a>*@
+                </div>
+                <span>NeuroLogically.com</span>
+            </div><!-- avatar-body -->
+        </div><!-- sidebar-footer -->
+
+    </aside>
+
+    <div class="content">
+
+        <header id="header">
+            <div class="fix-header">
+
+                <div class="left">
+
+                    @*<div id="logo">
+                            <a href="@Url.Action("frmAppHome","AppHome", new { Area = "" })" title="The Zone Home">
+                                <img src="/Content/images/logo.png" width="166" height="100" alt="The Zone Logo">
+                            </a>
+                        </div>*@
+
+                    @*<ul class="static-menu">
+                            <li><button type="button" id="asideTriggerHide" class="link icon i-nav"></button></li>
+                            <li><button type="button" id="asideTriggerShow" class="link icon i-nav" style=""></button></li>
+                            <li><a href="@Url.Action("frmAppHome","AppHome", new { Area = "" })" title="The Zone Home" class="link icon i-home"></a></li>
+                        </ul>*@
+
+                    <div class="content-header">
+                        <button id="contentMenu" class="content-menu d-none d-lg-flex"><i data-feather="menu"></i></button>
+                        <button id="mobileMenu" class="content-menu d-lg-none"><i data-feather="menu"></i></button>
+                    </div>
+
+                </div>
+                @*@if (Session["LoginRole"] != null && (Session["LoginRole"].ToString() == "1" || Session["LoginRole"].ToString() == "5"))
+                    {
+                    <div class="left">
+                        <div class="row">
+                            <div class="st-input-cntnr col">
+                                <select id="lstGlobalOrganizations" class="form-select" onchange="fnSelectOrganization()">
+                                    @if (Session["theDTOrganizations"] != null)
+                                    {
+                                        <option value="0">Select Organization</option>
+                                        foreach (System.Data.DataRow row in ((System.Data.DataTable)Session["theDTOrganizations"]).Rows)
+                                        {
+                                            if (Session["OrganizationId"] != null && Session["OrganizationId"].ToString() == row["Id"].ToString())
+                                            {
+                                                <option value="@row["Id"]" selected="selected">@row["Name"]</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@row["Id"]">@row["Name"]</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    }*@
+                <div class="right">
+
+                    <ul class="admin-user">
+                        <li>
+                            <button>
+                                <div class="txt">@Session["UserName"]<span>@Session["OrganizationName"]</span></div>
+                                <div class="img-wrap rounded-circle">
+                                    <img src="@Session["LogoPath"]" alt="@Session["OrganizationName"]">
+                                </div>
+                            </button>
+                            <ul>
+                                <li><a href="@Url.Action("frmChangePassword","ChangePassword", new { Area = "" })" class="change-password @(ViewContext.RouteData.Values["action"].ToString() == "frmChangePassword" ? "active" : "")">Change Password</a></li>
+                                <li><a href="@Url.Action("frmSupport","Support", new { Area = "" })" class="technical-support @(ViewContext.RouteData.Values["action"].ToString() == "frmSupport" ? "active" : "")">Technical Support</a></li>
+                                <li><a href="@Url.Action("Logout","AppHome", new { Area = "" })" class="logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </header>
+
+        @RenderBody()
+
+    </div>
+
+    <script src="/Scripts/jquery-3.6.1.min.js"></script>
+    <script src="/Scripts/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Content/admin/js/feather.min.js"></script>
+    <script src="~/Content/admin/js/perfect-scrollbar.min.js"></script>
+    <script src="~/Content/admin/js/script.js"></script>
+
+    <script src="~/Scripts/gridmvc.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    @RenderSection("footerSeparate", false)
+    <script>
+        $(window).on("load", function () {
+            $("#preloader").fadeOut("slow");
+        });
+
+        $(document).ajaxStart(function () {
+            setTimeout(function () {
+                $("#preloader").show();
+            }, 100);
+        });
+        $(document).ajaxComplete(function () {
+            setTimeout(function () {
+                $("#preloader").hide();
+            }, 3000);
+        });
+
+        function fnSelectOrganization() {
+            var OrganizationId = $("#lstGlobalOrganizations").val();
+            var OrganizationName = $("#lstGlobalOrganizations option:selected").text();
+            if (OrganizationId == 0 || OrganizationId == "" || OrganizationId == null || OrganizationId == NaN) {
+                alert('Please Select Organization!');
+                $("#lstGlobalOrganizations").val(@Session["OrganizationId"]);
+                return false;
+            }
+            var theUrl = '@Url.Action("SwitchOrganization", "Common", new { Area = "" })';
+            $.ajax({
+                type: "POST",
+                url: theUrl,
+                data: '{"theOrganizationId":"' + OrganizationId + '","theOrganizationName":"' + OrganizationName + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result == OrganizationId) {
+                        //alert("Organization changed successfully!");
+                        window.location = "";
+                    }
+                    else {
+                        alert("Organization not changed, Please try again later!")
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#asideTriggerHide").on("click", function () {
+                $(this).hide();
+                $("#asideTriggerShow").show();
+                $("#aside,#logo").animate({ left: -250 }, 500);
+                $("#main,.static-menu").animate({ marginLeft: 0 }, 500);
+                /*$("#logo").css({'background-color':'white', 'width':'auto', 'padding':'0px 10px 0px 20px'});*/
+            });
+            $("#asideTriggerShow").on("click", function () {
+                $(this).hide();
+                $("#asideTriggerHide").show();
+                $("#aside,#logo").animate({ left: 0 }, 500);
+                $("#main,.static-menu").animate({ marginLeft: 250 }, 500);
+                /*$("#logo").css({'background-color':'#272d3c', 'width':'250px', 'padding':'0px'});*/
+            });
+
+            //Active Navigation
+            var current_url = window.location.href.split('?')[0];
+            var host = window.location.protocol + "//" + window.location.host;
+            var current_href = window.location.href.replace(host, '');
+
+            $(".nav-item").removeClass("active").removeClass("show");
+            $("a.sub-link").removeClass("active");
+
+            var a_nav_link = $("a.nav-link");
+            a_nav_link.each(function (e) {
+
+                if (this.href.indexOf(current_url) > -1 && $(this).attr("href") != "") {
+                    $(this).parents(".nav-item").addClass("active");
+                }
+            });
+
+            var a_sub_link = $("a.sub-link");
+            a_sub_link.each(function (e) {
+
+                if (this.href.indexOf(current_url) > -1 && $(this).attr("href") != "") {
+                    $(this).addClass("active");
+                    $(this).parents(".nav-item").addClass("active").addClass("show");
+                }
+            });
+
+            $(".sidebar a.menudisable").parent("li").addClass("menudisable");
+
+        });
+    </script>
+
+    @if (Session["ScriptMessage"] != null && Session["ScriptType"] != null)
+    {
+        var ScriptMessage = Session["ScriptMessage"];
+        var ScriptType = Session["ScriptType"];
+        Session["ScriptMessage"] = null;
+        Session["ScriptType"] = null;
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var type = "@ScriptType";
+                if (type == "alert") {
+                            alert("@ScriptMessage");
+                        }
+                        else{
+                            return confirm("@ScriptMessage");
+                        }
+                    });
+        </script>
+    }
+
+    <script src="~/Content/admin/js/common.js"></script>
+</body>
+</html>

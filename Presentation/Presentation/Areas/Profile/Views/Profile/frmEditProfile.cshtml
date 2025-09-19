@@ -1,0 +1,385 @@
+﻿
+@{
+    ViewBag.Title = "ND Frients";
+    ViewBag.MetaDescription = "ND Frients";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section headerSeparate{
+    @*<script src="~/Content/assets/js/multiselect.min.js"></script>*@
+    <link href="/Content/bootstrap-select.css" rel="stylesheet">
+    <link href="~/Content/bootstrap-select.min.css" rel="stylesheet" />
+}
+
+<main id="editProfile">
+    <script>
+
+    </script>
+    <div class="profile-bg">
+        <span class="s-150"></span>
+        <span class="s-50"></span>
+        <span class="s-50"></span>
+        <span class="s-75"></span>
+        <span class="s-100"></span>
+        <span class="s-200"></span>
+        <span class="s-50"></span>
+        <span class="s-100"></span>
+        <span class="s-50"></span>
+        <span class="s-100"></span>
+        <div class="skew">
+            <svg x="0" y="0" viewBox="0 0 2560 120" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="2560 0 2560 120 0 120"></polygon>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row tabs js-tabs">
+            <section class="col-12 col-lg-5 col-xl-4 col-xxl-3 p-lg-0 left">
+
+                @Html.Partial("_Profile_UserGallery")
+
+                <div class="d-block d-lg-none">
+                    <div class="mb-2 text-center">
+                        <h3 class="mb-0 fs-1 fw-normal">@Session["UserName"]</h3>
+                        <span>@ViewBag.Email</span>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="fs-3">@ViewBag.Complete %</div>
+                        <span style="font-size:.875rem;margin-left:6px;">COMPLETE</span>
+                    </div>
+                </div>
+
+                <div id="menuWrap">
+                    <ul id="tabs">
+                        <li class="js-tabs-item active" id="tab1">
+                            <div class="p-tab js-tabs-link"><div style="left:0;">Demographic Information<p class="mb-0">About youeself</p></div></div>
+                        </li>
+                        <li class="js-tabs-item" id="tab2">
+                            <div class="p-tab js-tabs-link"><div style="right:-42px;">My Life in Pictures<p class="mb-0">Your favourite photo</p></div></div>
+                        </li>
+                        @*<li class="js-tabs-item" id="tab3">
+                                <div class="p-tab js-tabs-link"><div style="right:-75px;">How to Be Friends with Me<p class="mb-0">Ways to become a good friend</p></div></div>
+                            </li>
+                            <li class="js-tabs-item" id="tab4">
+                                <div class="p-tab js-tabs-link"><div style="right:-51px;">My Specific Interests<p class="mb-0">Your hobbies</p></div></div>
+                            </li>
+                            <li class="js-tabs-item" id="tab5">
+                                <div class="p-tab js-tabs-link"><div>My Neurodiverse Strengths<p class="mb-0">Ability to recognize your strengths</p></div></div>
+                            </li>*@
+                        <li class="js-tabs-item" id="tab6">
+                            <div class="p-tab js-tabs-link"><div>Personal Habits<p class="mb-0">Personal Habits</p></div></div>
+                        </li>
+                        <li class="js-tabs-item" id="tab7">
+                            <div class="p-tab js-tabs-link"><div>Activity Preferences<p class="mb-0">Activity Preferences</p></div></div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <div class="col-12 col-lg-7 col-xl-8 col-xxl-9 px-lg-0 right tabs-content js-tabs-wrap">
+
+                <div class="row justify-content-lg-between flex-column flex-lg-row ps-lg-5 d-none d-lg-flex user-name">
+                    <div class="col-auto mb-2 mb-lg-0 text-center text-lg-start">
+                        <h3 class="mb-0 fs-1 fw-light">@Session["UserName"]</h3>
+                        <span>@ViewBag.Email</span>
+                    </div>
+                    <div class="col-auto text-center complete">
+                        <div class="fs-3 lh-sm">@ViewBag.Complete %</div>
+                        <span>COMPLETE</span>
+                    </div>
+                </div>
+
+                <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab1C">
+                    @Html.Partial("_Profile_DemographicDetail")
+                </div>
+
+                <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab2C">
+                    @Html.Partial("_Profile_LifeinPic")
+                </div>
+
+                @*<div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab3C">
+                        <form class="row g-3 needs-validation ps-lg-4" novalidate>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">What an ideal Neurodiverse friendship is to me:</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">How I am most comfortable communicating:</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">Things I look for in a friend:</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">Things I avoid in a friend:</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">Things that I consider 'fun':</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">Things that I consider 'not fun':</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-12 text-center mt-5">
+                                <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+                            </div>
+                        </form>
+                    </div>*@
+
+                @*<div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab4C">
+                        <form class="row g-3 needs-validation ps-lg-4" novalidate>
+                            <div class="col-md-6">
+                                <label for="validationCustom01" class="form-label">My Interests</label>
+                                <input type="text" class="form-control" placeholder="Select Top 5 Strengths You desire in a Friend">
+                                <div class="invalid-feedback">Please provide a valid city.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationCustom01" class="form-label">MY TOP 5 STRENGTHS</label>
+                                <input type="text" class="form-control" placeholder="Select Your Top 5 Strengths">
+                                <div class="invalid-feedback">Please provide a valid city.</div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">STRENGTHS I DESIRE IN A FRIEND</label>
+                                <input type="text" class="form-control" placeholder="Select Top 5 Strengths You desire in a Friend">
+                                <div class="invalid-feedback">Please provide a valid city.</div>
+                            </div>
+                            <div class="col-12 text-center mt-5">
+                                <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+                            </div>
+                        </form>
+                    </div>*@
+
+                @*<div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab5C">
+                        <form class="row g-3 needs-validation ps-lg-4" novalidate>
+                            <div class="col-md-12">
+                                <label for="validationCustom01" class="form-label">Neurodiverse Strengths</label>
+                                <textarea class="form-control" rows="4"></textarea>
+                                <div class="invalid-feedback">Please provide a valid city.</div>
+                            </div>
+                            <div class="col-12 text-center mt-5">
+                                <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+                            </div>
+                        </form>
+                    </div>*@
+
+                <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab6C">
+                    @Html.Partial("_Profile_PersonalHabits")
+                </div>
+
+                <div class="tab js-tabs-content py-5 ps-lg-5 pe-0" id="tab7C">
+                    @Html.Partial("_Profile_ActivityPreferences")
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+
+
+@section footerSeparate{
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+
+    <script type="text/javascript">
+
+        debugger;
+        var arrMovie = $('#hfSelectedMultiMovieId').val().split(',');
+        var arrCuisine = $('#hfSelectedMultiCuisineId').val().split(',');
+        $(document).ready(function () {
+
+            $('.movie').click(function () {
+
+                if ($(this).is(":checked")) {
+                    var val = $(this).val();
+                    arrMovie.push(val);
+                    $("#hfSelectedMultiMovieId").val(arrMovie);
+                }
+
+
+                if ($(this).not(':checked').length) {
+                    var val = $(this).val();
+                    const newArr = arrMovie.filter(e => e !== val);
+                    
+                    $("#hfSelectedMultiMovieId").val(newArr);
+                    for (var i in arrMovie) {
+                        var val = $(this).val();
+                        if (arrMovie[i] == val) {
+                            arrMovie.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+
+            });
+
+
+            $('.cuisine').click(function () {
+
+                if ($(this).is(":checked")) {
+                    var val = $(this).val();
+                    arrCuisine.push(val);
+                    $("#hfSelectedMultiCuisineId").val(arrCuisine);
+                }
+
+                if ($(this).not(':checked').length) {
+
+                    var val = $(this).val();
+                    const newArr = arrCuisine.filter(e => e !== val);
+                    $("#hfSelectedMultiCuisineId").val(newArr);
+                    for (var i in arrCuisine) {
+                        if (arrCuisine[i] == val) {
+                            arrCuisine.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+
+
+            });
+
+
+        //    if ($('#FUSectionSelector1').get(0).files.length > 0) {
+        //        alert('here');
+        //        if ($('#ddlProfileSection1').val() == "") {
+        //            alert("Please choose file theme");
+        //        }
+        //        if ($('#SectionAbout1').val() == "") {
+        //            alert("Please write about picture");
+        //        }
+
+        //    }
+        //})
+
+    </script>
+
+    <script>
+            function GetCountryState() {
+            var theUrl = '@Url.Action("GetCountryState", "Profile")';
+            var theCountryId = $("#ddlCountry").val();
+            $.ajax({
+                type: "GET", dataType: "json", url: theUrl,
+                data: { theCountryId: theCountryId }, success: function (response) {
+                    $("#ddlState").empty();
+                    $("#ddlState").append($("<option></option>").val("0").html("Choose..."));
+                    $.each(response, function (index, item) {
+                        $("#ddlState").append($("<option></option>").val(item['Value']).html(item['Text']));
+                    })
+                    $(document).ready(function () { $("#ddlState").val(@ViewBag.StateId); })
+                }, error: function () { alert("Error in Call"); }
+            })
+        }
+    </script>
+
+    <script>
+        @*function ShowLifeInPics() {
+            $.ajax({
+                type: "POST",
+                url :'@Url.Action("_Profile_LifeInPic", "Profile")',
+                data : { "theProfileId":@Session["theProfileId"]},
+                    error: function () {
+                        alert("Error in Call. Please try again.");
+                    }, success: function () { }
+            })
+
+        }*@
+        $(document).ready(function () {
+
+            $('#tabs li:not(:first)').addClass('inactive');
+            $('.tab').hide();
+            $('.tab:first').show();
+
+            $('#tabs li').click(function () {
+                var t = $(this).attr('id');
+                if ($(this).hasClass('inactive')) { //this is the start of our condition
+                    $('#tabs li').addClass('inactive');
+                    $('#tabs li').removeClass('active');
+                    $(this).removeClass('inactive');
+                    $(this).addClass('active');
+
+                    $('.tab').hide();
+                    $('#' + t + 'C').fadeIn('slow');
+
+                    $.ajax({
+                type: "GET", dataType: "json", url: '@Url.Action("SetEditProfileActiveTab","Profile")',
+                        data: { theActiveTab: t.replace("tab","").toString() }, success: function (response) { }, error: function () { }
+            })
+                }
+            });
+
+
+
+            $("#frmLifeInPic input[type='file']").change(function () {
+                var input = $(this);
+                    const file = this.files[0];
+                    if (file) {
+                        let reader = new FileReader();
+                        reader.onload = function (event) {
+                            $(input).parent(".fav-pic").css("background-image", 'url(' + event.target.result + ')');
+                        }
+                        reader.readAsDataURL(file);
+                    }
+            });
+
+
+            // Enable Live Search.
+            $('#ddlMusic').attr('data-live-search', true);
+            //// Enable multiple select.
+            $('#ddlMusic').attr('multiple', true);
+            $('#ddlMusic').attr('data-selected-text-format', 'count');
+            $('.selectMusic').selectpicker(
+                {
+                    width: '100%',
+                    title: '- [Choose Multiple Musics] -',
+                    //style: 'btn-warning',
+                    size: 6,
+                    iconBase: 'fa',
+                    tickIcon: 'fa-check'
+                });
+
+
+        });
+
+
+        //$(document).on("click", ".dinner", function () {
+        //    var val = $(this).val();
+        //    if (val == "1") {
+        //        $("#foodType").slideDown("fast");
+        //    } else {
+        //        $("#foodType").slideUp("fast");
+        //    }
+        //});
+
+
+        //document.multiselect('#testSelect1')
+        //.setCheckBoxClick("checkboxAll", function (target, args) {
+        //    console.log("Checkbox 'Select All' was clicked and got value ", args.checked);
+        //})
+        //.setCheckBoxClick("1", function (target, args) {
+        //    console.log("Checkbox for item with value '1' was clicked and got value ", args.checked);
+        //});
+    </script>
+    @if (Session["EditProfileActiveTab"] != null)
+    {
+        <script>
+    $(document).ready(function () {
+        $('#tabs li').addClass("inactive").removeClass("active");
+        $('.tab').hide();
+
+        $('#tabs li#tab' + @Session["EditProfileActiveTab"].ToString() + '').removeClass('inactive').addClass("active");
+        $('#tab' + @Session["EditProfileActiveTab"].ToString() + 'C').css("display", "block");
+    })
+        </script>
+    }
+}

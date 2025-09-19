@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Messages>
+	<Message Id="#C1" Type="!" Text="&lt;DataElement&gt;MessageText&lt;/DataElement&gt;"/>
+	<Message Id="InvalidLogin" Type="!" Text="Invalid Login. Please try again."/>
+	<Message Id="PasswordChange" Type="!" Text="Password Changed Successfully."/>
+	<Message Id="Saved" Type="!" Text="Saved Successfully."/>
+	<Message Id="Updated" Type="!" Text="Updated Successfully."/>
+	<Message Id="Error" Type="!" Text="Error Occured, Please try again."/>
+
+</Messages>
+

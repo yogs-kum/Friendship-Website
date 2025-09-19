@@ -1,0 +1,5 @@
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Administration\bin\Debug\Interface.Administration.dll
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Administration\bin\Debug\Interface.Administration.pdb
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Administration\obj\Debug\Interface.Administration.csproj.CoreCompileInputs.cache
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Administration\obj\Debug\Interface.Administration.dll
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Administration\obj\Debug\Interface.Administration.pdb

@@ -1,0 +1,208 @@
+﻿@model Presentation.Areas.Profile.Models.NDUserProfile
+
+
+@using (@Html.BeginForm("SaveUpdateActivityPreferences", "Profile", FormMethod.Post, new { @class = "row g-3 needs-validation ps-lg-4" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+<div class="col-12">
+    @{ var id = string.Join(",", Model.theActivityPreferences.SelectedMultiMovieId);}
+
+    <input type="hidden" id="hfSelectedMultiMovieId" name="hfSelectedMultiMovieId" value="@id" />
+    
+    <label for="validationCustom01" class="form-label">Watching a movie?</label>
+    <div class="row row-cols-4">
+        @foreach (var item in ViewBag.Movie)
+        {
+            var IsSelected = "";
+            if (Model.theActivityPreferences.SelectedMultiMovieId != null)
+            {
+                if (Model.theActivityPreferences.SelectedMultiMovieId.Contains(Convert.ToInt32(item.Value)))
+                {
+                    IsSelected = "checked";
+                }
+            }
+            <div class="mb-1"><input type="checkbox" value="@item.Value" name="movie" class="form-check-input ms-2 movie" @IsSelected> @item.Text</div>
+        }
+
+    </div>
+</div>
+    <div class="col-12">
+        <label for="validationCustom01" class="form-label">Having tea/coffee</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q2_Having_Tea_Coffee, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q2_Having_Tea_Coffee, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q2_Having_Tea_Coffee, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="validationCustom01" class="form-label">Going to a bar/sports bar</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q3_Going_To_a_bar_sports_bar, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q3_Going_To_a_bar_sports_bar, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q3_Going_To_a_bar_sports_bar, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="validationCustom01" class="form-label">Going to a concert</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q4_Going_To_a_Concert, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q4_Going_To_a_Concert, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q4_Going_To_a_Concert, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="validationCustom01" class="form-label">Watching a live play</label>
+        <div>
+
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q5_Watching_a_Live_Play, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q5_Watching_a_Live_Play, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q5_Watching_a_Live_Play, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="validationCustom01" class="form-label">Watching a musical live/on TV</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q6_Watching_a_musical_live_on_TV, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q6_Watching_a_musical_live_on_TV, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q6_Watching_a_musical_live_on_TV, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="validationCustom01" class="form-label">Fishing/hunting</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q7_Fishing_Hunting, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q7_Fishing_Hunting, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q7_Fishing_Hunting, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="validationCustom01" class="form-label">Participating in water sports in an natural body of water</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q8_Participating_In_Water_Sports_in_an_natural_Body_Of_Water, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q8_Participating_In_Water_Sports_in_an_natural_Body_Of_Water, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q8_Participating_In_Water_Sports_in_an_natural_Body_Of_Water, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="validationCustom01" class="form-label">Going for a motorcycle ride</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q9_Going_for_a_motorcycle_ride, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q9_Going_for_a_motorcycle_ride, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q9_Going_for_a_motorcycle_ride, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Go on a hike</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q10_Go_on_a_hike, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q10_Go_on_a_hike, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q10_Go_on_a_hike, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Going for a bike ride</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q11_Going_for_a_bike_ride, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q11_Going_for_a_bike_ride, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q11_Going_for_a_bike_ride, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Going for a run</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q12_Going_for_a_run, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q12_Going_for_a_run, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q12_Going_for_a_run, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Going for a leisurely walk</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q13_Going_for_a_leisurely_walk, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q13_Going_for_a_leisurely_walk, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q13_Going_for_a_leisurely_walk, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Going on a road trip/vacation</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q14_Going_on_a_road_trip_vacation, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q14_Going_on_a_road_trip_vacation, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q14_Going_on_a_road_trip_vacation, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Going on a picnic</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q15_Going_on_a_picnic, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q15_Going_on_a_picnic, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q15_Going_on_a_picnic, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Bowling</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q16_Bowling, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q16_Bowling, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q16_Bowling, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Going to a museum</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q17_Going_To_a_museum, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q17_Going_To_a_museum, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q17_Going_To_a_museum, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="validationCustom01" class="form-label">Going shopping</label>
+        <div>
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q18_Going_shopping, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q18_Going_shopping, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q18_Going_shopping, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-12">
+
+        @{ var idc = string.Join(",", Model.theActivityPreferences.SelectedMultiCuisineId);}
+        <input type="hidden" id="hfSelectedMultiCuisineId" name="hfSelectedMultiCuisineId" value="@idc" />
+
+        <label class="form-label">Going out to dinner</label>
+        <div class="row row-cols-4">
+            @foreach (var item in ViewBag.Cuisine)
+            {
+                var IsSelected = "";
+                if (Model.theActivityPreferences.SelectedMultiCuisineId != null)
+                {
+                    if (Model.theActivityPreferences.SelectedMultiCuisineId.Contains(Convert.ToInt32(item.Value)))
+                    {
+                        IsSelected = "checked";
+                    }
+                }
+                <div class="mb-1"><input type="checkbox" value="@item.Value" name="movie" class="form-check-input ms-2 cuisine" @IsSelected> @item.Text</div>
+            }
+
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="validationCustom01" class="form-label">Going dancing</label>
+        <div>
+
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q20_Going_dancing, "Yes", new { @class = "form-check-input ms-2", @checked = "checked" }) Yes
+            @Html.RadioButtonFor(m => m.theActivityPreferences.Q20_Going_dancing, "No", new { @class = "form-check-input ms-2" }) No
+            @Html.ValidationMessageFor(m => m.theActivityPreferences.Q20_Going_dancing, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="col-12 text-center mt-5">
+        <button class="btn btn-primary rounded-pill" type="submit">SAVE</button>
+    </div>
+}
+

@@ -1,0 +1,333 @@
+﻿    @using Presentation.Areas.Profile.Models;
+    @model LnkProfilePhotos
+    @{
+        ViewBag.Title = "About Me";
+        // Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+        Model.LinkPhotos = Model.LinkPhotos.OrderByDescending(x => x.LinkID).ToList();
+        var Pic1 = Model.LinkPhotos.Where(x => x.ProfileSectionId == "10").FirstOrDefault();
+        var PicName = System.Configuration.ConfigurationManager.AppSettings["ProfileSection"] + "default-upload.png";
+        if (Pic1 != null)
+        {
+            Model.LinkPhotos.Remove(Pic1);
+            if (string.IsNullOrEmpty(Pic1.PicName))
+            {
+                Pic1.PicName = System.Configuration.ConfigurationManager.AppSettings["ProfileSection"] + "default-upload.png";
+            }
+            else
+            {
+                Pic1.PicName = "../../" + System.Configuration.ConfigurationManager.AppSettings["ProfilePhotos"] + "/" + Pic1.ProfileID + "/" + Pic1.PicName;
+            }
+        }
+        else
+        {
+            Pic1 = new LnkProfileData();
+            Pic1.PicName = System.Configuration.ConfigurationManager.AppSettings["ProfileSection"] + "default-upload.png";
+            Pic1.LinkID = "0";
+        }
+
+        var PicList = Model.LinkPhotos;
+
+    }
+    <div>
+
+        <div style="text-align:center;margin-bottom:20px;">
+            <h3>Include personal photos to tell your story, visually</h3>
+        </div>
+
+		<div class="st-row st-wrap">
+
+			<div class="life-in-pic-box">
+				<div class="st-pdg proficepic">
+					@using (Html.BeginForm("UploadProfilePhoto", "Profile", FormMethod.Post, new { id = "frmContactUs1", name = "frmContactUs1", enctype = "multipart/form-data" }))
+					{
+						<div onclick="UploadPhoto('1')" class="img-input">
+							@try
+							{
+								if (string.IsNullOrEmpty(PicList[0].PicName))
+								{
+									PicName = System.Configuration.ConfigurationManager.AppSettings["ProfileSection"] + "default-upload.png";
+								}
+								else
+								{
+									PicName = "../../" + System.Configuration.ConfigurationManager.AppSettings["ProfilePhotos"] + "/" + PicList[0].ProfileID + "/" + PicList[0].PicName;
+
+								}
+							}
+							catch { }
+							<div id="divimg_1" class="img-box">
+								<img src="@PicName" height="150" width="150" id="img_1">
+							</div>
+						</div>
+						<input type="file" accept="image/*" style="display:none" id='btnUPload_1' onchange="imagesPreview(this, 'img_1')" />
+						<div class="detail-box">
+							@Html.DropDownList("ProfileSectionId", new SelectList((IEnumerable<SelectListItem>)ViewData["MstProfileSections"], "Value", "Text", PicList[0].SectionID), "Select Name", new { @class = "pf-input", @id = "ProfileSectionId", @name = "ProfileSectionId" })
+							<input type="text" id="PicDescription" name="PicDescription" class="pf-input" placeholder="About Picture" value="@PicList[0].PicDescription">
+						</div>
+						<input type="hidden" id="ProfileId" name="ProfileId" value="@Application.Common.clsEncryptDecrypt.Encrypt(Model.profilePhoto.ProfileId.ToString())" />
+						<input type="hidden" id="LinkID" name="LinkID" value="@Application.Common.clsEncryptDecrypt.Encrypt(PicList[0].LinkID.ToString())" />
+					}
+				</div>
+			</div>
+
+			<div class="life-in-pic-box">
+				<div class="st-pdg proficepic">
+					@using (Html.BeginForm("UploadProfilePhoto", "Profile", FormMethod.Post, new { id = "frmContactUs2", name = "frmContactUs2", enctype = "multipart/form-data" }))
+					{
+						<div onclick="UploadPhoto('2')" class="img-input">
+							@try
+							{
+								if (string.IsNullOrEmpty(PicList[1].PicName))
+								{
+									PicName = System.Configuration.ConfigurationManager.AppSettings["ProfileSection"] + "default-upload.png";
+
+								}
+								else
+								{
+									PicName = "../../" + System.Configuration.ConfigurationManager.AppSettings["ProfilePhotos"] + "/" + PicList[1].ProfileID + "/" + PicList[1].PicName;
+
+								}
+							}
+							catch { }
+							<div id="divimg_2" class="img-box">
+								<img src="@PicName" height="150" width="150" id="img_2">
+							</div>
+						</div>
+						<input type="file" accept="image/*" class="pf-input" style="border:none; display:none" id='btnUPload_2' onchange="imagesPreview(this, 'img_2')" />
+						<div class="detail-box">
+							@Html.DropDownList("ProfileSectionId", new SelectList((IEnumerable<SelectListItem>)ViewData["MstProfileSections"], "Value", "Text", PicList[1].SectionID), "Select Name", new { @class = "pf-input", @id = "ProfileSectionId", @name = "ProfileSectionId" })
+							<input type="text" id="PicDescription" name="PicDescription" class="pf-input" placeholder="About Picture" value="@PicList[1].PicDescription">
+						</div>
+						<input type="hidden" id="ProfileId" name="ProfileId" value="@Application.Common.clsEncryptDecrypt.Encrypt(Model.profilePhoto.ProfileId.ToString())" />
+						<input type="hidden" id="LinkID" name="LinkID" value="@Application.Common.clsEncryptDecrypt.Encrypt(PicList[1].LinkID.ToString())" />
+					}
+				</div>
+			</div>
+
+			<div class="life-in-pic-box">
+				<div class="st-pdg proficepic">
+					@using (Html.BeginForm("UploadProfilePhoto", "Profile", FormMethod.Post, new { id = "frmContactUs3", name = "frmContactUs3", enctype = "multipart/form-data" }))
+					{
+						<div onclick="UploadPhoto('3')" class="img-input">
+							@try
+							{
+								if (string.IsNullOrEmpty(PicList[2].PicName))
+								{
+									PicName = System.Configuration.ConfigurationManager.AppSettings["ProfileSection"] + "default-upload.png";
+								}
+								else
+								{
+									PicName = "../../" + System.Configuration.ConfigurationManager.AppSettings["ProfilePhotos"] + "/" + PicList[2].ProfileID + "/" + PicList[2].PicName;
+								}
+							}
+							catch { }
+							<div id="divimg_3" class="img-box">
+								<img src="@PicName" height="150" width="150" id="img_3">
+							</div>
+						</div>
+						<input type="file" accept="image/*" class="pf-input" style="border:none; display:none" id='btnUPload_3' onchange="imagesPreview(this, 'img_3')" />
+						<div class="detail-box">
+							@Html.DropDownList("ProfileSectionId", new SelectList((IEnumerable<SelectListItem>)ViewData["MstProfileSections"], "Value", "Text", PicList[2].SectionID), "Select Name", new { @class = "pf-input", @id = "ProfileSectionId", @name = "ProfileSectionId" })
+
+							<input type="text" id="PicDescription" name="PicDescription" class="pf-input" placeholder="About Picture" value="@PicList[2].PicDescription">
+						</div>
+						<input type="hidden" id="ProfileId" name="ProfileId" value="@Application.Common.clsEncryptDecrypt.Encrypt(Model.profilePhoto.ProfileId.ToString())" />
+						<input type="hidden" id="LinkID" name="LinkID" value="@Application.Common.clsEncryptDecrypt.Encrypt(PicList[2].LinkID.ToString())" />
+					}
+				</div>
+			</div>
+
+
+			<div class="life-in-pic-box">
+				<div class="st-pdg proficepic">
+					@using (Html.BeginForm("UploadProfilePhoto", "Profile", FormMethod.Post, new { id = "frmContactUs4", name = "frmContactUs4", enctype = "multipart/form-data" }))
+					{
+						<div onclick="UploadPhoto('4')" class="img-input">
+
+							@try
+							{
+								if (string.IsNullOrEmpty(PicList[3].PicName))
+								{
+									PicName = System.Configuration.ConfigurationManager.AppSettings["ProfileSection"] + "default-upload.png";
+								}
+								else
+								{
+									PicName = "../../" + System.Configuration.ConfigurationManager.AppSettings["ProfilePhotos"] + "/" + PicList[3].ProfileID + "/" + PicList[3].PicName;
+
+								}
+							}
+							catch { }
+							<div id="divimg_4" class="img-box">
+								<img src="@PicName" height="150" width="150" id="img_4">
+							</div>
+						</div>
+						<input type="file" accept="image/*" class="pf-input" style="border:none; display:none" id='btnUPload_4' onchange="imagesPreview(this, 'img_4')" />
+						<div class="detail-box">
+							@Html.DropDownList("ProfileSectionId", new SelectList((IEnumerable<SelectListItem>)ViewData["MstProfileSections"], "Value", "Text", PicList[3].SectionID), "Select Name", new { @class = "pf-input", @id = "ProfileSectionId", @name = "ProfileSectionId" })
+							<input type="text" id="PicDescription" name="PicDescription" class="pf-input" placeholder="About Picture" value="@PicList[3].PicDescription">
+						</div>
+						<input type="hidden" id="ProfileId" name="ProfileId" value="@Application.Common.clsEncryptDecrypt.Encrypt(Model.profilePhoto.ProfileId.ToString())" />
+						<input type="hidden" id="LinkID" name="LinkID" value="@Application.Common.clsEncryptDecrypt.Encrypt(PicList[3].LinkID.ToString())" />
+					}
+				</div>
+			</div>
+
+			<div class="life-in-pic-box">
+				<div class="st-pdg proficepic">
+					@using (Html.BeginForm("UploadProfilePhoto", "Profile", FormMethod.Post, new { id = "frmContactUs4", name = "frmContactUs4", enctype = "multipart/form-data" }))
+					{
+						<div onclick="UploadPhoto('5')" class="img-input">
+
+							@try
+							{
+								if (string.IsNullOrEmpty(PicList[4].PicName))
+								{
+									PicName = System.Configuration.ConfigurationManager.AppSettings["ProfileSection"] + "default-upload.png";
+								}
+								else
+								{
+									PicName = "../../" + System.Configuration.ConfigurationManager.AppSettings["ProfilePhotos"] + "/" + PicList[4].ProfileID + "/" + PicList[4].PicName;
+
+								}
+							}
+							catch { }
+							<div id="divimg_4" class="img-box">
+								<img src="@PicName" height="150" width="150" id="img_5">
+							</div>
+						</div>
+						<input type="file" accept="image/*" class="pf-input" style="border:none; display:none" id='btnUPload_5' onchange="imagesPreview(this, 'img_5')" />
+						<div class="detail-box">
+							@Html.DropDownList("ProfileSectionId", new SelectList((IEnumerable<SelectListItem>)ViewData["MstProfileSections"], "Value", "Text", PicList[4].SectionID), "Select Name", new { @class = "pf-input", @id = "ProfileSectionId", @name = "ProfileSectionId" })
+							<input type="text" id="PicDescription" name="PicDescription" class="pf-input" placeholder="About Picture" value="@PicList[4].PicDescription">
+						</div>
+						<input type="hidden" id="ProfileId" name="ProfileId" value="@Application.Common.clsEncryptDecrypt.Encrypt(Model.profilePhoto.ProfileId.ToString())" />
+						<input type="hidden" id="LinkID" name="LinkID" value="@Application.Common.clsEncryptDecrypt.Encrypt(PicList[4].LinkID.ToString())" />
+					}
+				</div>
+			</div>
+		</div>
+
+        @*@foreach (DataRow row in Model.Rows)
+            {
+                if (row["ProfileSectionId"].ToString() != "10")
+                {
+
+            <div class="proficepic col-sm-4">
+                @using (Html.BeginForm("UploadProfilePhoto", "Profile", FormMethod.Post, new { id = "frmContactUs" + row["ProfileSectionId"].ToString(), name = "frmContactUs" + row["ProfileSectionId"].ToString(), enctype = "multipart/form-data" }))
+                {
+
+
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col-sm-12" style="text-align:center;">
+                                    <img style="height: 100px;width: 100px;cursor:pointer;" src="@System.Configuration.ConfigurationManager.AppSettings["ProfileSection"]default-upload.png"
+                                         onclick="UploadPhoto('@row["ProfileSectionId"].ToString()')" id="img_@row["ProfileSectionId"].ToString()" />
+                                    <input type="file" accept="image/*" class="pf-input" style="border:none; display:none" id='btnUPload_@row["ProfileSectionId"].ToString()' onchange="imagesPreview(this, 'img_@row["ProfileSectionId"].ToString()')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col-sm-12" style="text-align:center">
+                                    <label for="staticEmail" class="col-form-label">
+                                        @row["Name"]
+                                    </label>
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <input type="text" id="PicDescription" name="PicDescription" class="pf-input" style="text-align:center;" placeholder="About Picture">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                    <input type="hidden" id="ProfileSectionId" name="ProfileSectionId" value="@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileSectionId"].ToString())" />
+                    <input type="hidden" id="ProfileId" name="ProfileId" value="@Application.Common.clsEncryptDecrypt.Encrypt(row["ProfileID"].ToString())" />
+
+
+
+                }
+            </div>
+
+                }
+            }*@
+
+        <div class="pf-field-cntnr st-row st-center" style="padding-top:25px;">
+            <input type="button" value="Next &nbsp;&nbsp;&#10095;" onclick="SavePics()" class="btn-l btn-primary btn-next" />
+        </div>
+
+    </div>
+
+
+<script>
+    //function UploadPhoto(id) {
+	   // $('#btnUPload_' + id).click();
+    //}
+
+    function SavePics() {
+	    $('.proficepic').find('form').each(function (i, el) {
+		    var ab = $(this).find('input[type="file"]');
+		    var fileUpload = ab.get(0);
+		    var files = fileUpload.files;
+
+		    // Create FormData object
+		    var fileData = new FormData();
+
+		    if (files.length > 0) {
+
+			    if (window.FormData !== undefined) {
+
+				    // Looping over all files and add it to FormData object
+				    for (var i = 0; i < files.length; i++) {
+					    fileData.append(files[i].name, files[i]);
+				    }
+
+				    // Adding one more key to FormData object
+				    //string ProfileSectionId, string ProfileId, string PicDescription
+				    fileData.append('ProfileSectionId', $(this).find('[name="ProfileSectionId"]').val());
+				    fileData.append('ProfileId', $(this).find('[name="ProfileId"]').val());
+				    fileData.append('PicDescription', $(this).find('[name="PicDescription"]').val());
+				    fileData.append('LinkID', $(this).find('[name="LinkID"]').val());
+				    $.ajax({
+					    url: '@Url.Action("UploadProfilePhoto", "Profile")',
+					    type: "POST",
+					    contentType: false, // Not to set any content header
+					    processData: false, // Not to process data
+						data: fileData,
+						async:false,
+					    success: function (result) {
+						    //alert(result);
+					    },
+					    error: function (err) {
+						    //alert(err.statusText);
+					    }
+				    });
+			    } else {
+				    alert("FormData is not supported.");
+			    }
+		    }
+
+		    // do something with productId, product, Quantity
+	    });
+        openLifeFriendsWithMeView(1);
+    }
+
+	//var imagesPreview = function (input, placeToInsertImagePreview) {
+	//	if (input.files) {
+	//		var filesAmount = input.files.length;
+	//		debugger;
+	//		for (i = 0; i < filesAmount; i++) {
+	//			var reader = new FileReader();
+
+	//			reader.onload = function (event) {
+	//				$('#' + placeToInsertImagePreview).attr('src', event.target.result);
+	//			}
+
+	//			reader.readAsDataURL(input.files[i]);
+	//		}
+	//	}
+	//};
+
+
+</script>
+

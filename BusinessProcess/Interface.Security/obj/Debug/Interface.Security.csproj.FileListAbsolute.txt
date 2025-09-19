@@ -1,0 +1,6 @@
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Security\bin\Debug\Interface.Security.dll
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Security\bin\Debug\Interface.Security.pdb
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Security\obj\Debug\Interface.Security.csproj.CoreCompileInputs.cache
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Security\obj\Debug\Interface.Security.dll
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Security\obj\Debug\Interface.Security.pdb
+C:\Projects\NDFriends2022\BusinessProcess\Interface.Security\obj\Debug\Interface.Security.csproj.AssemblyReference.cache

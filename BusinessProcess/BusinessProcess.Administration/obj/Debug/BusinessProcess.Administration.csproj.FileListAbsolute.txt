@@ -1,0 +1,17 @@
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\BusinessProcess.Administration.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\BusinessProcess.Administration.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\Application.Common.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\DataAccess.Base.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\DataAccess.Common.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\DataAccess.Entity.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\Interface.Administration.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\Application.Common.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\DataAccess.Base.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\DataAccess.Common.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\DataAccess.Entity.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\bin\Debug\Interface.Administration.pdb
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\obj\Debug\BusinessProcess.Administration.csproj.AssemblyReference.cache
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\obj\Debug\BusinessProcess.Administration.csproj.CoreCompileInputs.cache
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\obj\Debug\BusinessProcess.Administration.csproj.CopyComplete
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\obj\Debug\BusinessProcess.Administration.dll
+C:\Projects\NDFriends2022\BusinessProcess\BusinessProcess.Administration\obj\Debug\BusinessProcess.Administration.pdb

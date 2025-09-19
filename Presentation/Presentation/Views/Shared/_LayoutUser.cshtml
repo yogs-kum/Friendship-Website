@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.MetaTitle</title>
+    <meta name="description" content="@ViewBag.MetaDescription">
+
+    @{string strCanonicalUrl = HttpContext.Current.Request.Url.AbsoluteUri;}
+    <link rel="canonical" href="@strCanonicalUrl">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+
+    @RenderSection("headerSeparate", false)
+
+    @*<link rel="shortcut icon" type="image/x-icon" href="~/Content/images/favicon/favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="~/Content/images/favicon/favicon32x32.png">
+        <link rel="icon" type="image/png" sizes="48x48" href="~/Content/images/favicon/favicon48x48.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="~/Content/images/favicon/favicon96x96.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="~/Content/images/favicon/favicon144x144.png">
+        <link rel="icon" type="image/png" sizes="196x196" href="~/Content/images/favicon/favicon196x196.png">*@
+</head>
+<body class="@(ViewContext.RouteData.Values["action"].ToString() == "chat" ? "" : "dark-mode")">
+    @*<div id="preloader"><img src="~/Content/assets/images/preloader.gif" alt="preloader" width="64" height="64"></div>*@
+
+    <header id="header" class="@(ViewContext.RouteData.Values["action"].ToString() == "chat" ? "" : "transparent")">
+        <div class="container-fluid">
+            <div class="row justify-content-between align-items-center">
+
+                <div class="col-3 ps-xl-5 d-none d-lg-block">
+                    <button id="navIcon" class="rounded-circle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+                <div class="col-auto" id="branding">
+                    <a href="@Url.Action("Index", "Home")" title="ND Friends Home">
+                        <img src="~/Content/assets/images/logo.png" width="352" height="148" alt="ND Friends Logo" class="logo">
+                        <img src="~/Content/assets/images/logo-w.png" width="352" height="148" alt="ND Friends Logo" class="logo-w">
+                    </a>
+                </div>
+
+                <div class="col-auto col-lg-3 d-flex justify-content-end pe-xl-5">
+                    <div id="navAfterLogin">
+                        <ul>
+                            <li class="profile">
+                                <button id="profileToggleBtn" class="link overflow-hidden">
+                                    <img src="@Session["ProfilePic"]" alt="User Img">
+                                    @*<img src="~/Content/assets/images/temp/demo-user-1.jpg" alt="User Img">*@
+                                </button>
+                                <div id="profilePopup" class="popup">
+                                    <ul>
+                                        <li><a href="@Url.Action("my-profile", "Home")" class="i-profile @(ViewContext.RouteData.Values["action"].ToString() == "my-profile" ? "active" : "")">My Profile</a></li>
+                                        <li><a href="@Url.Action("my-matches", "Home")" class="i-matches @(ViewContext.RouteData.Values["action"].ToString() == "my-matches" ? "active" : "")">My Matches</a></li>
+                                        <li><a href="#" class="i-password" id="passResetPopupTrigger">Password Reset</a></li>
+                                        <li><a href="@Url.Action("SignOut", "Login",new { Area="" })" class="i-logout">Logout</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="notify">
+                                <button id="notifyToggleBtn" class="link">
+                                    <span class="material-symbols-outlined">notifications_active</span>
+                                    <span class="indicator">1</span>
+                                </button>
+                                <div id="notifyPopup" class="popup">
+                                    <h2 class="heading mt-3 mb-2">Notifications</h2>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <div class="user-img">
+                                                    <div class="rounded-circle overflow-hidden">
+                                                        <img src="~/Content/assets/images/blank-user.png" alt="User Img">
+                                                    </div>
+                                                </div>
+                                                <div class="content">
+                                                    <span class="text">Add a new friend</span>
+                                                    <span class="time">a day ago</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="readed">
+                                            <a href="#">
+                                                <div class="user-img">
+                                                    <div class="rounded-circle overflow-hidden">
+                                                        <img src="~/Content/assets/images/blank-user.png" alt="User Img">
+                                                    </div>
+                                                </div>
+                                                <div class="content">
+                                                    <span class="text">Add a new friend</span>
+                                                    <span class="time">1 week ago</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="notify chat">
+                                <a href="@Url.Action("chat", "Home")" id="chatToggleBtn" class="link">
+                                    <span class="material-symbols-outlined">chat</span>
+                                    <span class="chat-indicator"></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="userMenuOverlay"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <nav id="nav">
+            <ul>
+                <li><a href="@Url.Action("Index", "Home", new { Area = "" })" class="link i-home @(ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">Home</a></li>
+                <li><a href="@Url.Action("about-the-creators", "Home", new { Area = "" })" class="link i-about">About the Creators</a></li>
+                <li><a href="@Url.Action("Index", "Home", new { Area = "" })#findingFriends" class="link i-friend page-scroll">Why ND Friends?</a></li>
+                <li><a href="@Url.Action("Index", "Home", new { Area = "" })#sampleProfileSec" class="link i-profile page-scroll">Sample Profile</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    @RenderBody()
+
+    <div id="passResetPopup" class="rounded-4">
+        <div class="p-4">
+            <div class="mb-4">
+                <h3 class="heading">Password Reset</h3>
+                <p>To reset your password, enter the email address you use to sign in to NDFriends</p>
+            </div>
+            <form action="/Login/Login" class="" method="post">
+                <div class="mb-3">
+                    @*<label class="form-label" for="emailID">Email-ID*</label>*@
+                    <input type="email" id="emailID" name="emailID" placeholder="Enter your Email-ID" class="form-control shadow-none rounded-pill">
+                </div>
+                <button type="submit" class="btn fw-semibold rounded-pill w-100">SEND RESET LINK</button>
+            </form>
+        </div>
+        <div id="passResetPopupClose"></div>
+    </div>
+    <div id="passResetPopupOverlay"></div>
+
+    @*<footer>
+        </footer>*@
+
+    <script src="~/Scripts/jquery-3.6.1.min.js"></script>    
+    
+    @RenderSection("footerSeparate", false)
+
+    @*<script src="~/Scripts/bootstrap.bundle.min.js"></script>*@
+    <script src="~/Content/assets/js/common.js"></script>
+    <script>
+        $(document).ajaxStart(function () {
+            setTimeout(function () {
+                $("#preloader").show();
+            }, 100);
+        });
+        $(document).ajaxComplete(function () {
+            setTimeout(function () {
+                $("#preloader").hide();
+            }, 3000);
+        });
+    </script>
+    <script>
+         function gettoken()
+        {
+            var token = '@Html.AntiForgeryToken()';
+            token = $(token).val();
+            return token;
+        }
+    </script>
+
+    @if (Session["ScriptMessage"] != null && Session["ScriptType"] != null)
+    {
+        var ScriptMessage = Session["ScriptMessage"];
+        var ScriptType = Session["ScriptType"];
+        Session["ScriptMessage"] = null;
+        Session["ScriptType"] = null;
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var type = "@ScriptType";
+                if (type == "alert") {
+                            alert("@ScriptMessage");
+                        }
+                        else{
+                            return confirm("@ScriptMessage");
+                        }
+                    });
+        </script>
+    }
+</body>
+</html>

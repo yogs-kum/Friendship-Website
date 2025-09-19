@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+@{
+    Html.RenderPartial("_LayoutHeader");
+}
+<body>
+    <nav class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"></a>
+        </div>
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="@Url.Action("frmAdminHome", "AdminHome", new { Area = "Administration" })"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#"><i class="fa fa-cogs"></i> Administration <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="@Url.Action("frmAppHome", "AppHome", new { Area="" })"><i class="fa fa-sign-out-alt"></i> Exit</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container body-content">
+        <div class="formstyle">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+<hr />
+@{
+    Html.RenderPartial("_LayoutFooter");
+}
+</html>

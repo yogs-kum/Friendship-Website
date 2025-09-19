@@ -1,0 +1,408 @@
+﻿@using Presentation.Models
+@model Presentation.Models.LoginModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.MetaTitle</title>
+    <meta name="description" content="@ViewBag.MetaDescription">
+
+    @{string strCanonicalUrl = HttpContext.Current.Request.Url.AbsoluteUri;}
+    <link rel="canonical" href="@strCanonicalUrl">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    @*<link rel="shortcut icon" type="image/x-icon" href="~/Content/images/favicon/favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="~/Content/images/favicon/favicon32x32.png">
+        <link rel="icon" type="image/png" sizes="48x48" href="~/Content/images/favicon/favicon48x48.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="~/Content/images/favicon/favicon96x96.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="~/Content/images/favicon/favicon144x144.png">
+        <link rel="icon" type="image/png" sizes="196x196" href="~/Content/images/favicon/favicon196x196.png">*@
+</head>
+<body>
+    <div id="preloader"><img src="~/Content/assets/images/preloader.gif" alt="preloader" width="64" height="64"></div>
+
+    <main id="login" class="d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center justify-content-xl-end">
+                <div class="col-11 col-xl-8 col-xxl-7">
+
+                    @*<div id="branding" class="text-center mb-3">
+                            <a href="#" title="ND Friends Home">
+                                <img src="~/Content/assets/images/logo.png" width="352" height="148" alt="ND Friends Logo" class="logo">
+                            </a>
+                        </div>*@
+                    <div class="row rounded-4 wrap flex-column flex-md-row">
+
+                        <div class="p-5 left">
+
+                            <div id="loginWrap" class="py-0 py-md-3">
+                                <div class="mb-4 d-flex justify-content-between align-items-center">
+                                    <h3 class="heading">Login</h3>
+                                    <a href="@Url.Action("Index", "Home", new { Area = "" })" class="i-home"><span class="material-symbols-outlined">home</span></a>
+                                </div>
+                                @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+                                    <div class="mb-4">
+                                        @Html.LabelFor(m => m.theUserId, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.theUserId, new { @class = "form-control shadow-none rounded-pill", @autofocus = "autofocus", @placeholder = "Enter your User ID" })
+                                        @Html.ValidationMessageFor(m => m.theUserId, "", new { @class = "text-danger" })
+                                        @*<div id="emailHelp" class="form-text">We'll never share your email with anyone.</div>*@
+                                    </div>
+                                    <div class="mb-4">
+                                        @Html.LabelFor(m => m.thePassword, new { @class = "form-label" })
+                                        @Html.PasswordFor(m => m.thePassword, new { @class = "form-control shadow-none rounded-pill", @placeholder = "Password" })
+                                        @Html.ValidationMessageFor(m => m.thePassword, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="mb-3 d-flex align-items-center justify-content-between" style="font-size:.875rem">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="rememer_me" name="rememer_me">
+                                            <label class="form-check-label" for="rememer_me">Remember me</label>
+                                        </div>
+                                        <div>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Forgot Password</a>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn fw-semibold rounded-pill">LOGIN</button>
+                                    @*<a href="@Url.Action("my-profile", "Home")" class="btn fw-semibold rounded-pill">LOGIN</a>*@
+
+
+                                }
+                            </div>
+
+                            <div id="joinUsWrap">
+                                <div class="mb-4 d-flex justify-content-between align-items-center">
+                                    <h3 class="heading">Join Us</h3>
+                                    <a href="@Url.Action("Index", "Home", new { Area = "" })" class="i-home"><span class="material-symbols-outlined">home</span></a>
+                                </div>
+                                @Html.Partial("_SignUp")
+
+                                @*@using (Html.BeginForm("SignUp", "Login", FormMethod.Post, new { @class = "" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <div class="mb-3">
+                                            <label class="form-label" for="firstName">Full Name*</label>
+                                            <div class="d-flex">
+                                                <input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-control shadow-none rounded-pill w-50" style="border-top-right-radius:0 !important;border-bottom-right-radius:0 !important;">
+                                                <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="form-control shadow-none rounded-pill w-50" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="emailID">Email-ID*</label>
+                                            <input type="email" id="emailID" name="emailID" placeholder="Enter your Email-ID" class="form-control shadow-none rounded-pill">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label" for="phoneNo">Phone No.</label>
+                                            <input type="text" id="phoneNo" name="phoneNo" placeholder="Enter your Phone No." class="form-control shadow-none rounded-pill">
+                                        </div>
+                                        <button type="submit" class="btn fw-semibold rounded-pill">JOIN US</button>
+                                    }*@
+                            </div>
+
+                        </div>
+
+                        <div class="p-5 pt-4 right">
+                            <div class="text-center">
+                                <div id="branding" class="text-center mb-2">
+                                    <a href="#" title="ND Friends Home">
+                                        <img src="~/Content/assets/images/logo.png" width="352" height="148" alt="ND Friends Logo" class="logo">
+                                    </a>
+                                </div>
+                                <h2>Hello Friend!</h2>
+                                <p class="mb-3" id="joinUsMsg">Tell us about yourself to start your journey with us</p>
+                                <p class="mb-3" id="loginMsg">Already have an account?</p>
+                                <a href="#" class="btn fw-semibold rounded-pill" id="joinUsBtn">JOIN US</a>
+                                <a href="#" class="btn fw-semibold rounded-pill" id="loginBtn">LOGIN</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Forgot Password</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="ForgetEmail" aria-describedby="emailHelp" placeholder="Enter email">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="ForgetPassword()" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.6.1.min.js"></script>
+    <script src="~/Scripts/PageScripts/common.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script src="~/Scripts/bootstrap.bundle.min.js"></script>
+        <script src="~/Content/assets/js/common.js"></script>*@
+
+
+    <script>
+        $(document).ready(function () {
+            $('#joinUsBtn').click(function () {
+                $(this).hide();
+                $("#loginWrap").hide();
+                $("#joinUsMsg").hide();
+                $("#joinUsWrap").show();
+                $("#loginMsg").show();
+                $("#loginBtn").show();
+            });
+            $('#loginBtn').click(function () {
+                $(this).hide();
+                $("#joinUsWrap").hide();
+                $("#loginMsg").hide();
+                $("#loginWrap").show();
+                $("#joinUsMsg").show();
+                $("#joinUsBtn").show();
+            });
+        });
+    </script>
+    <script type="text/javascript">
+		var isDuplicateEmail = true;
+	$(document).ready(function () {
+		//to allow only numberic
+		$('#txtPhone').keypress(function (e) {
+			ValidateUser();
+			//NumericOnly(e);
+		});
+		$('#txtPhone').keyup(function (e) {
+			ValidateUser();
+			//NumericOnly(e);
+		});
+		$('#txtPhone').keydown(function (e) {
+			ValidateUser();
+			//NumericOnly(e);
+		});
+		$("#txtPhone").bind("paste", function (e) {
+			e.preventDefault();
+		});
+		$("#txtPhone").bind('keypress', function (e) {
+        if (e.keyCode == '9' || e.keyCode == '16') {
+            return;
+        }
+        var code;
+        if (e.keyCode) code = e.keyCode;
+        else if (e.which) code = e.which;
+        if (e.which == 46)
+            return false;
+        if (code == 8 || code == 46)
+            return true;
+        if (code < 48 || code > 57)
+            return false;
+    }
+    );
+		$('#txtFirstName').keypress(function (e) {
+			ValidateUser();
+		});
+		$('#txtLastName').keypress(function (e) {
+			ValidateUser();
+		});
+		$('#txtEmail').keypress(function (e) {
+			ValidateUser();
+
+		});
+		$('#txtEmail').focusout(function (e) {
+			if ($("#txtEmail").val().trim() != "") {
+                validateEmail($("#txtEmail").val());
+			}
+		});
+
+
+
+	});
+
+    function gettoken()
+    {
+        var token = '@Html.AntiForgeryToken()';
+        token = $(token).val();
+        return token;
+		}
+
+		function ValidateUser(return_val) {
+			event = event || window.event || event.srcElement;
+			var return_val = true;
+			if ($('#txtFirstName').val().trim() == '') {
+				$('#txtFirstName').next('span').text('Please Enter first name').show();
+				return_val = false;
+			} else {
+				$('#txtFirstName').next('span').hide();
+			}
+			if ($('#txtLastName').val().trim() == '') {
+				$('#txtLastName').next('span').text('Please enter last name').show();
+				return_val = false;
+			} else {
+				$('#txtLastName').next('span').hide();
+			}
+			if ($('#txtEmail').val().trim() == '') {
+				$('#txtEmail').next('span').text('Please enter Email').show();
+				return_val = false;
+
+			} else {
+				$('#txtEmail').next('span').hide();
+				if (fnValidateEmail($('#txtEmail').val().trim()) == false) {
+					$('#txtEmail').next('span').text('Please enter valid Email').show();
+					return_val = false;
+				} else {
+					$('#txtEmail').next('span').text('Please enter Email').hide();
+				}
+			}
+
+			if ($('#txtPhone').val().trim() == '') {
+				$('#txtPhone').next('span').text('Please enter phone no.').show();
+				return_val = false;
+			} else {
+				$('#txtPhone').next('span').hide();
+			}
+
+			return return_val;
+		};
+
+
+		function SaveCall() {
+			var return_val = ValidateUser(true);
+			if ($("#txtEmail").val().trim()!="") {
+                validateEmail($("#txtEmail").val());
+
+			}
+            if (return_val && isDuplicateEmail) {
+                $('#preloader').show();
+                return true;
+
+                //var url = "/Profile/Profile/SignUp";
+                //var model = { FirstName: txtFirstName.value, LastName: txtLastName.value, Email: txtEmail.value, Phone: txtPhone.value };
+                //$.ajax({
+                //	type: "POST", url: url, data: { __RequestVerificationToken: gettoken(), "theModel": model }, success: function () {
+
+                //		$('#preloader').hide();
+                //	}, error: function () { alert("Error in Call"); }
+
+                //})
+            }
+            else {
+                return false;
+            }
+
+		}
+
+		function validateEmail(emailid) {
+			//var isDuplicateEmail = false;
+            var email = emailid;
+			var url = '@Url.Action("validateEmail", "Login")';
+			$.ajax({
+				url: url,
+				type: "GET",
+				data: { 'email': email },
+				async:false,
+				success: function (data) {
+					if (data =="Email already registered with another user") {
+                        $('#txtEmail').next('span').text(email + ' already associated with another user').show();
+						return isDuplicateEmail =  false;
+					}
+					else {
+						return isDuplicateEmail = true;
+						ValidateUser(true)
+					}
+
+				}, error: function () { alert("Error in Call"); }
+
+			});
+
+		}
+
+    </script>
+    <script>
+
+        function ForgetPassword() {
+            ////
+            var url = "@Url.Action("ForgetPassword","Login")";
+            var email = $('#ForgetEmail').val().trim();
+            if (email == '') {
+                alert('Please enter Email');
+                return false;
+
+            }
+            $.ajax({
+                type: "POST", url: url, data: { __RequestVerificationToken: gettoken(), "theEmail": email }, error: function () {
+                    //alert("Error in Call. Please try again.");
+                    alert("Error in Call. Please try again.");
+                }, success: function () {
+                    //alert("Credentails Email Sent to your account.");
+                    alert("Credentails Email Sent to your account.");
+                }
+
+            })
+            $("#exampleModalCenter").modal('hide');
+        }
+    </script>
+    <script>
+        $(window).on("load", function () {
+            $("#preloader").fadeOut("slow");
+        });
+
+        $(document).ajaxStart(function () {
+            setTimeout(function () {
+                $("#preloader").show();
+            }, 100);
+        });
+        $(document).ajaxComplete(function () {
+            setTimeout(function () {
+                $("#preloader").hide();
+            }, 3000);
+        });
+
+    </script>
+    @if (ViewBag.Message != null && ViewBag.Message != "")
+    {
+        var ScriptMessage = ViewBag.Message;
+        ViewBag.Message = "";
+        ViewBag.Message = null;
+        <script type="text/javascript">
+            $(document).ready(function () {
+                alert("@ScriptMessage");
+
+                    });
+        </script>
+    }
+    else if (Request.QueryString["error"] != null && Request.QueryString["error"] != "")
+    {
+        var ScriptMessage = Request.QueryString["error"];
+        <script type="text/javascript">
+                    $(document).ready(function () {
+                        alert("@ScriptMessage");
+                        window.location = "@Url.Action("frmLogin","Login")";
+                        
+                     });
+        </script>
+    }
+</body>
+</html>
